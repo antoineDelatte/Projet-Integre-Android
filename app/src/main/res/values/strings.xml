@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">PackVoyage</string>
+    <string name="app_name">Trip4Student</string>
+    <string name="connexion_title">Connexion</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>
