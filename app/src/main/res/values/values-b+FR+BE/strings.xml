@@ -6,4 +6,5 @@
     <string name="password">Mot de passe</string>
     <string name="connection_button">Se connecter</string>
     <string name="forgotten_username_password">Nom d'utilisateur ou mot de passe oublié ?</string>
+    <string name="create_account">Se créer un compte</string>
 </resources>

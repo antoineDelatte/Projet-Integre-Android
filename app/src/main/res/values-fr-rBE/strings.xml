@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="forgotten_username_password">Nom d\'utilisateur ou mot de passe oublié ?</string>
-    <string name="connexion_title">test</string>
-    <string name="create_account">Créer un compte</string>
-</resources>
