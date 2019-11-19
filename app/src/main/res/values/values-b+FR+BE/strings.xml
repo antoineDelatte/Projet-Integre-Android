@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Trip4Student</string>
-    <string name="connexion_title">Connection</string>
+    <string name="connection_title">Connexion</string>
     <string name="username">Nom d'utilisateur</string>
     <string name="password">Mot de passe</string>
+    <string name="connection_button">Se connecter</string>
+    <string name="forgotten_username_password">Nom d'utilisateur ou mot de passe oublié ?</string>
 </resources>

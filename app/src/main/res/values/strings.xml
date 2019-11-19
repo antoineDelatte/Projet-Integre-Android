@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Trip4Student</string>
-    <string name="connexion_title">Connexion</string>
+    <string name="connection_title">Connection</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="connection_button">Sign in</string>
+    <string name="forgotten_username_password">Forgot Username or Password?</string>
+    <string name="create_account">Create an Account</string>
 </resources>
