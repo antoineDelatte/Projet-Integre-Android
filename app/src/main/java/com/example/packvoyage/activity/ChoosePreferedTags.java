@@ -42,8 +42,11 @@ public class ChoosePreferedTags extends AppCompatActivity {
         }
 
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
 
-
+        }
     }
 
 

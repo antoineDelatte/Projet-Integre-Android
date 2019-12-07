@@ -31,7 +31,7 @@ public class TagsToSelectAdapter extends RecyclerView.Adapter<TagsToSelectAdapte
 
     public TagsToSelectAdapter.TagHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.tags_to_select, parent, false);
+                .inflate(R.layout.tags_to_select_recyclerview, parent, false);
         TagHolder holder = new TagHolder(v, position -> {
             Tag tag = tags.get(position);
         });

@@ -9,4 +9,5 @@
     <string name="my_preferences">My preferences</string>
     <string name="travel_themes">Travel themes</string>
     <string name="prefered_accomodations_types">My prefered accomodation\'s types</string>
+    <string name="pack_name">Pack name</string>
 </resources>
