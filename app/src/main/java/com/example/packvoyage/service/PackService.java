@@ -11,13 +11,13 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface PackService {
-    String BASE_URL = "https://localhost:";
+    String BASE_URL = "https://localhost:5001";
 
-    @GET("packs")
+    @GET("pack")
     Call<List<Pack>> getPacks();
 
-    @GET("packs")
-    Call<Pack> getUserById(@Query("id") Integer id);
+    //@GET("packs")
+    //Call<Pack> getUserById(@Query("id") Integer id);
 
     //@POST("packs")
     //Call<Pack> postUser(@Body Pack pack)
