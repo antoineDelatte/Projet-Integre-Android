@@ -1,10 +1,10 @@
 package com.example.packvoyage.bindingModel;
 
-public class ImageOrVideo {
+public class ImageOrVideoBindingModel {
 
     private String content;
 
-    public ImageOrVideo(String content){
+    public ImageOrVideoBindingModel(String content){
         this.content = content;
     }
 

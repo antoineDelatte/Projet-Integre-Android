@@ -2,6 +2,8 @@ package com.example.packvoyage.repository;
 
 import android.util.Log;
 
+import com.example.packvoyage.bindingModel.ImageOrVideoBindingModel;
+import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.service.PackService;
 
@@ -24,22 +26,24 @@ public class PackDao {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         PackService pack = retrofit.create(PackService.class);
-        Call<List<Pack>> call = pack.getPacks();
-        call.enqueue(new Callback<List<Pack>>() {
+        Call<List<PackBindingModel>> call = pack.getPacks();
+        call.enqueue(new Callback<List<PackBindingModel>>() {
             @Override
-            public void onResponse(Call<List<Pack>> call, Response<List<Pack>> response) {
+            public void onResponse(Call<List<PackBindingModel>> call, Response<List<PackBindingModel>> response) {
                 if (!response.isSuccessful()) {
                     return;
                 }
-                List<Pack> packList = response.body();
-                for(Pack pack : packList){
+                List<PackBindingModel> packList = response.body();
+                Pack pack;
+                for(PackBindingModel packBindingModel : packList){
+                    pack = new Pack(packBindingModel.getId(), packBindingModel.getName(), null, packBindingModel.getImageOrVideoBindingModels().get(0).getContent());
                     PackDao.this.packs.add(pack);
                 }
 
             }
 
             @Override
-            public void onFailure(Call<List<Pack>> call, Throwable t) {
+            public void onFailure(Call<List<PackBindingModel>> call, Throwable t) {
                 Log.i("erreur", t.getMessage());
             }
         });
