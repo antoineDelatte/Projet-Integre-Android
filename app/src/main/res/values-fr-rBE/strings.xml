@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trip4Student</string>
+    <string name="connection_button">S\'identifier</string>
+    <string name="connection_title">Connexion</string>
+    <string name="create_account">Créer un compte</string>
+    <string name="forgotten_username_password">Nom d\'utilisateur ou mot de passe oublié ?</string>
+    <string name="password">Mot de passe</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="my_preferences">Mes préférences</string>
+    <string name="travel_themes">Thèmes de voyage</string>
+    <string name="prefered_accomodations_types">Mes types de logements préférés</string>
+</resources>

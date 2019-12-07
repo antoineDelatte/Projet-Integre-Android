@@ -6,4 +6,7 @@
     <string name="connection_button">Sign in</string>
     <string name="forgotten_username_password">Forgot Username or Password?</string>
     <string name="create_account">Create an account</string>
+    <string name="my_preferences">My preferences</string>
+    <string name="travel_themes">Travel themes</string>
+    <string name="prefered_accomodations_types">My prefered accomodation\'s types</string>
 </resources>
