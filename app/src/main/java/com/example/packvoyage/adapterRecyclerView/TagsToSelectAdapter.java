@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.packvoyage.R;
 import com.example.packvoyage.model.Tag;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TagsToSelectAdapter extends RecyclerView.Adapter<TagsToSelectAdapter.TagHolder> {
