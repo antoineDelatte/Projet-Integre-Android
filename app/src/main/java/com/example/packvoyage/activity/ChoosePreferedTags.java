@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.packvoyage.R;
-import com.example.packvoyage.adapterRecyclerView.TagsToSelectAdapter;
+import com.example.packvoyage.adapterRecyclerView.TagToSelectAdapter;
 import com.example.packvoyage.model.Tag;
 
 import butterknife.BindView;
@@ -27,7 +27,7 @@ public class ChoosePreferedTags extends AppCompatActivity {
         setContentView(R.layout.activity_choose_prefered_tags);
 
         ButterKnife.bind(this);
-        TagsToSelectAdapter adapter = new TagsToSelectAdapter();
+        TagToSelectAdapter adapter = new TagToSelectAdapter();
         tagsToSelectRecyclerView.setHasFixedSize(true);
         tagsToSelectRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         tagsToSelectRecyclerView.setAdapter(adapter);
@@ -44,7 +44,6 @@ public class ChoosePreferedTags extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
 
         }
     }

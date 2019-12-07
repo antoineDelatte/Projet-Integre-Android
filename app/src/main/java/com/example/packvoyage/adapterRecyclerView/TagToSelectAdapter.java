@@ -12,14 +12,14 @@ import com.example.packvoyage.model.Tag;
 
 import java.util.List;
 
-public class TagsToSelectAdapter extends RecyclerView.Adapter<TagsToSelectAdapter.TagHolder> {
+public class TagToSelectAdapter extends RecyclerView.Adapter<TagToSelectAdapter.PackHolder> {
 
     List<Tag> tags;
 
-    public static class TagHolder extends RecyclerView.ViewHolder{
+    public static class PackHolder extends RecyclerView.ViewHolder{
         private CheckBox tagButton;
 
-        public TagHolder(View itemView, OnItemSelectedListener listener){
+        public PackHolder(View itemView, OnItemSelectedListener listener){
             super(itemView);
             tagButton = itemView.findViewById(R.id.tag_button);
             tagButton.setOnClickListener(e -> {
@@ -29,17 +29,17 @@ public class TagsToSelectAdapter extends RecyclerView.Adapter<TagsToSelectAdapte
         }
     }
 
-    public TagsToSelectAdapter.TagHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public PackHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.tags_to_select_recyclerview, parent, false);
-        TagHolder holder = new TagHolder(v, position -> {
+        PackHolder holder = new PackHolder(v, position -> {
             Tag tag = tags.get(position);
         });
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(TagsToSelectAdapter.TagHolder holder, int position) {
+    public void onBindViewHolder(PackHolder holder, int position) {
         holder.tagButton.setText(tags.get(position).getName());
 
     }
