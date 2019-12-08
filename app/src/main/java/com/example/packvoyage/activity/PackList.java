@@ -54,7 +54,7 @@ public class PackList extends AppCompatActivity {
             @Override
             public void onClick(int id) {
 //                Intent intent = new Intent(PackList.this, PackDetails.class);
-//                intent.putExtra("curretPack", id);
+//                intent.putExtra("currentPack", id);
 //                startActivity(intent);
                 Toast.makeText(PackList.this, "détails du pack", Toast.LENGTH_LONG).show();            }
         });

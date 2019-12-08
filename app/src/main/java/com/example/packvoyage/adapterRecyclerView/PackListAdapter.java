@@ -31,7 +31,7 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHo
         public PackHolder(View itemView) {
             super(itemView);
             packPicture = itemView.findViewById(R.id.pack_image);
-            packName = itemView.findViewById(R.id.pack_display_rv);
+            packName = itemView.findViewById(R.id.pack_name);
         }
 
         public void bind(Integer id, OnItemClickListener listener){
@@ -69,7 +69,6 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHo
         holder.bind(packList.get(position).getId(), listener);
         Glide.with(this.context).load(this.packList.get(position).getImage_url()).into(holder.packPicture);
         holder.packName.setText(packList.get(position).getName());
-
     }
 
 

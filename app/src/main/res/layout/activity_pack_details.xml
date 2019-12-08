@@ -7,7 +7,7 @@
     tools:context=".activity.PackDetails">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/pack_details_pack_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="168dp"
@@ -15,15 +15,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:layout_width="412dp"
-        android:layout_height="368dp"
-        android:layout_marginTop="20dp"
+    <TextView
+        android:id="@+id/pack_details_pack_description"
+        android:layout_width="218dp"
+        android:layout_height="159dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="44dp"
+        android:text="long long long long long long long long long pack description"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </ScrollView>
+    <fragment
+        android:id="@+id/fragment_activity_list"
+        android:name="com.example.packvoyage.activity.ActivityList"
+        android:layout_width="355dp"
+        android:layout_height="469dp"
+        android:layout_marginTop="260dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
