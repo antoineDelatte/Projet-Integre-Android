@@ -11,4 +11,9 @@
     <string name="travel_themes">Thèmes de voyage</string>
     <string name="prefered_accomodations_types">Mes types de logements préférés</string>
     <string name="pack_name">Nom du pack</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="forward_path">Trajet aller</string>
+    <string name="return_trip">Trajet retour</string>
+    <string name="departure_place">Lieu de départ</string>
+    <string name="departure_place_value">Valeur lieu de départ</string>
 </resources>

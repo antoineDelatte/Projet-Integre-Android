@@ -4,9 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +15,6 @@ import com.example.packvoyage.R;
 import com.example.packvoyage.model.Pack;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHolder> {
 
@@ -32,7 +31,7 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHo
         public PackHolder(View itemView) {
             super(itemView);
             packPicture = itemView.findViewById(R.id.pack_image);
-            packName = itemView.findViewById(R.id.pack_name);
+            packName = itemView.findViewById(R.id.pack_display_rv);
         }
 
         public void bind(Integer id, OnItemClickListener listener){
@@ -57,6 +56,7 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHo
         v.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Toast.makeText(context, "coucou", Toast.LENGTH_SHORT).show();
                 //todo
             }
         });
