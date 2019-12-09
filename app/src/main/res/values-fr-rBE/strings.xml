@@ -17,4 +17,22 @@
     <string name="departure_place">Lieu de départ</string>
     <string name="departure_place_value">Valeur lieu de départ</string>
     <string name="book_this_pack_button">Réserver ce pack</string>
+    <string name="flight_details_title">Vols du pack</string>
+    <string name="flight_details_going">Trajet aller</string>
+    <string name="flight_details_coming_back">Trajet retour</string>
+    <string name="flight_details_info">
+        \n-Company : Ryanair
+        \n-Departure info : Airport Charles Henry 15 january 2019 6AM, Belgium Brussels
+        \n-Arrival info : Airport Jean Claude 15 january 2019 3PM, United Stated New York
+        \n-Flight number : 627175656
+    </string>
+    <string name="pack_activity_title">Activités</string>
+    <string name="pack_details_show_activity_fragment">Activités</string>
+    <string name="pack_details_show_flights_fragment">Vols</string>
+    <string name="pack_details_show_accommodations_fragment">Logements</string>
+    <string name="pack_description">Description de pack Description de pack Description de pack
+    Description de pack Description de pack Description de pack Description de pack
+    Description de pack Description de pack Description de pack Description de pack
+    Description de pack Description de pack Description de pack Description de pack
+    Description de pack Description de pack Description de pack Description de pack </string>
 </resources>

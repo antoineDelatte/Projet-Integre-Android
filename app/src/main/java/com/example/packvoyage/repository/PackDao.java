@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.packvoyage.bindingModel.ImageOrVideoBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.model.Activity;
+import com.example.packvoyage.model.Flight;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.service.PackService;
 
@@ -83,4 +84,24 @@ public class PackDao {
         return pack;
     }
 
+    public Pack getPackWithGeneralFlightInfos(int packId){
+        // todo
+        ArrayList<Flight>flights = new ArrayList<>();
+        flights.add(new Flight(1, true));
+        flights.add(new Flight(2, false));
+        flights.add(new Flight(3, true));
+        flights.add(new Flight(4, false));
+        flights.add(new Flight(5, true));
+        flights.add(new Flight(6, false));
+        flights.add(new Flight(7, true));
+        flights.add(new Flight(8, false));
+        flights.add(new Flight(9, true));
+        flights.add(new Flight(10, false));
+        Pack pack = new Pack(1, "voyage en afganistan", "vous voulez exploser? ceci est l'occasion rêvée pour aller s'éclater!", "https://images.unsplash.com/photo-1507234897433-06646bd0e673?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80");
+        pack.setFlights(flights);
+        return pack;
+    }
+    public Pack getPackWithImageAndDescription(int packId){
+        return new Pack(1, "voyage en afganistan", "vous voulez exploser? ceci est l'occasion rêvée pour aller s'éclater!", "https://images.unsplash.com/photo-1507234897433-06646bd0e673?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80");
+    }
 }

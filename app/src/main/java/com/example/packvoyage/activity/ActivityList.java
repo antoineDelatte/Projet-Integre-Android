@@ -45,10 +45,14 @@ public class ActivityList extends Fragment {
         ButterKnife.bind(this, view);
         packDao = new PackDao();
         pack = packDao.getPackWithDescriptionAndActivities(selectedPackId);
-        parent.setCurrentPack(pack);
+        //parent.setCurrentPack(pack);
         // /!\ laisser cette ligne à la fin
         initRecyclerView();
         return view;
+    }
+
+    public ActivityList(){
+
     }
 
     @Override

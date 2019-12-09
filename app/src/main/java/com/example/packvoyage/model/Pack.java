@@ -9,12 +9,39 @@ public class Pack {
     private String description;
     private String image_url;
     private ArrayList<Activity>activities;
+    private ArrayList<Flight>flights;
 
     public Pack(Integer id, String name, String description, String image_url) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.image_url = image_url;
+    }
+
+    public ArrayList<Flight>getOutwardsFlights(){
+        ArrayList<Flight>outwardsFlights = new ArrayList<>();
+        for(Flight flight : flights){
+            if(flight.isGoing())
+                outwardsFlights.add(flight);
+        }
+        return outwardsFlights;
+    }
+
+    public ArrayList<Flight>getHomewardsFlights(){
+        ArrayList<Flight>homewardsFlights = new ArrayList<>();
+        for(Flight flight : flights){
+            if(!flight.isGoing())
+                homewardsFlights.add(flight);
+        }
+        return homewardsFlights;
+    }
+
+    public ArrayList<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(ArrayList<Flight> flights) {
+        this.flights = flights;
     }
 
     public ArrayList<Activity> getActivities() {

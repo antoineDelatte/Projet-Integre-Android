@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,7 +68,6 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         private TextView activity_name;
         private TextView activity_price;
         private TextView activity_location;
-        private LinearLayout activity_parent_layout;
 
         public ActivityHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,7 +75,6 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
             activity_name = itemView.findViewById(R.id.activities_recycler_activity_name);
             activity_price = itemView.findViewById(R.id.activities_recycler_activity_price);
             activity_location = itemView.findViewById(R.id.activities_recycler_activity_location);
-            activity_parent_layout = itemView.findViewById(R.id.activities_recycler_parent);
         }
 
         public void bind(Integer id, OnItemClickListener listener){

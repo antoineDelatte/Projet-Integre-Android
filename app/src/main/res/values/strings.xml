@@ -16,7 +16,23 @@
     <string name="departure_place">Departure place</string>
     <string name="departure_place_value">Departure place value</string>
     <string name="book_this_pack_button">Book this pack</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="flight_details_title">Packs flights</string>
+    <string name="flight_details_going">Outward journey</string>
+    <string name="flight_details_coming_back">Homeward journey</string>
+    <string name="flight_details_info">
+        -Company : Ryanair
+        \n-Departure info : Airport Charles Henry 15 january 2019 6AM, Belgium Brussels
+        \n-Arrival info : Airport Jean Claude 15 january 2019 3PM, United Stated New York
+        \n-Flight number : 627175656
+    </string>
+    <string name="pack_activity_title">Activities</string>
+    <string name="pack_details_show_activity_fragment">Activities</string>
+    <string name="pack_details_show_flights_fragment">Flights</string>
+    <string name="pack_details_show_accommodations_fragment">Housing</string>
+    <string name="pack_description">Pack Description Pack Description Pack Description Pack Description
+    Pack Description Pack Description Pack Description Pack Description Pack Description Pack Description
+    Pack Description Pack Description Pack Description Pack Description Pack Description Pack Description
+    Pack Description Pack Description Pack Description Pack Description Pack Description Pack Description
+    Pack Description Pack Description Pack Description Pack Description Pack Description Pack Description
+    Pack Description Pack Description Pack Description Pack Description Pack Description </string>
 </resources>
