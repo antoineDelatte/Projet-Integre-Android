@@ -16,4 +16,5 @@
     <string name="return_trip">Trajet retour</string>
     <string name="departure_place">Lieu de départ</string>
     <string name="departure_place_value">Valeur lieu de départ</string>
+    <string name="book_this_pack_button">Réserver ce pack</string>
 </resources>

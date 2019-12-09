@@ -1,6 +1,7 @@
 package com.example.packvoyage.adapterRecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,66 +19,73 @@ import java.util.ArrayList;
 
 public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHolder> {
 
-    private ArrayList<Pack> packList;
+    public ArrayList<Pack> packList;
     private Context context;
-    private final OnItemClickListener listener;
+    private OnPackListener onPackListener;
 
-    public static class PackHolder extends RecyclerView.ViewHolder {
-
-        private ImageButton packPicture;
-        private TextView packName;
-
-
-        public PackHolder(View itemView) {
-            super(itemView);
-            packPicture = itemView.findViewById(R.id.pack_image);
-            packName = itemView.findViewById(R.id.pack_name);
-        }
-
-        public void bind(Integer id, OnItemClickListener listener){
-            itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    listener.onClick(id);
-                }
-            });
-        }
-    }
-
-    public PackListAdapter(ArrayList<Pack> packs, Context context, PackListAdapter.OnItemClickListener listener){
+    public PackListAdapter(ArrayList<Pack> packs, Context context, OnPackListener onPackListener){
         this.packList = packs;
         this.context = context;
-        this.listener = listener;
+        this.onPackListener = onPackListener;
     }
 
     public PackListAdapter.PackHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.display_pack_recyclerview, parent, false);
-        v.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Toast.makeText(context, "coucou", Toast.LENGTH_SHORT).show();
-                //todo
-            }
-        });
-        PackListAdapter.PackHolder holder = new PackListAdapter.PackHolder(v);
+        PackListAdapter.PackHolder holder = new PackListAdapter.PackHolder(v, onPackListener);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(PackListAdapter.PackHolder holder, int position) {
-        holder.bind(packList.get(position).getId(), listener);
+        holder.bind(packList.get(position).getId(), onPackListener);
         Glide.with(this.context).load(this.packList.get(position).getImage_url()).into(holder.packPicture);
         holder.packName.setText(packList.get(position).getName());
+        holder.packPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPackListener.onPackClick(packList.get(position).getId());
+            }
+        });
     }
-
 
     @Override
     public int getItemCount() {
         return this.packList == null ? 0 : packList.size();
     }
 
-    public interface OnItemClickListener {
-        void onClick(int offerId);
+    public interface OnPackListener {
+        void onPackClick(int packId);
+    }
+
+    public static class PackHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private OnPackListener onPackListener;
+        private ImageButton packPicture;
+        private TextView packName;
+        private int packId;
+
+
+        public PackHolder(View itemView, OnPackListener onPackListener) {
+            super(itemView);
+            packPicture = itemView.findViewById(R.id.pack_image);
+            packName = itemView.findViewById(R.id.pack_name);
+            this.onPackListener = onPackListener;
+            itemView.setOnClickListener(this);
+        }
+
+        public void bind(Integer id, OnPackListener listener){
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onPackClick(id);
+                }
+            });
+        }
+
+        @Override
+        public void onClick(View v) {
+            onPackListener.onPackClick(packId);
+        }
     }
 }

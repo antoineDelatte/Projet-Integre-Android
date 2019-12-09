@@ -73,7 +73,12 @@ public class PackDao {
         activities.add(new Activity(3, "acti3", 200.5, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
         activities.add(new Activity(4, "acti4", 200.5, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
         activities.add(new Activity(5, "acti5", 200.5, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
-        Pack pack = new Pack(1, "Voyage Zambie", "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés", "https://img.ev.mu/images/portfolio/pays/245/600x400/846346.jpg");
+        Pack pack = new Pack(1, "Voyage Zambie", "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés" +
+                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
+                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
+                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
+                        "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
+                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés", "https://img.ev.mu/images/portfolio/pays/245/600x400/846346.jpg");
         pack.setActivities(activities);
         return pack;
     }

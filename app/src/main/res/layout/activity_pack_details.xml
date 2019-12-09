@@ -8,31 +8,50 @@
 
     <TextView
         android:id="@+id/pack_details_pack_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
+        android:layout_width="183dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="4dp"
         android:text="@string/pack_name"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/pack_details_pack_description"
-        android:layout_width="218dp"
-        android:layout_height="159dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="44dp"
-        android:text="long long long long long long long long long pack description"
+    <ScrollView
+        android:layout_width="310dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/pack_details_pack_name">
+
+        <TextView
+            android:id="@+id/pack_details_pack_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="long long long long long long long long long pack description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </ScrollView>
 
     <fragment
         android:id="@+id/fragment_activity_list"
         android:name="com.example.packvoyage.activity.ActivityList"
-        android:layout_width="355dp"
-        android:layout_height="469dp"
-        android:layout_marginTop="260dp"
+        android:layout_width="324dp"
+        android:layout_height="392dp"
+        android:layout_marginTop="176dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/pack_details_book_this_pack"
+        android:layout_width="158dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/book_this_pack_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_activity_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
