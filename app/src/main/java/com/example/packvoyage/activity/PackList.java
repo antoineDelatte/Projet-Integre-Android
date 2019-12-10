@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.packvoyage.R;
+import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.adapterRecyclerView.PackListAdapter;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
@@ -58,6 +60,5 @@ public class PackList extends AppCompatActivity implements PackListAdapter.OnPac
         Intent intent = new Intent(PackList.this, PackDetails.class);
         intent.putExtra("currentPack", packId);
         startActivity(intent);
-        Log.i("Trip4Student", Integer.toString(packId));
     }
 }

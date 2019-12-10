@@ -65,7 +65,7 @@ public class PackDao {
         return packs;
     }
 
-    public Pack getPackWithDescriptionAndActivities(int packId){
+    public Pack getPackActivities(int packId){
         //appel methode correspondante
         // todo
         ArrayList<Activity>activities = new ArrayList<>();
@@ -101,7 +101,7 @@ public class PackDao {
         pack.setFlights(flights);
         return pack;
     }
-    public Pack getPackWithImageAndDescription(int packId){
+    public Pack getPackNameAndDescription(int packId){
         return new Pack(1, "voyage en afganistan", "vous voulez exploser? ceci est l'occasion rêvée pour aller s'éclater!", "https://images.unsplash.com/photo-1507234897433-06646bd0e673?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80");
     }
 }

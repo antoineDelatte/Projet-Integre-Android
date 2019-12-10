@@ -22,7 +22,7 @@ import com.example.packvoyage.repository.PackDao;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PackDetails extends AppCompatActivity implements IPackDetails{
+public class PackDetails extends AppCompatActivity {
 
     @BindView(R.id.pack_details_pack_description)
     public TextView pack_description;
@@ -38,8 +38,8 @@ public class PackDetails extends AppCompatActivity implements IPackDetails{
     public Button display_flights_fragment;
     @BindView(R.id.pack_details_show_accommodations_fragment)
     public Button display_housing_fragment;
+    private Pack currentPack;
     private PackDao packDao;
-    private Pack selectedPack;
     private static final String ACTIVITIES = "activities";
     private static final String FLIGHTS = "flights";
     private static final String HOUSING = "housing";
@@ -54,8 +54,11 @@ public class PackDetails extends AppCompatActivity implements IPackDetails{
             packId = intent.getIntExtra("currentPack", 1);
         }
         packDetailVM.setSelectedPackId(packId);
+        packDao = new PackDao();
+        currentPack = packDao.getPackNameAndDescription(packId);
         setContentView(R.layout.activity_pack_details);
         ButterKnife.bind(this);
+        changeFragment(ACTIVITIES);
         bookThisPack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,10 +67,6 @@ public class PackDetails extends AppCompatActivity implements IPackDetails{
                 startActivity(goToPackOptionsForReserv);
             }
         });
-        /*packDetailVM.getCurrentPack().observe(this, pack -> {
-                pack_description.setText(pack.getDescription());
-                pack_name.setText(pack.getName());
-        });*/
         display_activities_fragment.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -86,26 +85,21 @@ public class PackDetails extends AppCompatActivity implements IPackDetails{
                 changeFragment(HOUSING);
             }
         });
-        packDao = new PackDao();
-        selectedPack = packDao.getPackWithImageAndDescription(packId);
-        pack_description.setText(selectedPack.getDescription());
-        pack_name.setText(selectedPack.getName());
+        pack_description.setText(currentPack.getDescription());
+        pack_name.setText(currentPack.getName());
     }
 
-    @Override
-    public void setCurrentPack(Pack pack) {
-        packDetailVM.setCurrentPack(pack);
-    }
+
 
     private void changeFragment(String selectedFragment){
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Fragment newFragment;
         switch (selectedFragment){
-            case "activities" :
+            case ACTIVITIES :
                 newFragment = new ActivityList();
                 break;
-            case "flights" :
+            case FLIGHTS :
                 newFragment = new FlightListOfPack();
                 break;
             default :
