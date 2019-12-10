@@ -4,14 +4,15 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.packvoyage.R;
+import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.model.Flight;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
@@ -21,16 +22,14 @@ import butterknife.ButterKnife;
 
 
 public class FlightListOfPack extends Fragment {
-    //@BindView(R.id.flight_details_rv)
-    //public RecyclerView flightDetails_rv;
     private PackDao packDao;
-    //private FlightListAdapter flightListAdapter;
     private Pack pack;
     private int selectedPackId;
     @BindView(R.id.fragment_flight_details_outward_journey_details)
     public TextView outwardTextInfo;
     @BindView(R.id.fragment_flight_details_homeward_journey_details)
     public TextView homewardTextInfo;
+    private PackDetailVM packDetailVM;
 
     public FlightListOfPack(){
 
@@ -41,20 +40,13 @@ public class FlightListOfPack extends Fragment {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_flight_list_of_pack, container, false);
         ButterKnife.bind(this, view);
+        packDetailVM = ViewModelProviders.of(this).get(PackDetailVM.class);
+        packDetailVM.getSelectedPackId().observe(this, packId -> selectedPackId = packId);
         packDao = new PackDao();
         pack = packDao.getPackWithGeneralFlightInfos(selectedPackId);
-        //initRecyclerView();
         setFlightInfoText();
         return view;
     }
-
-    /*private void initRecyclerView(){
-        flightListAdapter = new FlightListAdapter(pack.getFlights(), getContext());
-        Log.i("Trip4Student", Integer.toString(pack.getOutwardsFlights().size()));
-        flightDetails_rv.setHasFixedSize(true);
-        flightDetails_rv.setAdapter(flightListAdapter);
-        flightDetails_rv.setLayoutManager(new LinearLayoutManager(getContext()));
-    }*/
 
     private void setFlightInfoText(){
         StringBuilder outwardInfo = new StringBuilder();
@@ -67,7 +59,6 @@ public class FlightListOfPack extends Fragment {
         }
         outwardTextInfo.setText(outwardInfo);
         homewardTextInfo.setText(homewardInfo);
-        Log.i("Trip4Student", homewardTextInfo.toString());
     }
 
     @Override

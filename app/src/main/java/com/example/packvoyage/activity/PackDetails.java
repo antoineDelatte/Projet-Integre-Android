@@ -28,7 +28,6 @@ public class PackDetails extends AppCompatActivity {
     public TextView pack_description;
     @BindView(R.id.pack_details_pack_name)
     public TextView pack_name;
-    private PackDetailVM packDetailVM;
     private int packId;
     @BindView(R.id.pack_details_book_this_pack)
     public Button bookThisPack;
@@ -38,8 +37,8 @@ public class PackDetails extends AppCompatActivity {
     public Button display_flights_fragment;
     @BindView(R.id.pack_details_show_accommodations_fragment)
     public Button display_housing_fragment;
-    private Pack currentPack;
     private PackDao packDao;
+    private String packName;
     private static final String ACTIVITIES = "activities";
     private static final String FLIGHTS = "flights";
     private static final String HOUSING = "housing";
@@ -47,24 +46,17 @@ public class PackDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        packDetailVM = ViewModelProviders.of(this).get(PackDetailVM.class);
         Intent intent = getIntent();
-        if(intent != null){
-            packId = intent.getIntExtra("currentPack", 1);
-        }
-        packDetailVM.setSelectedPackId(packId);
+        packName = intent.getStringExtra("pack_name");
+        packId = intent.getIntExtra("pack_id", 1);
         packDao = new PackDao();
-        currentPack = packDao.getPackNameAndDescription(packId);
         setContentView(R.layout.activity_pack_details);
         ButterKnife.bind(this);
         changeFragment(ACTIVITIES);
         bookThisPack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToPackOptionsForReserv = new Intent(PackDetails.this, ChooseOptionsForBooking.class);
-                goToPackOptionsForReserv.putExtra("selected_pack_id", packId);
-                startActivity(goToPackOptionsForReserv);
+                startActivity(new Intent(PackDetails.this, ChooseOptionsForBooking.class));
             }
         });
         display_activities_fragment.setOnClickListener(new View.OnClickListener(){
@@ -85,8 +77,8 @@ public class PackDetails extends AppCompatActivity {
                 changeFragment(HOUSING);
             }
         });
-        pack_description.setText(currentPack.getDescription());
-        pack_name.setText(currentPack.getName());
+        pack_name.setText(packName);
+        pack_description.setText(packDao.getPackDescription(packId));
     }
 
 

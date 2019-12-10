@@ -38,13 +38,13 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHo
 
     @Override
     public void onBindViewHolder(PackListAdapter.PackHolder holder, int position) {
-        holder.bind(packList.get(position).getId(), onPackListener);
+        holder.bind(packList.get(position).getId(), packList.get(position).getName(), onPackListener);
         Glide.with(this.context).load(this.packList.get(position).getImage_url()).into(holder.packPicture);
         holder.packName.setText(packList.get(position).getName());
         holder.packPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onPackListener.onPackClick(packList.get(position).getId());
+                onPackListener.onPackClick(packList.get(position).getId(), packList.get(position).getName());
             }
         });
     }
@@ -55,7 +55,7 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHo
     }
 
     public interface OnPackListener {
-        void onPackClick(int packId);
+        void onPackClick(int packId, String packName);
     }
 
     public static class PackHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -63,6 +63,7 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHo
         private OnPackListener onPackListener;
         private ImageButton packPicture;
         private TextView packName;
+        private String packTitle;
         private int packId;
 
 
@@ -74,18 +75,20 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHo
             itemView.setOnClickListener(this);
         }
 
-        public void bind(Integer id, OnPackListener listener){
+        public void bind(Integer id, String name, OnPackListener listener){
+            packTitle = name;
+            packId = id;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onPackClick(id);
+                    listener.onPackClick(id, name);
                 }
             });
         }
 
         @Override
         public void onClick(View v) {
-            onPackListener.onPackClick(packId);
+            onPackListener.onPackClick(packId, packTitle);
         }
     }
 }

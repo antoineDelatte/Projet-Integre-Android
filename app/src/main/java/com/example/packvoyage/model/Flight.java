@@ -1,13 +1,24 @@
 package com.example.packvoyage.model;
 
+import java.util.ArrayList;
+
 public class Flight {
     private int flightId;
     private int flightNumber;
     private boolean isGoing;
+    private ArrayList<PlaneSeat>planeSeats;
 
     public Flight(int flightNumber, boolean isGoing) {
         this.flightNumber = flightNumber;
         this.isGoing = isGoing;
+    }
+
+    public ArrayList<PlaneSeat> getPlaneSeats() {
+        return planeSeats;
+    }
+
+    public void setPlaneSeats(ArrayList<PlaneSeat> planeSeats) {
+        this.planeSeats = planeSeats;
     }
 
     public int getFlightId() {

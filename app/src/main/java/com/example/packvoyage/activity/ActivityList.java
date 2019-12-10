@@ -51,12 +51,7 @@ public class ActivityList extends Fragment {
     public ActivityList(){ }
 
     private void initRecyclerView(){
-        rvAdapter = new ActivityListAdapter(getContext(), pack.getActivities(), new ActivityListAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(int id) {
-                Toast.makeText(getContext(), "cliqué sur acti", Toast.LENGTH_LONG).show();
-            }
-        });
+        rvAdapter = new ActivityListAdapter(getContext(), pack.getActivities());
         activityList_rv.setHasFixedSize(true);
         activityList_rv.setAdapter(rvAdapter);
         activityList_rv.setLayoutManager(new LinearLayoutManager(getContext()));

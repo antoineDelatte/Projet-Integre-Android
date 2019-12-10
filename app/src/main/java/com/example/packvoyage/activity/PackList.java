@@ -31,6 +31,7 @@ public class PackList extends AppCompatActivity implements PackListAdapter.OnPac
     private RecyclerView.Adapter rVadapter;
     private RecyclerView.LayoutManager rVLayout;
     private ArrayList<Pack> packList;
+    private PackDetailVM packDetailVM;
 
 
     @Override
@@ -42,6 +43,7 @@ public class PackList extends AppCompatActivity implements PackListAdapter.OnPac
 
         packDao = new PackDao();
         //packList = packDao.getPacks();
+        packDetailVM = ViewModelProviders.of(this).get(PackDetailVM.class);
         packList = new ArrayList<>();
         packList.add(new Pack(1, "Voyage Combodge", null, "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
         packList.add(new Pack(2, "Voyage Belgique", null, "https://media.routard.com/image/73/7/belgique-gand.1487737.c1000x300.jpg"));
@@ -56,9 +58,10 @@ public class PackList extends AppCompatActivity implements PackListAdapter.OnPac
     }
 
     @Override
-    public void onPackClick(int packId) {
+    public void onPackClick(int packId, String packName) {
         Intent intent = new Intent(PackList.this, PackDetails.class);
-        intent.putExtra("currentPack", packId);
+        intent.putExtra("pack_id", packId);
+        intent.putExtra("pack_name", packName);
         startActivity(intent);
     }
 }

@@ -7,6 +7,7 @@ import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.model.Activity;
 import com.example.packvoyage.model.Flight;
 import com.example.packvoyage.model.Pack;
+import com.example.packvoyage.model.PlaneSeat;
 import com.example.packvoyage.service.PackService;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class PackDao {
 
             @Override
             public void onFailure(Call<List<PackBindingModel>> call, Throwable t) {
-                Log.i("erreur", t.getMessage());
+                Log.e("Trip4Student", t.getMessage());
             }
         });
     }
@@ -101,7 +102,45 @@ public class PackDao {
         pack.setFlights(flights);
         return pack;
     }
-    public Pack getPackNameAndDescription(int packId){
-        return new Pack(1, "voyage en afganistan", "vous voulez exploser? ceci est l'occasion rêvée pour aller s'éclater!", "https://images.unsplash.com/photo-1507234897433-06646bd0e673?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80");
+    public String getPackDescription(int packId){
+        return "vous voulez exploser? ceci est l'occasion rêvée pour vous éclater!";
+    }
+    public ArrayList<Flight>getFlightsWithSeats(int packId){
+        ArrayList<Flight>flights = new ArrayList<>();
+
+        ArrayList<PlaneSeat>planeSeatsF1 = new ArrayList<>();
+        planeSeatsF1.add(new PlaneSeat(1, "A3", 120.5));
+        planeSeatsF1.add(new PlaneSeat(2, "A4", 120.5));
+        planeSeatsF1.add(new PlaneSeat(3, "B3", 120.5));
+        planeSeatsF1.add(new PlaneSeat(4, "C3", 120.5));
+        planeSeatsF1.add(new PlaneSeat(5, "D3", 120.5));
+        Flight flight1 = new Flight(1, true);
+        flight1.setPlaneSeats(planeSeatsF1);
+
+
+        ArrayList<PlaneSeat>planeSeatsF2 = new ArrayList<>();
+        planeSeatsF2.add(new PlaneSeat(6, "E3", 120.5));
+        planeSeatsF2.add(new PlaneSeat(7, "F3", 120.5));
+        planeSeatsF2.add(new PlaneSeat(8, "G3", 120.5));
+        planeSeatsF2.add(new PlaneSeat(9, "H3", 120.5));
+        planeSeatsF2.add(new PlaneSeat(10, "I3", 120.5));
+        Flight flight2 = new Flight(2, true);
+        flight2.setPlaneSeats(planeSeatsF2);
+
+
+        ArrayList<PlaneSeat>planeSeatsF3 = new ArrayList<>();
+        planeSeatsF3.add(new PlaneSeat(11, "J3", 120.5));
+        planeSeatsF3.add(new PlaneSeat(12, "K3", 120.5));
+        planeSeatsF3.add(new PlaneSeat(13, "L3", 120.5));
+        planeSeatsF3.add(new PlaneSeat(14, "M3", 120.5));
+        planeSeatsF3.add(new PlaneSeat(15, "N3", 120.5));
+        Flight flight3 = new Flight(2, false);
+        flight3.setPlaneSeats(planeSeatsF2);
+
+        flights.add(flight1);
+        flights.add(flight2);
+        flights.add(flight3);
+
+        return flights;
     }
 }
