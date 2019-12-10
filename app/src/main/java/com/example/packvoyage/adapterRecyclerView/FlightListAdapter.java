@@ -1,4 +1,4 @@
-package com.example.packvoyage.adapterRecyclerView;
+/*package com.example.packvoyage.adapterRecyclerView;
 
 import android.content.Context;
 import android.util.Log;
@@ -16,13 +16,10 @@ import com.example.packvoyage.model.Flight;
 import java.util.ArrayList;
 
 public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.FlightHolder> {
-    private ArrayList<Flight> outwardsFlights;
-    private ArrayList<Flight> homewardsFlights;
+    private ArrayList<Flight> flights;
     private Context context;
 
-    public FlightListAdapter(ArrayList<Flight> outwardsFlights, ArrayList<Flight> homewardsFlights, Context context){
-        this.outwardsFlights = outwardsFlights;
-        this.homewardsFlights = homewardsFlights;
+    public FlightListAdapter(ArrayList<Flight> flights, Context context){
         this.context = context;
     }
 
@@ -59,13 +56,14 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
     }
 
     public static class FlightHolder extends RecyclerView.ViewHolder {
-        private TextView outwardsInfo;
         private TextView homewardsInfo;
+        private TextView outwardsInfo;
 
         public FlightHolder(@NonNull View itemView) {
             super(itemView);
-            outwardsInfo = itemView.findViewById(R.id.flight_info_recycler_outward);
             homewardsInfo = itemView.findViewById(R.id.flight_info_recycler_homeward);
+            outwardsInfo = itemView.findViewById(R.id.flight_info_recycler_outward);
         }
     }
 }
+*/

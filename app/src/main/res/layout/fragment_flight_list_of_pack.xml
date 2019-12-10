@@ -7,23 +7,56 @@
     android:layout_height="wrap_content"
     tools:context=".activity.FlightListOfPack">
 
-    <TextView
-        android:id="@+id/fragment_flight_details_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/flight_details_title"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/flight_details_going"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:id="@+id/fragment_flight_details_outward_journey_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_flight_details_outward_journey_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/flight_details_info"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/fragment_flight_details_outward_journey_title"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/flight_details_coming_back"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/fragment_flight_details_outward_journey_details"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:id="@+id/fragment_flight_details_homeward_journey_title"/>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/fragment_flight_details_homeward_journey_details"
+            android:text="@string/flight_details_info"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_flight_details_homeward_journey_title"/>
+
+    <!--<androidx.recyclerview.widget.RecyclerView
         android:id="@+id/flight_details_rv"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_flight_details_title" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_flight_details_title" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
