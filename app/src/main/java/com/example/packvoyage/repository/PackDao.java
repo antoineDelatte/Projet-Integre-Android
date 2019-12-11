@@ -5,7 +5,9 @@ import android.util.Log;
 import com.example.packvoyage.bindingModel.ImageOrVideoBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.model.Activity;
+import com.example.packvoyage.model.Airport;
 import com.example.packvoyage.model.Flight;
+import com.example.packvoyage.model.Locality;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.model.PlaneSeat;
 import com.example.packvoyage.service.PackService;
@@ -105,7 +107,12 @@ public class PackDao {
     public String getPackDescription(int packId){
         return "vous voulez exploser? ceci est l'occasion rêvée pour vous éclater!";
     }
-    public ArrayList<Flight>getFlightsWithSeats(int packId){
+    public ArrayList<Flight>getFlightsWithAirportAndSeats(int packId){
+        Locality depLocality = new Locality("New York");
+        Airport depAirport = new Airport("JFk", depLocality);
+        Locality arrLocality = new Locality("Sydney");
+        Airport arrAirport = new Airport("Croco airport", arrLocality);
+
         ArrayList<Flight>flights = new ArrayList<>();
 
         ArrayList<PlaneSeat>planeSeatsF1 = new ArrayList<>();
@@ -115,6 +122,8 @@ public class PackDao {
         planeSeatsF1.add(new PlaneSeat(4, "C3", 120.5));
         planeSeatsF1.add(new PlaneSeat(5, "D3", 120.5));
         Flight flight1 = new Flight(1, true);
+        flight1.setDepartureAirport(depAirport);
+        flight1.setArrivalAirport(arrAirport);
         flight1.setPlaneSeats(planeSeatsF1);
 
 
@@ -125,6 +134,8 @@ public class PackDao {
         planeSeatsF2.add(new PlaneSeat(9, "H3", 120.5));
         planeSeatsF2.add(new PlaneSeat(10, "I3", 120.5));
         Flight flight2 = new Flight(2, true);
+        flight2.setDepartureAirport(depAirport);
+        flight2.setArrivalAirport(arrAirport);
         flight2.setPlaneSeats(planeSeatsF2);
 
 
@@ -136,6 +147,8 @@ public class PackDao {
         planeSeatsF3.add(new PlaneSeat(15, "N3", 120.5));
         Flight flight3 = new Flight(2, false);
         flight3.setPlaneSeats(planeSeatsF2);
+        flight3.setDepartureAirport(depAirport);
+        flight3.setArrivalAirport(arrAirport);
 
         flights.add(flight1);
         flights.add(flight2);

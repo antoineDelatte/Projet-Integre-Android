@@ -56,7 +56,10 @@ public class PackDetails extends AppCompatActivity {
         bookThisPack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PackDetails.this, ChooseOptionsForBooking.class));
+                Intent intent = new Intent(PackDetails.this, ChooseOptionsForBooking.class);
+                intent.putExtra("pack_name", packName);
+                intent.putExtra("pack_id", packId);
+                startActivity(intent);
             }
         });
         display_activities_fragment.setOnClickListener(new View.OnClickListener(){

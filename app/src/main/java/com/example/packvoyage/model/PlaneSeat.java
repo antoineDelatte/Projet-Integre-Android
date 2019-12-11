@@ -4,6 +4,7 @@ public class PlaneSeat {
     private int id;
     private String seatNumber;
     private double price;
+    private boolean isBusinessClass;
 
     public PlaneSeat(int id, String seatNumber, double price) {
         this.id = id;
@@ -29,5 +30,9 @@ public class PlaneSeat {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String toString(){
+        return seatNumber + " " + price + " €";
     }
 }

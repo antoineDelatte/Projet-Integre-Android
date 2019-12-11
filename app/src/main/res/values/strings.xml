@@ -36,4 +36,9 @@
     Pack Description Pack Description Pack Description Pack Description Pack Description Pack Description
     Pack Description Pack Description Pack Description Pack Description Pack Description </string>
     <string name="pack_booking_nb_travelers">Number of travelers</string>
+    <string name="flight_seats_booking_title">Choose your seats</string>
+    <string name="book_housing_rooms_title">Choose your bedrooms</string>
+    <string name="book_paying_activities_title">Choose the paying activities which you want be a part of</string>
+    <string name="flight_booking_flight_info">Paris - London</string>
+    <string name="booking_plane_seat_info">A5 First class 200€</string>
 </resources>

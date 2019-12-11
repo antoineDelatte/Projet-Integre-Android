@@ -7,6 +7,8 @@ public class Flight {
     private int flightNumber;
     private boolean isGoing;
     private ArrayList<PlaneSeat>planeSeats;
+    private Airport departureAirport;
+    private Airport arrivalAirport;
 
     public Flight(int flightNumber, boolean isGoing) {
         this.flightNumber = flightNumber;
@@ -43,6 +45,26 @@ public class Flight {
 
     public void setGoing(boolean going) {
         isGoing = going;
+    }
+
+    public String getShortDescription(){
+        return departureAirport.getLocality().getName() + " - " + arrivalAirport.getLocality().getName();
+    }
+
+    public Airport getDepartureAirport() {
+        return departureAirport;
+    }
+
+    public void setDepartureAirport(Airport departureAirport) {
+        this.departureAirport = departureAirport;
+    }
+
+    public Airport getArrivalAirport() {
+        return arrivalAirport;
+    }
+
+    public void setArrivalAirport(Airport arrivalAirport) {
+        this.arrivalAirport = arrivalAirport;
     }
 
     public String getFullDescription(){
