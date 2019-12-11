@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.packvoyage.R;
@@ -56,9 +57,10 @@ public class ChooseOptionsForBooking extends AppCompatActivity implements Bookin
     @Override
     public void onSeatCheckBoxClick(int seatId, double seatPrice, boolean isCheckboxSelected) {
         if(isCheckboxSelected)
-            selectedSeatsWithPrice.remove(seatId);
-        else
             selectedSeatsWithPrice.put(seatId, seatPrice);
+        else
+            selectedSeatsWithPrice.remove(seatId);
+        Log.i("Trip4", Integer.toString(selectedSeatsWithPrice.size()));
     }
 
     public void initFlightBookingRV(){
