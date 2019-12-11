@@ -4,8 +4,10 @@ import android.util.Log;
 
 import com.example.packvoyage.bindingModel.ImageOrVideoBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
+import com.example.packvoyage.model.Accommodation;
 import com.example.packvoyage.model.Activity;
 import com.example.packvoyage.model.Airport;
+import com.example.packvoyage.model.BedRoom;
 import com.example.packvoyage.model.Flight;
 import com.example.packvoyage.model.Locality;
 import com.example.packvoyage.model.Pack;
@@ -74,9 +76,9 @@ public class PackDao {
         ArrayList<Activity>activities = new ArrayList<>();
         activities.add(new Activity(1, "acti1", 200.5, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
         activities.add(new Activity(2, "acti2", 200.5, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
-        activities.add(new Activity(3, "acti3", 200.5, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
+        activities.add(new Activity(3, "acti3", 0, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
         activities.add(new Activity(4, "acti4", 200.5, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
-        activities.add(new Activity(5, "acti5", 200.5, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
+        activities.add(new Activity(5, "acti5", 0, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
         Pack pack = new Pack(1, "Voyage Zambie", "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés" +
                 "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
                 "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
@@ -85,6 +87,16 @@ public class PackDao {
                 "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés", "https://img.ev.mu/images/portfolio/pays/245/600x400/846346.jpg");
         pack.setActivities(activities);
         return pack;
+    }
+
+    public ArrayList<Activity> getPayingActivities(int packId){
+        Pack pack = getPackActivities(packId);
+        ArrayList<Activity>payingActivities = new ArrayList<>();
+        for(Activity act : pack.getActivities()){
+            if(act.getPrice() != null && act.getPrice() > 0)
+                payingActivities.add(act);
+        }
+        return payingActivities;
     }
 
     public Pack getPackWithGeneralFlightInfos(int packId){
@@ -155,5 +167,44 @@ public class PackDao {
         flights.add(flight3);
 
         return flights;
+    }
+
+    public ArrayList<Accommodation> getAccommodationsWithRooms(int packId){
+        ArrayList<Accommodation>accommodations = new ArrayList<>();
+
+        ArrayList<BedRoom>bedRooms1 = new ArrayList<>();
+        bedRooms1.add(new BedRoom(1, 5, 120.85));
+        bedRooms1.add(new BedRoom(2, 2, 120.85));
+        bedRooms1.add(new BedRoom(3, 2, 120.85));
+        bedRooms1.add(new BedRoom(4, 3, 120.85));
+        bedRooms1.add(new BedRoom(5, 4, 120.85));
+
+        ArrayList<BedRoom>bedRooms2 = new ArrayList<>();
+        bedRooms2.add(new BedRoom(6, 10, 120.85));
+        bedRooms2.add(new BedRoom(7, 4, 120.85));
+        bedRooms2.add(new BedRoom(8, 5, 120.85));
+        bedRooms2.add(new BedRoom(9, 3, 120.85));
+        bedRooms2.add(new BedRoom(10, 2, 120.85));
+
+        ArrayList<BedRoom>bedRooms3 = new ArrayList<>();
+        bedRooms3.add(new BedRoom(11, 6, 120.85));
+        bedRooms3.add(new BedRoom(12, 5, 120.85));
+        bedRooms3.add(new BedRoom(13, 4, 120.85));
+        bedRooms3.add(new BedRoom(14, 3, 120.85));
+        bedRooms3.add(new BedRoom(15, 2, 120.85));
+
+        Locality locality1 = new Locality("Ville du jambon");
+        Locality locality2 = new Locality("Ville du fromage");
+        Locality locality3 = new Locality("Ville du saucisson");
+
+
+        Accommodation accommodation1 = new Accommodation("hotel jambon", locality1, bedRooms1);
+        Accommodation accommodation2 = new Accommodation("hotel jambon", locality1, bedRooms2);
+        Accommodation accommodation3 = new Accommodation("hotel jambon", locality1, bedRooms3);
+
+        accommodations.add(accommodation1);
+        accommodations.add(accommodation2);
+        accommodations.add(accommodation3);
+        return accommodations;
     }
 }

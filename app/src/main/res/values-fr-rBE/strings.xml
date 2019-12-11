@@ -41,4 +41,11 @@
     <string name="book_paying_activities_title">Choisissez les activités payantes auxquelles vous voulez participer</string>
     <string name="flight_booking_flight_info">Paris - Londres</string>
     <string name="booking_plane_seat_info">A5 Première classe 200€</string>
+    <string name="booking_wrong_nb_of_travelers_input">Nombre de voyageurs invalide</string>
+    <string name="booking_negative_nb_of_travelers_input">Le nombre de voyageurs ne peut pas être inférieur à 1</string>
+    <string name="booking_activities_activity_info">Nom de l\'acti - prix</string>
+    <string name="hotel_booking_info">Infos hotel</string>
+    <string name="room_size">3</string>
+    <string name="room_size_label"> lits</string>
+    <string name="room_price"> - 90 €</string>
 </resources>

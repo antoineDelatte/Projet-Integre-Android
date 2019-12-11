@@ -24,14 +24,18 @@
             android:orientation="vertical">
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/text_input_layout_number_travelers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
+                    android:id="@+id/booking_options_nb_travelers"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:hint="@string/pack_booking_nb_travelers"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
+                    android:width="190sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

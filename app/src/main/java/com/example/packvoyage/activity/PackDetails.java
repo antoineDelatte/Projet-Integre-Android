@@ -39,6 +39,7 @@ public class PackDetails extends AppCompatActivity {
     public Button display_housing_fragment;
     private PackDao packDao;
     private String packName;
+    private PackDetailVM packDetailVM;
     private static final String ACTIVITIES = "activities";
     private static final String FLIGHTS = "flights";
     private static final String HOUSING = "housing";
@@ -49,6 +50,8 @@ public class PackDetails extends AppCompatActivity {
         Intent intent = getIntent();
         packName = intent.getStringExtra("pack_name");
         packId = intent.getIntExtra("pack_id", 1);
+        packDetailVM = ViewModelProviders.of(this).get(PackDetailVM.class);
+        packDetailVM.setSelectedPackId(packId);
         packDao = new PackDao();
         setContentView(R.layout.activity_pack_details);
         ButterKnife.bind(this);

@@ -3,7 +3,7 @@ package com.example.packvoyage.model;
 public class Activity {
     private int id;
     private String name;
-    private double price;
+    private Double price;
     private String location;
     private String image_url;
 
@@ -35,11 +35,11 @@ public class Activity {
         this.name = name;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -57,5 +57,9 @@ public class Activity {
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
+    }
+
+    public String getShortDescription(){
+        return name + " " + price;
     }
 }
