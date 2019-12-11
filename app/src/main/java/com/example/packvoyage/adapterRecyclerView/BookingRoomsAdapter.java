@@ -1,5 +1,6 @@
 package com.example.packvoyage.adapterRecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class BookingRoomsAdapter extends RecyclerView.Adapter<BookingRoomsAdapte
     @Override
     public void onBindViewHolder(@NonNull BookingRoomHolder holder, int position) {
         BedRoom room = rooms.get(position);
-        holder.room_size.setText(room.getNbBeds());
+        holder.room_size.setText(String.valueOf(room.getNbBeds()));
         holder.room_checkbox.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

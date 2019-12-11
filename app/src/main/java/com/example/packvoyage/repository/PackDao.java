@@ -199,8 +199,8 @@ public class PackDao {
 
 
         Accommodation accommodation1 = new Accommodation("hotel jambon", locality1, bedRooms1);
-        Accommodation accommodation2 = new Accommodation("hotel jambon", locality1, bedRooms2);
-        Accommodation accommodation3 = new Accommodation("hotel jambon", locality1, bedRooms3);
+        Accommodation accommodation2 = new Accommodation("hotel fromage", locality2, bedRooms2);
+        Accommodation accommodation3 = new Accommodation("hotel saucisson", locality3, bedRooms3);
 
         accommodations.add(accommodation1);
         accommodations.add(accommodation2);
