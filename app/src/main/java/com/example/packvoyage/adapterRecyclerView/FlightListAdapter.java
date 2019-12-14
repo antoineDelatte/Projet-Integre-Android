@@ -1,7 +1,6 @@
-/*package com.example.packvoyage.adapterRecyclerView;
+package com.example.packvoyage.adapterRecyclerView;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +16,10 @@ import java.util.ArrayList;
 
 public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.FlightHolder> {
     private ArrayList<Flight> flights;
-    private Context context;
+    private boolean isOutwardFlights;
 
-    public FlightListAdapter(ArrayList<Flight> flights, Context context){
-        this.context = context;
+    public FlightListAdapter(ArrayList<Flight> flights){
+        this.flights = flights;
     }
 
     @NonNull
@@ -33,37 +32,26 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
 
     @Override
     public void onBindViewHolder(@NonNull FlightListAdapter.FlightHolder holder, int position) {
-        if(position < outwardsFlights.size()){
-            holder.outwardsInfo.setText(outwardsFlights.get(position).getFullDescription());
-        }
-        if(position < homewardsFlights.size()){
-            holder.homewardsInfo.setText(homewardsFlights.get(position).getFullDescription());
-        }
+        Flight flight = flights.get(position);
+        holder.flight_departure_and_destination.setText(flight.getArrivalAndDestinationTitle());
+        holder.departure_flight_info.setText(flight.getDepartureInfo());
+        holder.arrival_flight_info.setText(flight.getArrivalInfo());
     }
 
     @Override
-    public int getItemCount() {
-        if(outwardsFlights == null)
-            if(homewardsFlights == null)
-                return 0;
-            else
-                return homewardsFlights.size();
-        else
-            if(homewardsFlights == null)
-                return outwardsFlights.size();
-            else
-                return outwardsFlights.size() + homewardsFlights.size();
-    }
+    public int getItemCount() { return flights == null ? 0 : flights.size();}
 
     public static class FlightHolder extends RecyclerView.ViewHolder {
-        private TextView homewardsInfo;
-        private TextView outwardsInfo;
+        private TextView flight_departure_and_destination;
+        private TextView departure_flight_info;
+        private TextView arrival_flight_info;
+
 
         public FlightHolder(@NonNull View itemView) {
             super(itemView);
-            homewardsInfo = itemView.findViewById(R.id.flight_info_recycler_homeward);
-            outwardsInfo = itemView.findViewById(R.id.flight_info_recycler_outward);
+            flight_departure_and_destination = itemView.findViewById(R.id.flight_departure_and_destination);
+            departure_flight_info = itemView.findViewById(R.id.departure_flight_info);
+            arrival_flight_info = itemView.findViewById(R.id.arrival_flight_info);
         }
     }
 }
-*/

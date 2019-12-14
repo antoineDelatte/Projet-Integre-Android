@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".activity.ChooseOptionsForBooking">
+    tools:context=".activity.ChooseOptionsForBooking"
+    android:background="@color/activity_background_color">
 
     <TextView
         android:id="@+id/choose_options_for_booking_pack_name"
@@ -26,7 +28,7 @@
                 android:id="@+id/text_input_layout_number_travelers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left">
+                android:layout_gravity="start">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/booking_options_nb_travelers"
@@ -46,7 +48,9 @@
                 android:text="@string/flight_seats_booking_title"
                 android:textSize="20sp"
                 android:layout_gravity="center"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textColor="#000000"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/book_plane_seats_rv"
@@ -60,7 +64,8 @@
                 android:text="@string/book_housing_rooms_title"
                 android:textSize="20sp"
                 android:layout_gravity="center"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textColor="#000000"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/book_housing_rooms_rv"
@@ -74,7 +79,8 @@
                 android:text="@string/book_paying_activities_title"
                 android:textSize="20sp"
                 android:layout_gravity="center"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textColor="#000000"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/book_paying_activities_rv"
                 android:layout_width="match_parent"

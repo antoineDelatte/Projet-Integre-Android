@@ -68,9 +68,22 @@ public class Flight {
     }
 
     public String getFullDescription(){
-        return "-Company : Ryanair\n" +
-                "\n-Departure info : Airport Charles Henry 15 january 2019 6AM, Belgium Brussels" +
-                "\n-Arrival info : Airport Jean Claude 15 january 2019 3PM, United Stated New York" +
-                "\n-Flight number : 627175656"; // todo
+        return  "Brussels - New York" +
+                "\n-Company : Ryanair" +
+                "\n-Departure : Airport Charles Henry 15 january 2019 6AM, Belgium Brussels" +
+                "\n-Arrival : Airport Jean Claude 15 january 2019 3PM, United Stated New York"; // todo
+    }
+
+    public String getArrivalAndDestinationTitle(){
+        //return departureAirport.getLocality() + " - " + arrivalAirport.getLocality();
+        return "Brussels - New York";
+    }
+    public String getDepartureInfo(){
+        return "Company : Belgian Airline " +
+                "\nBruxelles Nord, Brussels, 6AM";
+    }
+    public String getArrivalInfo(){
+        return "Company : US Airline " +
+                "\nJFK Airport, New York, 3PM";
     }
 }

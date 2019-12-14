@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/pack_activity_title"
+        android:textColor="@color/text_color"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

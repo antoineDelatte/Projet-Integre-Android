@@ -69,6 +69,7 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHo
         public PackHolder(View itemView, OnPackListener onPackListener) {
             super(itemView);
             packPicture = itemView.findViewById(R.id.pack_image);
+            packPicture.setClipToOutline(true);
             packName = itemView.findViewById(R.id.pack_name);
             this.onPackListener = onPackListener;
             itemView.setOnClickListener(this);

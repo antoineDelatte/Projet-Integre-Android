@@ -6,34 +6,52 @@
     android:id="@+id/flights_info_recycler_parent">
 
     <TextView
+        android:id="@+id/flight_departure_and_destination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/flight_details_going"
+        android:text="@string/flight_departure_and_destination"
+        android:textColor="@color/text_color"
         android:textSize="20sp"
-        android:textColor="#000000"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="16sp"
-        android:text="@string/flight_details_info"
-        android:id="@+id/flight_info_recycler_outward"/>
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/flight_details_coming_back"
-        android:textSize="20sp"
-        android:textColor="#000000"/>
+        android:textSize="18sp"
+        android:layout_gravity="left"
+        android:text="@string/flight_departure"
+        android:textColor="@color/text_color"
+        android:layout_marginTop="7dp"
+        android:layout_marginStart="5sp"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/departure_flight_info"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:textSize="16sp"
+        android:layout_marginStart="5sp"
+        android:layout_marginEnd="5sp"
+        android:text="@string/flight_details_info" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_gravity="left"
+        android:text="@string/flight_arrival"
+        android:layout_marginStart="5sp"
+        android:textColor="@color/text_color"
+        android:layout_marginTop="7dp"/>
+
+    <TextView
+        android:id="@+id/arrival_flight_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginStart="5sp"
+        android:layout_marginEnd="5sp"
         android:text="@string/flight_details_info"
-        android:id="@+id/flight_info_recycler_homeward"/>
+        />
 
 </LinearLayout>

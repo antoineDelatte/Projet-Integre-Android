@@ -16,14 +16,12 @@
     <string name="departure_place">Departure place</string>
     <string name="departure_place_value">Departure place value</string>
     <string name="book_this_pack_button">Book this pack</string>
-    <string name="flight_details_title">Packs flights</string>
+    <string name="flight_details_title">Flights</string>
     <string name="flight_details_going">Outward journey</string>
     <string name="flight_details_coming_back">Homeward journey</string>
     <string name="flight_details_info">
-        -Company : Ryanair
-        \n-Departure info : Airport Charles Henry 15 january 2019 6AM, Belgium Brussels
-        \n-Arrival info : Airport Jean Claude 15 january 2019 3PM, United Stated New York
-        \n-Flight number : 627175656
+        Company : Ryanair
+        \nAirport Charles Henry 15 january 2019 6AM, Belgium Brussels
     </string>
     <string name="pack_activity_title">Activities</string>
     <string name="pack_details_show_activity_fragment">Activities</string>
@@ -38,7 +36,7 @@
     <string name="pack_booking_nb_travelers">Number of travelers</string>
     <string name="flight_seats_booking_title">Choose your seats</string>
     <string name="book_housing_rooms_title">Choose your bedrooms</string>
-    <string name="book_paying_activities_title">Choose the paying activities which you want be a part of</string>
+    <string name="book_paying_activities_title">Select your activities</string>
     <string name="flight_booking_flight_info">Paris - London</string>
     <string name="booking_plane_seat_info">A5 First class 200€</string>
     <string name="booking_wrong_nb_of_travelers_input">Invalid number of travelers</string>
@@ -48,4 +46,7 @@
     <string name="room_size">3</string>
     <string name="room_size_label"> beds</string>
     <string name="room_price"> - 90 €</string>
+    <string name="flight_departure_and_destination">Departure - Destination</string>
+    <string name="flight_departure">Departure</string>
+    <string name="flight_arrival">Arrival</string>
 </resources>

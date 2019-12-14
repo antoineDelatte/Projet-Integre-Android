@@ -37,10 +37,12 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ActivityHolder holder, int position) {
-        Glide.with(this.context).load(this.activities.get(position).getImage_url()).into(holder.activity_image);
-        holder.activity_name.setText(activities.get(position).getName());
-        holder.activity_price.setText(Double.toString(activities.get(position).getPrice()));
-        holder.activity_location.setText(activities.get(position).getLocation());
+        Activity activity = this.activities.get(position);
+        Glide.with(this.context).load(activity.getImage_url()).into(holder.activity_image);
+        holder.activity_image.setClipToOutline(true);
+        holder.activity_name.setText(activity.getName());
+        holder.activity_price.setText(String.format("%.2f", activity.getPrice()));
+        holder.activity_location.setText(activity.getLocation());
     }
 
     @Override

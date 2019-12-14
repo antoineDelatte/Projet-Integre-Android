@@ -6,4 +6,8 @@
     <color name="mainColor">#E0D3BD</color>
     <color name="secondaryColor">#E0D3BD</color>
     <color name="borderColor">#000000</color>
+    <color name="recycler_background_color">#FFFFFF</color>
+    <color name="activity_background_color">#EBEBEB</color>
+    <color name="text_title">#252525</color>
+    <color name="text_color">#252525</color>
 </resources>

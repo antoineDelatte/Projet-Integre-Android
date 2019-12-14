@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="12sp"
+    android:background="@drawable/recycler_rounded_corner">
 
     <ImageButton
         android:id="@+id/pack_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:maxWidth="10dp"
-        android:maxHeight="10dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        tools:srcCompat="@tools:sample/avatars"
+        android:background="@drawable/rounded_corner" />
 
     <TextView
         android:id="@+id/pack_name"
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/pack_name" />
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/text_title"
+        android:text="@string/pack_name"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
 </LinearLayout>

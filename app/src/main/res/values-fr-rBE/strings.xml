@@ -17,14 +17,12 @@
     <string name="departure_place">Lieu de départ</string>
     <string name="departure_place_value">Valeur lieu de départ</string>
     <string name="book_this_pack_button">Réserver ce pack</string>
-    <string name="flight_details_title">Vols du pack</string>
+    <string name="flight_details_title">Vols</string>
     <string name="flight_details_going">Trajet aller</string>
     <string name="flight_details_coming_back">Trajet retour</string>
     <string name="flight_details_info">
-        \n-Company : Ryanair
-        \n-Departure info : Airport Charles Henry 15 january 2019 6AM, Belgium Brussels
-        \n-Arrival info : Airport Jean Claude 15 january 2019 3PM, United Stated New York
-        \n-Flight number : 627175656
+        Company : Ryanair
+        \nDeparture : Airport Charles Henry 15 january 2019 6AM, Belgium Brussels
     </string>
     <string name="pack_activity_title">Activités</string>
     <string name="pack_details_show_activity_fragment">Activités</string>
@@ -38,7 +36,7 @@
     <string name="pack_booking_nb_travelers">Nombre de voyageurs</string>
     <string name="flight_seats_booking_title">Choisissez vos places</string>
     <string name="book_housing_rooms_title">Choisissez vos chambres</string>
-    <string name="book_paying_activities_title">Choisissez les activités payantes auxquelles vous voulez participer</string>
+    <string name="book_paying_activities_title">Choisissez vos activités</string>
     <string name="flight_booking_flight_info">Paris - Londres</string>
     <string name="booking_plane_seat_info">A5 Première classe 200€</string>
     <string name="booking_wrong_nb_of_travelers_input">Nombre de voyageurs invalide</string>
@@ -48,4 +46,7 @@
     <string name="room_size">3</string>
     <string name="room_size_label"> lits</string>
     <string name="room_price"> - 90 €</string>
+    <string name="flight_departure_and_destination">Depart - Arrivee</string>
+    <string name="flight_departure">Départ</string>
+    <string name="flight_arrival">Arrivée</string>
 </resources>

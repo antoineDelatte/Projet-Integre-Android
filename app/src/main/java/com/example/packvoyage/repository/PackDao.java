@@ -112,12 +112,32 @@ public class PackDao {
         flights.add(new Flight(8, false));
         flights.add(new Flight(9, true));
         flights.add(new Flight(10, false));
-        Pack pack = new Pack(1, "voyage en afganistan", "vous voulez exploser? ceci est l'occasion rêvée pour aller s'éclater!", "https://images.unsplash.com/photo-1507234897433-06646bd0e673?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80");
+        Pack pack = new Pack(1, "voyage en afganistan", "Voyage voyage Au dessus des vieux volcans\n" +
+                "Glissent des ailes sous les tapis du vent\n" +
+                "Voyage, voyage\n" +
+                "Éternellement\n" +
+                "De nuages en marécages\n" +
+                "De vent d'Espagne en pluie d'équateur\n" +
+                "Voyage, voyage\n" +
+                "Vole dans les hauteurs\n" +
+                "Au dessus des capitales\n" +
+                "Des idées fatales\n" +
+                "Regardent l'océan", "https://images.unsplash.com/photo-1507234897433-06646bd0e673?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80");
         pack.setFlights(flights);
         return pack;
     }
     public String getPackDescription(int packId){
-        return "vous voulez exploser? ceci est l'occasion rêvée pour vous éclater!";
+        return "Voyage voyage Au dessus des vieux volcans\n" +
+                "Glissent des ailes sous les tapis du vent\n" +
+                "Voyage, voyage\n" +
+                "Éternellement\n" +
+                "De nuages en marécages\n" +
+                "De vent d'Espagne en pluie d'équateur\n" +
+                "Voyage, voyage\n" +
+                "Vole dans les hauteurs\n" +
+                "Au dessus des capitales\n" +
+                "Des idées fatales\n" +
+                "Regardent l'océan";
     }
     public ArrayList<Flight>getFlightsWithAirportAndSeats(int packId){
         Locality depLocality = new Locality("New York");

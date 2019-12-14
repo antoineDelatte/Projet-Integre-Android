@@ -5,15 +5,16 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.packvoyage.R;
 import com.example.packvoyage.ViewModel.PackDetailVM;
-import com.example.packvoyage.model.Flight;
+import com.example.packvoyage.adapterRecyclerView.FlightListAdapter;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
 
@@ -25,11 +26,12 @@ public class FlightListOfPack extends Fragment {
     private PackDao packDao;
     private Pack pack;
     private int selectedPackId;
-    @BindView(R.id.fragment_flight_details_outward_journey_details)
-    public TextView outwardTextInfo;
-    @BindView(R.id.fragment_flight_details_homeward_journey_details)
-    public TextView homewardTextInfo;
     private PackDetailVM packDetailVM;
+    @BindView(R.id.outward_flight_details_rv)
+    public RecyclerView outward_journey;
+    @BindView(R.id.homeward_flight_details_rv)
+    public RecyclerView homeward_journey;
+    private FlightListAdapter flightAdapter;
 
     public FlightListOfPack(){
 
@@ -44,21 +46,23 @@ public class FlightListOfPack extends Fragment {
         packDetailVM.getSelectedPackId().observe(this, packId -> selectedPackId = packId);
         packDao = new PackDao();
         pack = packDao.getPackWithGeneralFlightInfos(selectedPackId);
-        setFlightInfoText();
+        initOutwardFlightsRV();
+        initHomewardFlightsRV();
         return view;
     }
 
-    private void setFlightInfoText(){
-        StringBuilder outwardInfo = new StringBuilder();
-        StringBuilder homewardInfo = new StringBuilder();
-        for(Flight flight: pack.getOutwardsFlights()){
-            outwardInfo.append("\n" + flight.getFullDescription());
-        }
-        for(Flight flight : pack.getHomewardsFlights()){
-            homewardInfo.append("\n" + flight.getFullDescription());
-        }
-        outwardTextInfo.setText(outwardInfo);
-        homewardTextInfo.setText(homewardInfo);
+    private void initOutwardFlightsRV(){
+        flightAdapter = new FlightListAdapter(pack.getOutwardsFlights());
+        outward_journey.setHasFixedSize(true);
+        outward_journey.setAdapter(flightAdapter);
+        outward_journey.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private void initHomewardFlightsRV(){
+        flightAdapter = new FlightListAdapter(pack.getOutwardsFlights());
+        homeward_journey.setHasFixedSize(true);
+        homeward_journey.setAdapter(flightAdapter);
+        homeward_journey.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
