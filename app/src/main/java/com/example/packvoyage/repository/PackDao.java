@@ -1,6 +1,5 @@
 package com.example.packvoyage.repository;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.example.packvoyage.ViewModel.PackDetailVM;
@@ -52,6 +51,30 @@ public class PackDao {
 
             @Override
             public void onFailure(Call<List<PackBindingModel>> call, Throwable t) {
+                Log.e("Trip4Student", t.getMessage());
+            }
+        });
+    }
+
+    public void loadPackDescription(int packId, String language, PackDetailVM packVM){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(PackService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        PackService pack = retrofit.create(PackService.class);
+        Call<PackBindingModel> call = pack.getPackDescription(packId, language);
+        call.enqueue(new Callback<PackBindingModel>() {
+            @Override
+            public void onResponse(Call<PackBindingModel> call, Response<PackBindingModel> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                PackBindingModel packBindingModel = response.body();
+                packVM.setCurrentPackDescription(packBindingModel.getTraduction().getDescription());
+            }
+
+            @Override
+            public void onFailure(Call<PackBindingModel> call, Throwable t) {
                 Log.e("Trip4Student", t.getMessage());
             }
         });

@@ -1,9 +1,5 @@
 package com.example.packvoyage.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,6 +7,10 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
@@ -59,7 +59,7 @@ public class ChooseOptionsForBooking extends AppCompatActivity implements Bookin
         ButterKnife.bind(this);
         packName.setText(intent.getStringExtra("pack_name"));
         packId = intent.getIntExtra("pack_id", 1);
-        packDao = new PackDao();
+        packDao = SingletonDao.getPackDao();
         nbTravelers.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

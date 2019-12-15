@@ -1,15 +1,14 @@
 package com.example.packvoyage.activity;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
@@ -38,7 +37,7 @@ public class ActivityList extends Fragment {
         packDetailVM.getSelectedPackId().observe(this, packId -> selectedPackId = packId);
         View view =  inflater.inflate(R.layout.fragment_activity_list, container, false);
         ButterKnife.bind(this, view);
-        packDao = new PackDao();
+        packDao = SingletonDao.getPackDao();
         pack = packDao.getPackActivities(selectedPackId);
         // /!\ laisser cette ligne à la fin
         initRecyclerView();

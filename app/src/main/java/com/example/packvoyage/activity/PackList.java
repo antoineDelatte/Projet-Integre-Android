@@ -2,6 +2,7 @@ package com.example.packvoyage.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -9,12 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.packvoyage.R;
+import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.adapterRecyclerView.PackListAdapter;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,12 +41,11 @@ public class PackList extends AppCompatActivity implements PackListAdapter.OnPac
         ButterKnife.bind(this);
 
         packVM = ViewModelProviders.of(this).get(PackDetailVM.class);
-        packDao = new PackDao();
+        packDao = SingletonDao.getPackDao();
         packDao.loadPacks(packVM);
         packVM.getPacks().observe(this, packs -> {
             initRecyclerView(packs);
         });
-
         /*packList = new ArrayList<>();
         packList.add(new Pack(1, "Voyage Combodge", null, "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
         packList.add(new Pack(2, "Voyage Belgique", null, "https://media.routard.com/image/73/7/belgique-gand.1487737.c1000x300.jpg"));

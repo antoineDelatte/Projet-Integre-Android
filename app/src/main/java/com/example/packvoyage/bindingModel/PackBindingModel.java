@@ -7,11 +7,26 @@ public class PackBindingModel {
     private Integer id;
     private String name;
     private ArrayList<ImageOrVideoBindingModel> pictureOrVideo;
+    private ArrayList<TraductionBindingModel> traduction;
 
     public PackBindingModel(Integer id, String name, ArrayList<ImageOrVideoBindingModel> pictureOrVideo) {
         this.id = id;
         this.name = name;
         this.pictureOrVideo = pictureOrVideo;
+    }
+
+    public PackBindingModel(Integer id, ArrayList<TraductionBindingModel> traduction, String name) {
+        this.id = id;
+        this.name = name;
+        this.traduction = traduction;
+    }
+
+    public TraductionBindingModel getTraduction() {
+        return traduction.get(0);
+    }
+
+    public void setTraduction(ArrayList<TraductionBindingModel> traduction) {
+        this.traduction = traduction;
     }
 
     public Integer getId() {

@@ -11,6 +11,7 @@ public class PackDetailVM extends androidx.lifecycle.ViewModel {
 
     private MutableLiveData<Integer>selectedPackId = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Pack>>packs = new MutableLiveData<>();
+    private MutableLiveData<String>currentPackDescription = new MutableLiveData<>();
 
     public LiveData<Integer> getSelectedPackId() {
         return selectedPackId;
@@ -28,4 +29,11 @@ public class PackDetailVM extends androidx.lifecycle.ViewModel {
         this.packs.setValue(packs);
     }
 
+    public LiveData<String> getCurrentPackDescription() {
+        return currentPackDescription;
+    }
+
+    public void setCurrentPackDescription(String currentPackDescription) {
+        this.currentPackDescription.setValue(currentPackDescription);
+    }
 }

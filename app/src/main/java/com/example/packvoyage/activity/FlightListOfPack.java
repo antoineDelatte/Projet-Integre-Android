@@ -2,15 +2,14 @@ package com.example.packvoyage.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
@@ -45,7 +44,7 @@ public class FlightListOfPack extends Fragment {
         ButterKnife.bind(this, view);
         packDetailVM = ViewModelProviders.of(this).get(PackDetailVM.class);
         packDetailVM.getSelectedPackId().observe(this, packId -> selectedPackId = packId);
-        packDao = new PackDao();
+        packDao = SingletonDao.getPackDao();
         pack = packDao.getPackWithGeneralFlightInfos(selectedPackId);
         initOutwardFlightsRV();
         initHomewardFlightsRV();
