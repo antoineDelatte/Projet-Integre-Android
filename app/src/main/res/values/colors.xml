@@ -12,5 +12,6 @@
     <color name="text_title">#FFFFFF</color>
     <color name="text_color">#FFFFFF</color>
     <color name="text_info">#66757F</color>
+    <color name="border_color">#66757F</color>
     <color name="button_background_color">#55ACEE</color>
 </resources>

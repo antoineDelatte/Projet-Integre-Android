@@ -10,15 +10,17 @@
     <ImageButton
         android:id="@+id/pack_image"
         android:layout_width="match_parent"
+        android:padding="1sp"
         android:layout_height="180dp"
         tools:srcCompat="@tools:sample/avatars"
         android:background="@drawable/rounded_corner" />
 
     <TextView
+        android:padding="8sp"
         android:id="@+id/pack_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/text_title"
