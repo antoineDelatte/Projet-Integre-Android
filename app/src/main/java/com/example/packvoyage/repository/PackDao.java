@@ -1,8 +1,9 @@
 package com.example.packvoyage.repository;
 
+import android.content.Context;
 import android.util.Log;
 
-import com.example.packvoyage.bindingModel.ImageOrVideoBindingModel;
+import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.model.Accommodation;
 import com.example.packvoyage.model.Activity;
@@ -25,9 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PackDao {
 
-    private ArrayList<Pack> packs;
-
-    private void loadPacks() {
+    public void loadPacks(PackDetailVM packVM) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(PackService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -41,12 +40,14 @@ public class PackDao {
                     return;
                 }
                 List<PackBindingModel> packList = response.body();
+                ArrayList<Pack> packs = new ArrayList<>();
                 Pack pack;
+                packs.clear();
                 for(PackBindingModel packBindingModel : packList){
-                    pack = new Pack(packBindingModel.getId(), packBindingModel.getName(), null, packBindingModel.getImageOrVideoBindingModels().get(0).getContent());
-                    PackDao.this.packs.add(pack);
+                    pack = new Pack(packBindingModel.getId(), packBindingModel.getName(), null, packBindingModel.getPictureOrVideo().get(0).getContent());
+                    packs.add(pack);
                 }
-
+                packVM.setPacks(packs);
             }
 
             @Override
@@ -56,8 +57,8 @@ public class PackDao {
         });
     }
 
-    public ArrayList<Pack> getPacks() {
-        /*this.loadPacks();*/
+    /*public ArrayList<Pack> getPacks() {
+        //this.loadPacks();
         //Pour les tests
         if(packs != null){
             packs.add(new Pack(1, "Voyage Combodge", null, "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
@@ -66,9 +67,7 @@ public class PackDao {
             packs.add(new Pack(4, "Voyage Bois de boulogne", null, "https://ak.jogurucdn.com/media/image/p25/place-2016-01-4-12-Boisdeboulogne2065e49fc359db8a638314b88f9f216d.jpg"));
             packs.add(new Pack(5, "Voyage Danemark", null, "https://live.staticflickr.com/1831/42367565350_b3577e9f9b_b.jpg"));
         }
-
-        return packs;
-    }
+    }*/
 
     public Pack getPackActivities(int packId){
         //appel methode correspondante

@@ -24,7 +24,7 @@
         Company : Ryanair
         \nDeparture : Airport Charles Henry 15 january 2019 6AM, Belgium Brussels
     </string>
-    <string name="pack_activity_title">Activités</string>
+    <string name="pack_activity_title">Activités disponibles</string>
     <string name="pack_details_show_activity_fragment">Activités</string>
     <string name="pack_details_show_flights_fragment">Vols</string>
     <string name="pack_details_show_accommodations_fragment">Logements</string>

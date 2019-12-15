@@ -6,12 +6,12 @@ public class PackBindingModel {
 
     private Integer id;
     private String name;
-    private ArrayList<ImageOrVideoBindingModel> imageOrVideoBindingModels;
+    private ArrayList<ImageOrVideoBindingModel> pictureOrVideo;
 
-    public PackBindingModel(Integer id, String name, ArrayList<ImageOrVideoBindingModel> imageOrVideoBindingModels) {
+    public PackBindingModel(Integer id, String name, ArrayList<ImageOrVideoBindingModel> pictureOrVideo) {
         this.id = id;
         this.name = name;
-        this.imageOrVideoBindingModels = imageOrVideoBindingModels;
+        this.pictureOrVideo = pictureOrVideo;
     }
 
     public Integer getId() {
@@ -30,11 +30,11 @@ public class PackBindingModel {
         this.name = name;
     }
 
-    public ArrayList<ImageOrVideoBindingModel> getImageOrVideoBindingModels() {
-        return imageOrVideoBindingModels;
+    public ArrayList<ImageOrVideoBindingModel> getPictureOrVideo() {
+        return pictureOrVideo;
     }
 
-    public void setImageOrVideoBindingModels(ArrayList<ImageOrVideoBindingModel> imageOrVideoBindingModels) {
-        this.imageOrVideoBindingModels = imageOrVideoBindingModels;
+    public void setPictureOrVideo(ArrayList<ImageOrVideoBindingModel> pictureOrVideo) {
+        this.pictureOrVideo = pictureOrVideo;
     }
 }

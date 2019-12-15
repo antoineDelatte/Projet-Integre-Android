@@ -7,15 +7,22 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface PackService {
-    String BASE_URL = "https://localhost:5001";
+    String BASE_URL = "https://api-trip4students.azurewebsites.net/Pack/";
 
-    @GET("pack")
+    @GET("imageOfThePack")
     Call<List<PackBindingModel>> getPacks();
 
-    //@GET("packs")
-    //Call<Pack> getUserById(@Query("id") Integer id);
+    @GET("packs/{packId}")
+    Call<PackBindingModel> getPackImage(@Path("packId") int packId);
+
+    @GET("packs/{packId}")
+    Call<PackBindingModel> getPackDescription(@Path("packId") int packId);
+
+    @GET("packs/{packId}")
+    Call<PackBindingModel> getPackActivities(@Path("packId") int packId);
 
     //@POST("packs")
     //Call<Pack> postUser(@Body Pack pack)

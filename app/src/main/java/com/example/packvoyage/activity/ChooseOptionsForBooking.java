@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.packvoyage.R;
+import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.adapterRecyclerView.BookingActivitiesAdapter;
 import com.example.packvoyage.adapterRecyclerView.BookingFlightParentAdapter;
 import com.example.packvoyage.adapterRecyclerView.BookingPlaneSeatsSelectionAdapter;

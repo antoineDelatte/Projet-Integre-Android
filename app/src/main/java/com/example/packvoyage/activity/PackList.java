@@ -27,7 +27,7 @@ public class PackList extends AppCompatActivity implements PackListAdapter.OnPac
     private PackDao packDao;
     private RecyclerView.Adapter rVadapter;
     private ArrayList<Pack> packList;
-    private PackDetailVM packDetailVM;
+    private PackDetailVM packVM;
 
 
     @Override
@@ -37,15 +37,22 @@ public class PackList extends AppCompatActivity implements PackListAdapter.OnPac
 
         ButterKnife.bind(this);
 
+        packVM = ViewModelProviders.of(this).get(PackDetailVM.class);
         packDao = new PackDao();
-        //packList = packDao.getPacks();
-        packDetailVM = ViewModelProviders.of(this).get(PackDetailVM.class);
-        packList = new ArrayList<>();
+        packDao.loadPacks(packVM);
+        packVM.getPacks().observe(this, packs -> {
+            initRecyclerView(packs);
+        });
+
+        /*packList = new ArrayList<>();
         packList.add(new Pack(1, "Voyage Combodge", null, "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
         packList.add(new Pack(2, "Voyage Belgique", null, "https://media.routard.com/image/73/7/belgique-gand.1487737.c1000x300.jpg"));
         packList.add(new Pack(3, "Voyage Zambie", null, "https://img.ev.mu/images/portfolio/pays/245/600x400/846346.jpg"));
         packList.add(new Pack(4, "Voyage Bois de boulogne", null, "https://ak.jogurucdn.com/media/image/p25/place-2016-01-4-12-Boisdeboulogne2065e49fc359db8a638314b88f9f216d.jpg"));
-        packList.add(new Pack(5, "Voyage Danemark", null, "https://live.staticflickr.com/1831/42367565350_b3577e9f9b_b.jpg"));
+        packList.add(new Pack(5, "Voyage Danemark", null, "https://live.staticflickr.com/1831/42367565350_b3577e9f9b_b.jpg"));*/
+    }
+
+    public void initRecyclerView(ArrayList<Pack>packList){
         rVPackList.setHasFixedSize(true);
         rVPackList.setLayoutManager(new LinearLayoutManager(this));
         rVadapter = new PackListAdapter(packList, getApplicationContext(), this);

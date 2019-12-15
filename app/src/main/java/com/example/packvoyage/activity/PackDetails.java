@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.packvoyage.R;
+import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
@@ -105,7 +106,7 @@ public class PackDetails extends AppCompatActivity {
                 // todo changer par accomodation fragment
         }
         fragmentTransaction.replace(R.id.pack_details_fragment_container, newFragment);
-        fragmentTransaction.addToBackStack(null);
+        //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 }

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.packvoyage.R;
+import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.adapterRecyclerView.ActivityListAdapter;
 import com.example.packvoyage.model.Pack;
