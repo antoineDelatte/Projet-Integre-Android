@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="12sp"
-    android:background="@drawable/recycler_rounded_corner">
+    android:background="@drawable/activity_item_rounded_corner">
 
     <ImageButton
         android:id="@+id/pack_image"

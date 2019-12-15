@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.PackDetails"
-    android:background="@color/activity_background_color">
+    tools:context=".activity.PackDetails">
 
     <TextView
         android:id="@+id/pack_details_pack_name"
