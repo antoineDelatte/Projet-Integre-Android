@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +18,7 @@ import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.adapterRecyclerView.PackListAdapter;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -31,6 +34,8 @@ public class PackList extends AppCompatActivity implements PackListAdapter.OnPac
     private RecyclerView.Adapter rVadapter;
     private ArrayList<Pack> packList;
     private PackDetailVM packVM;
+    @BindView(R.id.bottom_navigation)
+    public BottomNavigationView bottom_navbar;
 
 
     @Override
@@ -40,18 +45,37 @@ public class PackList extends AppCompatActivity implements PackListAdapter.OnPac
 
         ButterKnife.bind(this);
 
+        bottom_navbar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent intent;
+                switch(menuItem.getItemId()){
+                    case R.id.ic_navbar_preferences :
+                        intent = new Intent(PackList.this, MyPreferences.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.ic_navbar_bookings :
+                        intent = new Intent(PackList.this, MyBookings.class);
+                        startActivity(intent);
+                        break;
+                }
+                return false;
+            }
+        });
+
         packVM = ViewModelProviders.of(this).get(PackDetailVM.class);
         packDao = SingletonDao.getPackDao();
         packDao.loadPacks(packVM);
         packVM.getPacks().observe(this, packs -> {
             initRecyclerView(packs);
         });
-        /*packList = new ArrayList<>();
+        packList = new ArrayList<>();
         packList.add(new Pack(1, "Voyage Combodge", null, "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
         packList.add(new Pack(2, "Voyage Belgique", null, "https://media.routard.com/image/73/7/belgique-gand.1487737.c1000x300.jpg"));
         packList.add(new Pack(3, "Voyage Zambie", null, "https://img.ev.mu/images/portfolio/pays/245/600x400/846346.jpg"));
         packList.add(new Pack(4, "Voyage Bois de boulogne", null, "https://ak.jogurucdn.com/media/image/p25/place-2016-01-4-12-Boisdeboulogne2065e49fc359db8a638314b88f9f216d.jpg"));
-        packList.add(new Pack(5, "Voyage Danemark", null, "https://live.staticflickr.com/1831/42367565350_b3577e9f9b_b.jpg"));*/
+        packList.add(new Pack(5, "Voyage Danemark", null, "https://live.staticflickr.com/1831/42367565350_b3577e9f9b_b.jpg"));
+        initRecyclerView(packList);
     }
 
     public void initRecyclerView(ArrayList<Pack>packList){
@@ -72,7 +96,7 @@ public class PackList extends AppCompatActivity implements PackListAdapter.OnPac
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_test, menu);
+        inflater.inflate(R.menu.navbar_menu, menu);
         return true;
     }
 }

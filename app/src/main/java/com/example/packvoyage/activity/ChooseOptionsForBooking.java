@@ -3,11 +3,13 @@ package com.example.packvoyage.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +22,7 @@ import com.example.packvoyage.adapterRecyclerView.BookingPlaneSeatsSelectionAdap
 import com.example.packvoyage.adapterRecyclerView.BookingRoomsAdapter;
 import com.example.packvoyage.adapterRecyclerView.BookingRoomsParentAdapter;
 import com.example.packvoyage.repository.PackDao;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
@@ -50,6 +53,8 @@ public class ChooseOptionsForBooking extends AppCompatActivity implements Bookin
     private BookingRoomsParentAdapter bookingRoomsParentAdapter;
     @BindView(R.id.book_housing_rooms_rv)
     public RecyclerView book_housing_rooms_rv;
+    @BindView(R.id.bottom_navigation)
+    public BottomNavigationView bottom_navbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,28 @@ public class ChooseOptionsForBooking extends AppCompatActivity implements Bookin
         setContentView(R.layout.activity_choose_options_for_booking);
         Intent intent = getIntent();
         ButterKnife.bind(this);
+
+        bottom_navbar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent intent;
+                switch(menuItem.getItemId()){
+                    case R.id.ic_navbar_preferences :
+                        intent = new Intent(ChooseOptionsForBooking.this, MyPreferences.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.ic_navbar_home :
+                        intent = new Intent(ChooseOptionsForBooking.this, PackList.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.ic_navbar_bookings :
+                        intent = new Intent(ChooseOptionsForBooking.this, MyBookings.class);
+                        startActivity(intent);
+                        break;
+                }
+                return false;
+            }
+        });
         packName.setText(intent.getStringExtra("pack_name"));
         packId = intent.getIntExtra("pack_id", 1);
         packDao = SingletonDao.getPackDao();

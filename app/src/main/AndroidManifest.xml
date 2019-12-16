@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ChooseOptionsForBooking"></activity>
+        <activity android:name=".activity.MyPreferences"></activity>
+        <activity android:name=".activity.MyBookings" />
+        <activity android:name=".activity.ChooseOptionsForBooking" />
         <activity android:name=".activity.PackDetails" />
         <!--
 <activity
@@ -28,6 +30,10 @@
         </activity> <!-- <activity android:name=".activity.ChoosePreferedTags" /> -->
         <activity android:name=".activity.SignUp" />
         <activity android:name=".activity.Login" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
