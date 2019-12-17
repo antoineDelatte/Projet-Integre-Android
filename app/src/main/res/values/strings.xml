@@ -49,4 +49,7 @@
     <string name="flight_departure_and_destination">Departure - Destination</string>
     <string name="flight_departure">Departure</string>
     <string name="flight_arrival">Arrival</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

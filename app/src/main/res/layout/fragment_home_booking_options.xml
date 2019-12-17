@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:weightSum="100"
+    tools:context=".activity.ChooseOptionsForBooking">
+
+    <TextView
+        android:id="@+id/choose_options_for_booking_pack_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:fontFamily="@font/acme"
+        android:gravity="center"
+        android:text="@string/pack_name"
+        android:textSize="20sp" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="92">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="12sp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_layout_number_travelers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/booking_options_nb_travelers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:hint="@string/pack_booking_nb_travelers"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
+                    android:textColor="@color/text_color"
+                    android:width="190sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/flight_seats_booking_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/flight_seats_booking_title"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/book_plane_seats_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:background="@drawable/activity_item_rounded_corner"/>
+
+            <TextView
+                android:id="@+id/book_housing_rooms_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_housing_rooms_title"
+                android:textSize="20sp"
+                android:layout_marginTop="5sp"
+                android:layout_gravity="center"
+                android:gravity="center" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/book_housing_rooms_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/activity_item_rounded_corner"
+                android:layout_marginTop="5sp"/>
+
+            <TextView
+                android:id="@+id/book_paying_activities_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_paying_activities_title"
+                android:layout_marginTop="5sp"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:gravity="center" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/book_paying_activities_rv"
+                android:layout_marginTop="5sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/activity_item_rounded_corner"/>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
