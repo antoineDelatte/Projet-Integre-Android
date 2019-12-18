@@ -39,6 +39,8 @@ import butterknife.ButterKnife;
 public class fragmentHomeBookingOptions extends Fragment implements BookingPlaneSeatsSelectionAdapter.OnSeatCheckboxClick
         , BookingActivitiesAdapter.OnActivityCheckboxClick, BookingRoomsAdapter.OnRoomCheckboxClickListener {
 
+    public static final String TAG = "BOOKING_OPTIONS";
+
     @BindView(R.id.choose_options_for_booking_pack_name)
     public TextView packName;
     private PackDao packDao;
@@ -67,9 +69,9 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
         View view =  inflater.inflate(R.layout.fragment_home_booking_options, container, false);
         ButterKnife.bind(this, view);
 
-        packDetailVM = ViewModelProviders.of(this).get(PackDetailVM.class);
-        packDetailVM.getSelectedPackId().observe(this, id -> packId = id);
-        packDetailVM.getSelectedPackName().observe(this, name -> packName.setText(name));
+        packDetailVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
+        packDetailVM.getSelectedPackId().observe(getActivity(), id -> packId = id);
+        packDetailVM.getSelectedPackName().observe(getActivity(), name -> packName.setText(name));
 
         packDao = SingletonDao.getPackDao();
         nbTravelers.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -133,9 +135,9 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
     @Override
     public void onRoomCheckboxClickListener(int roomId, double roomPrice, boolean isCheckboxSelected) {
         if(isCheckboxSelected)
-            selectedActivitiesWithPrice.put(roomId, roomPrice);
+            selectedRoomsWithPrice.put(roomId, roomPrice);
         else
-            selectedActivitiesWithPrice.remove(roomId);
+            selectedRoomsWithPrice.remove(roomId);
     }
 
     private void initRoomsBookingRV(){

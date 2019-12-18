@@ -42,8 +42,8 @@ public class FlightListOfPack extends Fragment {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_flight_list_of_pack, container, false);
         ButterKnife.bind(this, view);
-        packDetailVM = ViewModelProviders.of(this).get(PackDetailVM.class);
-        packDetailVM.getSelectedPackId().observe(this, packId -> selectedPackId = packId);
+        packDetailVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
+        packDetailVM.getSelectedPackId().observe(getActivity(), packId -> selectedPackId = packId);
         packDao = SingletonDao.getPackDao();
         pack = packDao.getPackWithGeneralFlightInfos(selectedPackId);
         initOutwardFlightsRV();

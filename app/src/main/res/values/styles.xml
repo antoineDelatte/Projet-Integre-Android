@@ -1,16 +1,16 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/mainColor</item>
-        <item name="colorPrimaryDark">@color/mainColor</item>
+        <item name="colorPrimary">@color/top_action_bar_background</item>
+        <item name="colorPrimaryDark">@color/top_action_bar_background</item>
         <item name="colorAccent">@color/secondaryColor</item>
-        <item name="colorButtonNormal">@color/secondaryColor</item>
+        <item name="colorButtonNormal">@color/button_background_color</item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textColorHint">@color/secondaryColor</item>
         <item name="editTextColor">@color/text_color</item>
-        <item name="android:windowBackground">@color/activity_background_color</item>
+        <item name="android:windowBackground">@drawable/sea_from_above</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

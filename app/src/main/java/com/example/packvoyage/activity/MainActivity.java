@@ -5,19 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.packvoyage.R;
-import com.example.packvoyage.ViewModel.PackDetailVM;
-import com.example.packvoyage.constant.constant;
 import com.example.packvoyage.fragment.fragmentHomeBookingOptions;
 import com.example.packvoyage.fragment.fragmentHomePackDetails;
 import com.example.packvoyage.fragment.fragmentHomePackList;
 import com.example.packvoyage.fragment.fragmentMyBookings;
 import com.example.packvoyage.fragment.fragmentMyPreferences;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,8 +27,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     @BindView(R.id.bottom_navigation)
     public BottomNavigationView bottom_navbar;
-
-    private PackDetailVM packVM;
+    private HashMap<String, Integer>fragment_nav_bar_order = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,58 +35,110 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        changeFragment(constant.HOME);
+        fragment_nav_bar_order.put(fragmentMyPreferences.TAG, 1);
+        fragment_nav_bar_order.put(fragmentHomePackList.TAG, 2);
+        fragment_nav_bar_order.put(fragmentHomeBookingOptions.TAG, 2);
+        fragment_nav_bar_order.put(fragmentHomePackDetails.TAG, 2);
+        fragment_nav_bar_order.put(fragmentMyBookings.TAG, 3);
+
+        changeFragment(fragmentHomePackList.TAG);
 
         bottom_navbar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch(menuItem.getItemId()){
                     case(R.id.ic_navbar_home) :
-                        changeFragment(constant.HOME);
+                        changeFragment(fragmentHomePackList.TAG);
                         break;
                     case R.id.ic_navbar_preferences :
-                        changeFragment(constant.PREFERENCES);
+                        changeFragment(fragmentMyPreferences.TAG);
                         break;
                     case R.id.ic_navbar_bookings :
-                        changeFragment(constant.MY_BOOKINGS);
+                        changeFragment(fragmentMyBookings.TAG);
                 }
                 return false;
             }
         });
     }
 
-    public void changeFragment(int selectedFragment){
+    public void changeFragment(String selectedFragmentTag){
+
+        String currentFragmentTag = getCurrentFragmentTag();
+        if(selectedFragmentTag == currentFragmentTag)
+            return;
+        if(currentFragmentTag == null)
+            currentFragmentTag = fragmentHomePackList.TAG;
 
         FragmentManager fragmentManager = this.getSupportFragmentManager();
 
         Fragment newFragment;
-        switch (selectedFragment){
-            case constant.HOME :
-                newFragment = new fragmentHomePackList();
-                break;
-            case constant.PREFERENCES :
+        switch (selectedFragmentTag){
+            case fragmentMyPreferences.TAG :
                 newFragment = new fragmentMyPreferences();
                 break;
-            case constant.MY_BOOKINGS:
+            case fragmentMyBookings.TAG:
                 newFragment = new fragmentMyBookings();
                 break;
-            case constant.PACK_DETAILS :
+            case fragmentHomePackDetails.TAG :
                 newFragment = new fragmentHomePackDetails();
                 break;
-            case constant.OPTIONS_FOR_BOOKING :
+            case fragmentHomeBookingOptions.TAG :
                 newFragment = new fragmentHomeBookingOptions();
                 break;
             default :
                 newFragment = new fragmentHomePackList();
-
         }
+
         boolean fragmentPopped = fragmentManager.popBackStackImmediate(newFragment.getClass().getName(), 0);
         if(!fragmentPopped){
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+            setCustomAnimation(fragmentTransaction, currentFragmentTag, selectedFragmentTag);
             fragmentTransaction.replace(R.id.main_activity_fragment_container, newFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
+    }
+
+    private void setCustomAnimation(FragmentTransaction fragmentTransaction, String currentFragmentTag, String selectedFragmentTag){
+
+        // de home à pack details
+        if(currentFragmentTag == fragmentHomePackList.TAG && selectedFragmentTag == fragmentHomePackDetails.TAG){
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_from_bottom, R.anim.slide_out_to_top, R.anim.slide_in_from_top, R.anim.slide_out_to_bottom);
+            return;
+        }
+
+        // de pack details à my bookings
+        if(currentFragmentTag == fragmentHomePackDetails.TAG && selectedFragmentTag == fragmentHomeBookingOptions.TAG){
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_from_bottom, R.anim.slide_out_to_top, R.anim.slide_in_from_top, R.anim.slide_out_to_bottom);
+            return;
+        }
+
+        // de pack details ou booking options à home
+        if((currentFragmentTag == fragmentHomePackDetails.TAG || currentFragmentTag == fragmentHomeBookingOptions.TAG) && selectedFragmentTag == fragmentHomePackList.TAG){
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_from_top, R.anim.slide_out_to_bottom, R.anim.slide_in_from_bottom, R.anim.slide_out_to_top);
+            return;
+        }
+
+        // go right
+        if(fragment_nav_bar_order.get(currentFragmentTag) < fragment_nav_bar_order.get(selectedFragmentTag))
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+        // go left
+        else
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
+    }
+
+    private String getCurrentFragmentTag(){
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_activity_fragment_container);
+        if(currentFragment instanceof fragmentHomePackList)
+            return fragmentHomePackList.TAG;
+        if(currentFragment instanceof fragmentHomePackDetails)
+            return fragmentHomePackDetails.TAG;
+        if(currentFragment instanceof fragmentHomeBookingOptions)
+            return fragmentHomeBookingOptions.TAG;
+        if(currentFragment instanceof fragmentMyBookings)
+            return fragmentMyBookings.TAG;
+        if(currentFragment instanceof fragmentMyPreferences)
+            return fragmentMyPreferences.TAG;
+        return null;
     }
 }

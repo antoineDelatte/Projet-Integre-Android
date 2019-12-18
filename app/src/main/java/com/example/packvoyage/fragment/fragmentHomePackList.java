@@ -3,6 +3,7 @@ package com.example.packvoyage.fragment;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,7 +19,6 @@ import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.activity.IMainActivity;
 import com.example.packvoyage.adapterRecyclerView.PackListAdapter;
-import com.example.packvoyage.constant.constant;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
 
@@ -29,12 +29,13 @@ import butterknife.ButterKnife;
 
 public class fragmentHomePackList extends Fragment implements PackListAdapter.OnPackListener {
 
+    public static final String TAG = "HOME";
+
     @BindView(R.id.pack_display_rv)
     public RecyclerView rVPackList;
 
     private PackDao packDao;
     private RecyclerView.Adapter rVadapter;
-    private ArrayList<Pack> packList;
     private PackDetailVM packVM;
 
     private IMainActivity parent;
@@ -46,20 +47,24 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_home_pack_list, container, false);
         ButterKnife.bind(this, view);
-        packVM = ViewModelProviders.of(this).get(PackDetailVM.class);
-        packDao = SingletonDao.getPackDao();
-        packDao.loadPacks(packVM);
-        packVM.getPacks().observe(this, packs -> {
-            initRecyclerView(packs);
-        });
-        packList = new ArrayList<>();
+        packVM.getPacks().observe(getActivity(), list -> initRecyclerView(list));
+
+        /*ArrayList<Pack> packList = new ArrayList<>();
         packList.add(new Pack(1, "Voyage Combodge", null, "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
         packList.add(new Pack(2, "Voyage Belgique", null, "https://media.routard.com/image/73/7/belgique-gand.1487737.c1000x300.jpg"));
         packList.add(new Pack(3, "Voyage Zambie", null, "https://img.ev.mu/images/portfolio/pays/245/600x400/846346.jpg"));
         packList.add(new Pack(4, "Voyage Bois de boulogne", null, "https://ak.jogurucdn.com/media/image/p25/place-2016-01-4-12-Boisdeboulogne2065e49fc359db8a638314b88f9f216d.jpg"));
         packList.add(new Pack(5, "Voyage Danemark", null, "https://live.staticflickr.com/1831/42367565350_b3577e9f9b_b.jpg"));
-        initRecyclerView(packList);
+        initRecyclerView(packList);*/
         return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        packVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
+        packDao = SingletonDao.getPackDao();
+        packDao.loadPacks(packVM);
     }
 
     public void initRecyclerView(ArrayList<Pack>packList){
@@ -73,7 +78,7 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
     public void onPackClick(int packId, String packName) {
         packVM.setSelectedPackId(packId);
         packVM.setSelectedPackName(packName);
-        parent.changeFragment(constant.PACK_DETAILS);
+        parent.changeFragment(fragmentHomePackDetails.TAG);
     }
 
     @Override

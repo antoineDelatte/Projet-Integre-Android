@@ -79,11 +79,9 @@ public class Flight {
         return "Brussels - New York";
     }
     public String getDepartureInfo(){
-        return "Company : Belgian Airline " +
-                "\nBruxelles Nord, Brussels, 6AM";
+        return "Bruxelles Nord, Brussels, 6AM";
     }
     public String getArrivalInfo(){
-        return "Company : US Airline " +
-                "\nJFK Airport, New York, 3PM";
+        return "JFK Airport, New York, 3PM";
     }
 }

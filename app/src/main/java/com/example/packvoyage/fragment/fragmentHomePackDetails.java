@@ -1,15 +1,15 @@
 package com.example.packvoyage.fragment;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +20,9 @@ import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.activity.ActivityList;
-import com.example.packvoyage.activity.ChooseOptionsForBooking;
 import com.example.packvoyage.activity.FlightListOfPack;
 import com.example.packvoyage.activity.IMainActivity;
-import com.example.packvoyage.activity.PackDetails;
-import com.example.packvoyage.constant.constant;
 import com.example.packvoyage.repository.PackDao;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Locale;
 
@@ -35,11 +31,13 @@ import butterknife.ButterKnife;
 
 public class fragmentHomePackDetails extends Fragment {
 
+    public static final String TAG = "PACK_DETAILS";
+
     @BindView(R.id.pack_details_pack_description)
     public TextView pack_description;
     @BindView(R.id.pack_details_pack_name)
     public TextView pack_name;
-    private int packId;
+    private String packName;
     @BindView(R.id.pack_details_book_this_pack)
     public Button bookThisPack;
     @BindView(R.id.pack_details_show_activity_fragment)
@@ -51,6 +49,8 @@ public class fragmentHomePackDetails extends Fragment {
     private PackDao packDao;
     private PackDetailVM packDetailVM;
     private IMainActivity parent;
+    private int packId;
+    private String packDescriptionText;
     private static final int ACTIVITIES = 1;
     private static final int FLIGHTS = 2;
     private static final int HOUSING = 3;
@@ -63,16 +63,12 @@ public class fragmentHomePackDetails extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_home_pack_details, container, false);
         ButterKnife.bind(this, view);
 
-        packDao = SingletonDao.getPackDao();
         changeFragment(ACTIVITIES);
-        packDetailVM = ViewModelProviders.of(this).get(PackDetailVM.class);
-        packDetailVM.getSelectedPackName().observe(this, name ->  pack_name.setText(name));
-        packDetailVM.getSelectedPackId().observe(this, id -> packId = id);
 
         bookThisPack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parent.changeFragment(constant.OPTIONS_FOR_BOOKING);
+                parent.changeFragment(fragmentHomeBookingOptions.TAG);
             }
         });
         display_activities_fragment.setOnClickListener(new View.OnClickListener(){
@@ -93,20 +89,35 @@ public class fragmentHomePackDetails extends Fragment {
                 changeFragment(HOUSING);
             }
         });
-        String languageCode = Locale.getDefault().getLanguage().equals("fr") ? "fr":"en";
-        packDao.loadPackDescription(packId, languageCode, packDetailVM);
-        packDetailVM.getCurrentPackDescription().observe(this, description -> {
-            pack_description.setText(description);
-        });
+        //pack_description.setText(packDescriptionText);
+        pack_name.setText(packName);
 
         return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        packDetailVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
+        packDao = SingletonDao.getPackDao();
+
+        String languageCode = Locale.getDefault().getLanguage().equals("fr") ? "fr":"en";
+        packDetailVM.getSelectedPackId().observe(getActivity(), id -> {
+            packId = id;
+            packDao.loadPackDescription(id, languageCode, packDetailVM);
+        });
+
+        packDetailVM.getCurrentPackDescription().observe(getActivity(), description -> {
+            packDescriptionText = description;
+        });
+        packDetailVM.getSelectedPackName().observe(getActivity(), name -> packName = name);
     }
 
     private void changeFragment(int selectedFragment){
         try {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+            //fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out_personalized);
             Fragment newFragment;
             switch (selectedFragment){
                 case ACTIVITIES :

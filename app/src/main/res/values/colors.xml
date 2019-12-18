@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="mainColor">#292F33</color>
-    <color name="secondaryColor">#55ACEE</color>
-    <color name="borderColor">#000000</color>
+    <color name="mainColor">#000000</color>
+    <color name="checkbox_color">#D81B60</color>
+    <color name="secondaryColor">#000000</color>
+    <color name="borderColor">#7F000000</color>
     <color name="black">#000000</color>
-    <color name="recycler_background_color">#292F33</color>
-    <color name="activity_background_color">#292F33</color>
+    <color name="recycler_background_color">#7F000000</color>
+    <color name="activity_background_color">#7F000000</color>
     <color name="text_title">#FFFFFF</color>
     <color name="text_color">#FFFFFF</color>
-    <color name="text_info">#66757F</color>
-    <color name="border_color">#66757F</color>
-    <color name="button_background_color">#55ACEE</color>
+    <color name="text_info">#FFFFFF</color>
+    <color name="border_color">#7F000000</color>
+    <color name="button_background_color">#7F000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="top_action_bar_background">#7F000000</color>
+    <color name="item_background_color">#7F000000</color>
 </resources>

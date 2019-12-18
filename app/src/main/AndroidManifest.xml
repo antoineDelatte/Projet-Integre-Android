@@ -18,17 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MyPreferences" />
-        <activity android:name=".activity.MyBookings" />
-        <activity android:name=".activity.ChooseOptionsForBooking" />
-        <activity android:name=".activity.PackDetails" />
         <!--
 <activity
             android:name=".activity.test"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar" />
         -->
-        <activity android:name=".activity.PackList"/>
         <activity android:name=".activity.SignUp" />
         <activity android:name=".activity.Login" />
 

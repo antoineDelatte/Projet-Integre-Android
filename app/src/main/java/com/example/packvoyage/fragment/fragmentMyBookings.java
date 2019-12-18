@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.packvoyage.R;
 
 public class fragmentMyBookings extends Fragment {
+    public static final String TAG = "MY_BOOKINGS";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -10,7 +10,6 @@
     <ImageButton
         android:id="@+id/pack_image"
         android:layout_width="match_parent"
-        android:padding="1sp"
         android:layout_height="180dp"
         tools:srcCompat="@tools:sample/avatars"
         android:background="@drawable/rounded_corner" />

@@ -33,8 +33,8 @@ public class ActivityList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        packDetailVM = ViewModelProviders.of(this).get(PackDetailVM.class);
-        packDetailVM.getSelectedPackId().observe(this, packId -> selectedPackId = packId);
+        packDetailVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
+        packDetailVM.getSelectedPackId().observe(getActivity(), packId -> selectedPackId = packId);
         View view =  inflater.inflate(R.layout.fragment_activity_list, container, false);
         ButterKnife.bind(this, view);
         packDao = SingletonDao.getPackDao();
