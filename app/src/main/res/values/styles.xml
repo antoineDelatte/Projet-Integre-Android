@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/secondaryColor</item>
         <item name="colorButtonNormal">@color/button_background_color</item>
         <item name="android:textColor">@color/text_color</item>
-        <item name="android:textColorHint">@color/secondaryColor</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
         <item name="editTextColor">@color/text_color</item>
         <item name="android:windowBackground">@drawable/sea_from_above</item>
     </style>

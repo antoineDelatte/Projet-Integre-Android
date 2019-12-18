@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorAccent">#D81B60</color>
-    <color name="mainColor">#000000</color>
     <color name="checkbox_color">#D81B60</color>
+    <color name="hint_color">#D81B60</color>
+    <color name="mainColor">#000000</color>
     <color name="secondaryColor">#000000</color>
+    <color name="button_background_color">#BF000000</color>
+
     <color name="borderColor">#7F000000</color>
     <color name="black">#000000</color>
     <color name="recycler_background_color">#7F000000</color>
@@ -12,7 +15,6 @@
     <color name="text_color">#FFFFFF</color>
     <color name="text_info">#FFFFFF</color>
     <color name="border_color">#7F000000</color>
-    <color name="button_background_color">#7F000000</color>
     <color name="white">#FFFFFF</color>
     <color name="top_action_bar_background">#7F000000</color>
     <color name="item_background_color">#7F000000</color>

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.PackDetails">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,15 +15,17 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="8"
-            android:fontFamily="@font/acme"
+            android:fontFamily="@font/galada"
             android:gravity="center"
             android:text="@string/pack_name"
             android:textColor="@color/text_title"
-            android:textSize="20sp" />
+            android:textSize="22sp"
+            android:background="@drawable/activity_item_squared_corner"/>
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="92" >
+            android:layout_weight="92"
+            android:layout_marginTop="6sp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pack_details_scrollview_constraint_layout"
@@ -43,7 +43,7 @@
                     android:padding="5sp"
                     android:layout_marginStart="12sp"
                     android:layout_marginEnd="12sp"
-                    android:background="@drawable/activity_item_rounded_corner"/>
+                    android:background="@drawable/activity_item_squared_corner"/>
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout

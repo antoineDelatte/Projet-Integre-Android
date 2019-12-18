@@ -27,12 +27,17 @@
     <string name="pack_details_show_activity_fragment">Activities</string>
     <string name="pack_details_show_flights_fragment">Flights</string>
     <string name="pack_details_show_accommodations_fragment">Housing</string>
-    <string name="pack_description">Pack Description Pack Description Pack Description Pack Description
-    Pack Description Pack Description Pack Description Pack Description Pack Description Pack Description
-    Pack Description Pack Description Pack Description Pack Description Pack Description Pack Description
-    Pack Description Pack Description Pack Description Pack Description Pack Description Pack Description
-    Pack Description Pack Description Pack Description Pack Description Pack Description Pack Description
-    Pack Description Pack Description Pack Description Pack Description Pack Description </string>
+    <string name="pack_description">"Voyage voyage Au dessus des vieux volcans\n"
+                "Glissent des ailes sous les tapis du vent\n"
+                "Voyage, voyage\n"
+                "Éternellement\n"
+                "De nuages en marécages\n"
+                "De vent d'Espagne en pluie d'équateur\n"
+                "Voyage, voyage\n"
+                "Vole dans les hauteurs\n"
+                "Au dessus des capitales\n"
+                "Des idées fatales\n"
+                "Regardent l'océan"</string>
     <string name="pack_booking_nb_travelers">Number of travelers</string>
     <string name="flight_seats_booking_title">Choose your seats</string>
     <string name="book_housing_rooms_title">Choose your bedrooms</string>

@@ -5,21 +5,22 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="12sp"
-    android:background="@drawable/activity_item_rounded_corner">
+    android:background="@drawable/activity_item_squared_corner">
 
     <ImageButton
         android:id="@+id/pack_image"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         tools:srcCompat="@tools:sample/avatars"
-        android:background="@drawable/rounded_corner" />
+        android:background="@drawable/activity_item_squared_corner">
+    </ImageButton>
 
     <TextView
         android:id="@+id/pack_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/galada"
         android:gravity="center"
@@ -27,4 +28,5 @@
         android:text="@string/pack_name"
         android:textColor="@color/text_title"
         android:textSize="24sp" />
+
 </LinearLayout>
