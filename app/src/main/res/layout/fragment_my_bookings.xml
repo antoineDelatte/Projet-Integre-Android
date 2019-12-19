@@ -3,10 +3,23 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:weightSum="100">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:background="@drawable/activity_item_squared_corner"
+        android:gravity="center"
+        android:text="@string/my_bookings_section_title"
+        android:textColor="@color/text_title"
+        android:textSize="22sp" />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0sp"
+        android:layout_weight="92">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_booked_packs_rv"
             android:layout_width="match_parent"

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.fragmentBookedPackDetails"
+    android:weightSum="100"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/pack_details_pack_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:fontFamily="@font/galada"
+        android:gravity="center"
+        android:text="@string/pack_name"
+        android:textColor="@color/text_title"
+        android:textSize="22sp"
+        android:background="@drawable/activity_item_squared_corner"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="92"
+        android:layout_marginTop="8sp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/activity_item_rounded_corner">
+            <TextView
+                android:text="@string/comment_section_title"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comments_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

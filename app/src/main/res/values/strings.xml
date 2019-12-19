@@ -60,4 +60,6 @@
     <string name="booking_activities_general_info">* The number of activities added to the booking depends on the number of travelers
     \n* Only the paying activities are being displayed below</string>
     <string name="comment_text">Comment text placeholder</string>
+    <string name="comment_section_title">Comment section</string>
+    <string name="my_bookings_section_title">MY BOOKINGS</string>
 </resources>

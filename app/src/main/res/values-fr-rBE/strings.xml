@@ -61,4 +61,6 @@
     <string name="booking_activities_general_info">* Le nombre d\'activités ajoutées à la réservation dépend du nombre de voyageurs
         \n* Seuls les activités payantes sont affichées ci-dessous</string>
     <string name="comment_text">Comment text placeholder</string>
+    <string name="comment_section_title">Commentaires</string>
+    <string name="my_bookings_section_title">MES RESERVATIONS</string>
 </resources>

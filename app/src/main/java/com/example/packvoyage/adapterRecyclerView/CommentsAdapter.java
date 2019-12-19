@@ -17,12 +17,12 @@ import com.example.packvoyage.model.Comment;
 
 import java.util.ArrayList;
 
-public class CommentRecyclerView extends RecyclerView.Adapter<CommentRecyclerView.CommentHolder>{
+public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.CommentHolder>{
 
     private ArrayList<Comment>comments;
     private Context context;
 
-    public CommentRecyclerView(ArrayList<Comment> comments, Context context){
+    public CommentsAdapter(ArrayList<Comment> comments, Context context){
         this.comments = comments;
         this.context = context;
     }
