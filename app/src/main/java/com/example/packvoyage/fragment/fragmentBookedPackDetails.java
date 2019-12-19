@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
@@ -32,6 +33,8 @@ public class fragmentBookedPackDetails extends Fragment {
 
     @BindView(R.id.comments_rv)
     public RecyclerView commentsRV;
+    @BindView(R.id.pack_name)
+    public TextView packName;
 
     public fragmentBookedPackDetails() {
     }
@@ -42,6 +45,7 @@ public class fragmentBookedPackDetails extends Fragment {
         View view = inflater.inflate(R.layout.fragment_booked_pack_details, container, false);
         ButterKnife.bind(this, view);
 
+        packVM.getSelectedBookedPackName().observe(getActivity(), name -> packName.setText(name));
         packVM.getSelectedBookedPackComments().observe(getActivity(), comments -> {
             initRecyclerView(comments);
         });
