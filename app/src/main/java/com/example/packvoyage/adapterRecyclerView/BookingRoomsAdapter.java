@@ -37,7 +37,7 @@ public class BookingRoomsAdapter extends RecyclerView.Adapter<BookingRoomsAdapte
     public void onBindViewHolder(@NonNull BookingRoomHolder holder, int position) {
         BedRoom room = rooms.get(position);
         holder.room_size.setText(String.valueOf(room.getNbBeds()));
-        holder.booking_room_price.setText(String.valueOf(room.getPrice()));
+        holder.booking_room_price.setText(room.getFormattedPrice());
         holder.room_checkbox.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

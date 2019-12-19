@@ -41,7 +41,7 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         Glide.with(this.context).load(activity.getImage_url()).into(holder.activity_image);
         holder.activity_image.setClipToOutline(true);
         holder.activity_name.setText(activity.getName());
-        holder.activity_price.setText(String.format("%.2f", activity.getPrice()));
+        holder.activity_price.setText(String.format("%.2f", activity.getPrice()) + " €");
         holder.activity_location.setText(activity.getLocation());
     }
 

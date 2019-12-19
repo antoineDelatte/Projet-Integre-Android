@@ -54,7 +54,10 @@
     <string name="flight_departure_and_destination">Departure - Destination</string>
     <string name="flight_departure">Departure</string>
     <string name="flight_arrival">Arrival</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="add_to_my_bookings_button">Add to my bookings</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_enter_a_number_of_traveler">Please enter the number of travelers</string>
+    <string name="booking_activities_general_info">* The number of activities added to the booking depends on the number of travelers
+    \n* Only the paying activities are being displayed below</string>
+    <string name="comment_text">Comment text placeholder</string>
 </resources>

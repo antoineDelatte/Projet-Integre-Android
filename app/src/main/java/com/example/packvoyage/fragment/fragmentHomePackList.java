@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,6 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
     public RecyclerView rVPackList;
 
     private PackDao packDao;
-    private RecyclerView.Adapter rVadapter;
     private PackDetailVM packVM;
 
     private IMainActivity parent;
@@ -70,8 +68,8 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
     public void initRecyclerView(ArrayList<Pack>packList){
         rVPackList.setHasFixedSize(true);
         rVPackList.setLayoutManager(new LinearLayoutManager(getContext()));
-        rVadapter = new PackListAdapter(packList, getContext(), this);
-        rVPackList.setAdapter(rVadapter);
+        RecyclerView.Adapter rVAdapter = new PackListAdapter(packList, getContext(), this);
+        rVPackList.setAdapter(rVAdapter);
     }
 
     @Override

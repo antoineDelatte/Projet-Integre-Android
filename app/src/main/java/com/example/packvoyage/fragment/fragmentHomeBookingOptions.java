@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +28,9 @@ import com.example.packvoyage.adapterRecyclerView.BookingPlaneSeatsSelectionAdap
 import com.example.packvoyage.adapterRecyclerView.BookingRoomsAdapter;
 import com.example.packvoyage.adapterRecyclerView.BookingRoomsParentAdapter;
 import com.example.packvoyage.repository.PackDao;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
     private BookingFlightParentAdapter bookingPlaneSeatsAdapter;
     @BindView(R.id.booking_options_nb_travelers)
     public TextInputEditText nbTravelers;
-    private Integer numberOfTravelers = 1;
+    private Integer numberOfTravelers = null;
     @BindView(R.id.book_paying_activities_rv)
     public RecyclerView book_paying_activities_rv;
     private Map<Integer, Double> selectedActivitiesWithPrice = new HashMap<>();
@@ -61,6 +62,8 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
     private PackDetailVM packDetailVM;
     @BindView(R.id.book_housing_rooms_rv)
     public RecyclerView book_housing_rooms_rv;
+    @BindView(R.id.add_to_my_bookings_button)
+    public Button add_to_my_bookings;
 
 
     @Override
@@ -69,11 +72,9 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
         View view =  inflater.inflate(R.layout.fragment_home_booking_options, container, false);
         ButterKnife.bind(this, view);
 
-        packDetailVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
         packDetailVM.getSelectedPackId().observe(getActivity(), id -> packId = id);
         packDetailVM.getSelectedPackName().observe(getActivity(), name -> packName.setText(name));
 
-        packDao = SingletonDao.getPackDao();
         nbTravelers.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -83,11 +84,13 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
                         if(numberOfTravelers < 1){
                             Toast.makeText(getContext(), getResources().getString(R.string.booking_negative_nb_of_travelers_input), Toast.LENGTH_SHORT).show();
                             nbTravelers.setText("1");
+                            numberOfTravelers = 1;
                         }
                     }
                     catch(Exception e){
                         Toast.makeText(getContext(), getResources().getString(R.string.booking_wrong_nb_of_travelers_input), Toast.LENGTH_SHORT).show();
                         nbTravelers.setText("1");
+                        numberOfTravelers = 1;
                     }
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -96,11 +99,28 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
                 return false;
             }
         });
+        add_to_my_bookings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(numberOfTravelers == null){
+                    Toast.makeText(getContext(), R.string.please_enter_a_number_of_traveler, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                packDao.RegisterNewBooking(getKeys(selectedRoomsWithPrice), getKeys(selectedActivitiesWithPrice), getKeys(selectedSeatsWithPrice));
+            }
+        });
         initFlightBookingRV();
         initActivitiesBookingRV();
         initRoomsBookingRV();
 
         return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        packDetailVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
+        packDao = SingletonDao.getPackDao();
     }
 
     @Override
@@ -145,5 +165,13 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
         book_housing_rooms_rv.setHasFixedSize(true);
         book_housing_rooms_rv.setAdapter(bookingRoomsParentAdapter);
         book_housing_rooms_rv.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private ArrayList<Integer>getKeys(Map<Integer, Double> hashMap){
+        ArrayList<Integer>keys = new ArrayList<>();
+        for(Integer key : hashMap.keySet()){
+            keys.add(key);
+        }
+        return keys;
     }
 }

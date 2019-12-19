@@ -8,10 +8,12 @@ import com.example.packvoyage.model.Accommodation;
 import com.example.packvoyage.model.Activity;
 import com.example.packvoyage.model.Airport;
 import com.example.packvoyage.model.BedRoom;
+import com.example.packvoyage.model.Comment;
 import com.example.packvoyage.model.Flight;
 import com.example.packvoyage.model.Locality;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.model.PlaneSeat;
+import com.example.packvoyage.model.User;
 import com.example.packvoyage.service.PackService;
 
 import java.util.ArrayList;
@@ -248,5 +250,55 @@ public class PackDao {
         accommodations.add(accommodation2);
         accommodations.add(accommodation3);
         return accommodations;
+    }
+
+    public void RegisterNewBooking(ArrayList<Integer>bedroomsId, ArrayList<Integer>payingActivitiesId, ArrayList<Integer>planeSeatsId){
+        // todo enregistrer commande
+        // todo prévenir l'utilisateur si la commande se passe mal
+    }
+
+    public void loadMyBookings(PackDetailVM packVM){
+        // todo charger mes réservations
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(PackService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        PackService pack = retrofit.create(PackService.class);
+        Call<List<PackBindingModel>> call = pack.getPacks();
+        call.enqueue(new Callback<List<PackBindingModel>>() {
+            @Override
+            public void onResponse(Call<List<PackBindingModel>> call, Response<List<PackBindingModel>> response) {
+                if (!response.isSuccessful()) {
+                    return;
+                }
+                List<PackBindingModel> packList = response.body();
+                ArrayList<Pack> packs = new ArrayList<>();
+                Pack pack;
+                packs.clear();
+                for(PackBindingModel packBindingModel : packList){
+                    pack = new Pack(packBindingModel.getId(), packBindingModel.getName(), null, packBindingModel.getPictureOrVideo().get(0).getContent());
+                    packs.add(pack);
+                }
+                packVM.setMyBookedPacks(packs);
+            }
+
+            @Override
+            public void onFailure(Call<List<PackBindingModel>> call, Throwable t) {
+                Log.e("Trip4Student", t.getMessage());
+            }
+        });
+    }
+
+    public void loadComments(PackDetailVM packVM, int packId){
+        // todo charger les commentaires, et pour chaque commentaire, le user correspondant
+        ArrayList<Comment>comments = new ArrayList<>();
+        User user = new User("Caeleb Dressel", "https://cdn.swimswam.com/wp-content/uploads/2019/06/Caeleb-Dressel-By-Jack-Spitser-CD8I8265-1080x720.jpg");
+        comments.add(new Comment("Such a great trip!", user));
+        comments.add(new Comment("Such a cool trip!", user));
+        comments.add(new Comment("Such a nice trip!", user));
+        comments.add(new Comment("Such a beautiful trip!", user));
+        comments.add(new Comment("Such an amazing trip!", user));
+        comments.add(new Comment("Such a crazy trip!", user));
+        packVM.setSelectedBookedPackComments(comments);
     }
 }

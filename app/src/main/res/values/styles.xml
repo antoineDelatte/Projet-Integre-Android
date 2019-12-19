@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/top_action_bar_background</item>
         <item name="colorPrimaryDark">@color/top_action_bar_background</item>
-        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="colorButtonNormal">@color/button_background_color</item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textColorHint">@color/colorAccent</item>

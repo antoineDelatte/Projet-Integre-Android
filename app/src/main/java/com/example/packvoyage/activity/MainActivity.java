@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.packvoyage.R;
+import com.example.packvoyage.fragment.fragmentBookedPackDetails;
 import com.example.packvoyage.fragment.fragmentHomeBookingOptions;
 import com.example.packvoyage.fragment.fragmentHomePackDetails;
 import com.example.packvoyage.fragment.fragmentHomePackList;
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         fragment_nav_bar_order.put(fragmentHomeBookingOptions.TAG, 2);
         fragment_nav_bar_order.put(fragmentHomePackDetails.TAG, 2);
         fragment_nav_bar_order.put(fragmentMyBookings.TAG, 3);
+        fragment_nav_bar_order.put(fragmentBookedPackDetails.TAG, 3);
 
         changeFragment(fragmentHomePackList.TAG);
 
@@ -85,6 +86,9 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
             case fragmentHomeBookingOptions.TAG :
                 newFragment = new fragmentHomeBookingOptions();
                 break;
+            case fragmentBookedPackDetails.TAG :
+                newFragment = new fragmentBookedPackDetails();
+                break;
             default :
                 newFragment = new fragmentHomePackList();
         }
@@ -109,7 +113,19 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
         // de pack details à my bookings
         if(currentFragmentTag == fragmentHomePackDetails.TAG && selectedFragmentTag == fragmentHomeBookingOptions.TAG){
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_from_top, R.anim.slide_out_to_bottom, R.anim.slide_in_from_bottom, R.anim.slide_out_to_top);
+            return;
+        }
+
+        // de my bookings à my booked pack detail
+        if(currentFragmentTag == fragmentMyBookings.TAG && selectedFragmentTag == fragmentBookedPackDetails.TAG){
             fragmentTransaction.setCustomAnimations(R.anim.slide_in_from_bottom, R.anim.slide_out_to_top, R.anim.slide_in_from_top, R.anim.slide_out_to_bottom);
+            return;
+        }
+
+        // de my booked pack detail à my bookings
+        if(currentFragmentTag == fragmentBookedPackDetails.TAG && selectedFragmentTag == fragmentMyBookings.TAG){
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_from_top, R.anim.slide_out_to_bottom, R.anim.slide_in_from_bottom, R.anim.slide_out_to_top);
             return;
         }
 
@@ -139,6 +155,8 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
             return fragmentMyBookings.TAG;
         if(currentFragment instanceof fragmentMyPreferences)
             return fragmentMyPreferences.TAG;
+        if(currentFragment instanceof fragmentBookedPackDetails)
+            return fragmentBookedPackDetails.TAG;
         return null;
     }
 }

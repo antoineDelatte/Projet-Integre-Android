@@ -67,7 +67,6 @@ public class PackListAdapter extends RecyclerView.Adapter<PackListAdapter.PackHo
         private ImageButton packPicture;
         private TextView packName;
 
-
         public PackHolder(View itemView) {
             super(itemView);
             packPicture = itemView.findViewById(R.id.pack_image);

@@ -27,6 +27,8 @@ public class BedRoom {
         return price;
     }
 
+    public String getFormattedPrice() { return price + " €";}
+
     public void setPrice(double price) {
         this.price = price;
     }
