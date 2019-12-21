@@ -63,4 +63,7 @@
     <string name="comment_text">Comment text placeholder</string>
     <string name="comment_section_title">Commentaires</string>
     <string name="my_bookings_section_title">MES RESERVATIONS</string>
+    <string name="comment_hint">Ecrire un commentaire</string>
+    <string name="comment_is_empty">Votre commentaire est vide</string>
+    <string name="delete_comment_button">Supprimer mon commentaire</string>
 </resources>

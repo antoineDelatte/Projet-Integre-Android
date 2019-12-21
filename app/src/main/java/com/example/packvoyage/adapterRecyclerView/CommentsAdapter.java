@@ -21,10 +21,12 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
     private ArrayList<Comment>comments;
     private Context context;
+    private OnCommentClick listener;
 
-    public CommentsAdapter(ArrayList<Comment> comments, Context context){
+    public CommentsAdapter(ArrayList<Comment> comments, Context context, OnCommentClick listener){
         this.comments = comments;
         this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -42,11 +44,22 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         Glide.with(context).load(comment.getUser().getProfile_pic_uri()).apply(RequestOptions.circleCropTransform()).into(holder.userProfilePic);
         holder.userName.setText(comment.getUser().getName());
         holder.commentText.setText(comment.getMessage());
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                listener.onCommentClick(comment.getUser().getId(), position);
+                return true;
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return comments == null ? 0 : comments.size();
+    }
+
+    public interface OnCommentClick{
+        void onCommentClick(int commentOwnerId, int selectedCommentPosition);
     }
 
     public static class CommentHolder extends RecyclerView.ViewHolder {

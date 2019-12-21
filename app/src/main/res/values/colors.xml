@@ -18,4 +18,5 @@
     <color name="white">#FFFFFF</color>
     <color name="top_action_bar_background">#7F000000</color>
     <color name="item_background_color">#7F000000</color>
+    <color name="comment_options_background">#E55C5C5C</color>
 </resources>

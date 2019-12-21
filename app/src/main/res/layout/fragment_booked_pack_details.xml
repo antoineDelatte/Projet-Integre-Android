@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.fragmentBookedPackDetails"
     android:weightSum="100"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/fragment_booked_pack_details">
 
     <TextView
         android:id="@+id/pack_name"
@@ -36,10 +38,36 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_comment_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:inputType="text"
+                    android:layout_marginStart="8sp"
+                    android:layout_marginEnd="12sp"
+                    android:imeOptions="actionSend"
+                    android:hint="@string/comment_hint"
+                    android:textColorHint="@color/text_color" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comments_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/comment_options"
+        android:layout_width="match_parent"
+        android:layout_height="90sp"
+        android:background="@color/comment_options_background">
+        <Button
+            android:id="@+id/delete_comment_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_comment_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

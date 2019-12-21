@@ -17,9 +17,9 @@
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
             android:id="@+id/comment_user_profile_pic"
-            android:layout_width="70sp"
+            android:layout_width="50sp"
             android:layout_gravity="center"
-            android:layout_height="70sp"
+            android:layout_height="50sp"
             android:padding="5sp"
             tools:srcCompat="@tools:sample/avatars" />
     </LinearLayout>

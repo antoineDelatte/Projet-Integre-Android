@@ -159,4 +159,14 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
             return fragmentBookedPackDetails.TAG;
         return null;
     }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        if(getCurrentFragmentTag() == fragmentBookedPackDetails.TAG){
+            fragmentBookedPackDetails fragment = (fragmentBookedPackDetails)getSupportFragmentManager().findFragmentById(R.id.fragment_booked_pack_details);
+            if(fragment != null)
+                fragment.backPressed();
+        }
+    }
 }
