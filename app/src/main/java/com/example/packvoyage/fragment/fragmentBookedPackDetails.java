@@ -137,8 +137,11 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
         commentOptionsLayout.setVisibility(View.GONE);
     }
 
-    public void backPressed(){
-        if(commentOptionsLayout.getVisibility() == View.VISIBLE)
+    public boolean backPressed(){
+        if(commentOptionsLayout.getVisibility() == View.VISIBLE){
             commentOptionsLayout.setVisibility(View.GONE);
+            return true;
+        }
+        return false;
     }
 }

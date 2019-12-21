@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.packvoyage.R;
@@ -162,11 +163,21 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     @Override
     public void onBackPressed(){
-        super.onBackPressed();
+        if(shouldDoSomething())
+            super.onBackPressed();
+    }
+
+    //should do something regarde s'il ne faut pas associer une autre action au back button que celle de base
+    private boolean shouldDoSomething(){
         if(getCurrentFragmentTag() == fragmentBookedPackDetails.TAG){
-            fragmentBookedPackDetails fragment = (fragmentBookedPackDetails)getSupportFragmentManager().findFragmentById(R.id.fragment_booked_pack_details);
-            if(fragment != null)
-                fragment.backPressed();
+            boolean somethingHappened;
+            fragmentBookedPackDetails fragment = (fragmentBookedPackDetails)getSupportFragmentManager().findFragmentById(R.id.main_activity_fragment_container);
+            Log.i("Trip4", getCurrentFragmentTag());
+            if(fragment != null) {
+                somethingHappened = fragment.backPressed();
+                return !somethingHappened;
+            }
         }
+        return true;
     }
 }
