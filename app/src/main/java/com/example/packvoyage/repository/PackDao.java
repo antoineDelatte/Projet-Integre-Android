@@ -98,11 +98,11 @@ public class PackDao {
         //appel methode correspondante
         // todo
         ArrayList<Activity>activities = new ArrayList<>();
-        activities.add(new Activity(1, "acti1", 200.5, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
-        activities.add(new Activity(2, "acti2", 200.5, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
-        activities.add(new Activity(3, "acti3", 0, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
-        activities.add(new Activity(4, "acti4", 200.5, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
-        activities.add(new Activity(5, "acti5", 0, "espagne madrid hotel playitas bambitas", "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
+        activities.add(new Activity(1, "ISL 8eme de finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
+        activities.add(new Activity(2, "ISL quart de finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
+        activities.add(new Activity(3, "ISL demi finale", 0, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
+        activities.add(new Activity(4, "ISL finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
+        activities.add(new Activity(5, "ISL Post finale bières", 0, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
         Pack pack = new Pack(1, "Voyage Zambie", "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés" +
                 "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
                 "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
@@ -300,5 +300,19 @@ public class PackDao {
         comments.add(new Comment("Such an amazing trip!", user));
         comments.add(new Comment("Such a crazy trip!", user));
         packVM.setSelectedBookedPackComments(comments);
+    }
+
+    public void loadAccommodations(PackDetailVM packVM, int packId){
+        ArrayList<Accommodation>accommodations = new ArrayList<>();
+        Locality locality = new Locality("Sauce-ville");
+        accommodations.add(new Accommodation("hotel samourai", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
+        accommodations.add(new Accommodation("hotel poivre", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
+        accommodations.add(new Accommodation("hotel barbecue", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
+        accommodations.add(new Accommodation("hotel andalouse", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
+        accommodations.add(new Accommodation("hotel mayonnaise", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
+        accommodations.add(new Accommodation("hotel brasil", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
+        accommodations.add(new Accommodation("hotel bicky", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
+        accommodations.add(new Accommodation("hotel béarnaise", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
+        packVM.setCurrentPackAccommodations(accommodations);
     }
 }

@@ -6,10 +6,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +17,6 @@ import android.widget.TextView;
 import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
-import com.example.packvoyage.activity.ActivityList;
-import com.example.packvoyage.activity.FlightListOfPack;
 import com.example.packvoyage.activity.IMainActivity;
 import com.example.packvoyage.repository.PackDao;
 
@@ -117,7 +113,6 @@ public class fragmentHomePackDetails extends Fragment {
         try {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            //fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out_personalized);
             Fragment newFragment;
             switch (selectedFragment){
                 case ACTIVITIES :
@@ -127,8 +122,7 @@ public class fragmentHomePackDetails extends Fragment {
                     newFragment = new FlightListOfPack();
                     break;
                 default :
-                    newFragment = new ActivityList();
-                    // todo changer par accomodation fragment
+                    newFragment = new AccommodationList();
             }
             fragmentTransaction.replace(R.id.pack_details_fragment_container, newFragment);
             fragmentTransaction.commit();

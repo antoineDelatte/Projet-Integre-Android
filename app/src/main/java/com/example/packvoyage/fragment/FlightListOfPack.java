@@ -1,4 +1,4 @@
-package com.example.packvoyage.activity;
+package com.example.packvoyage.fragment;
 
 import android.content.Context;
 import android.os.Bundle;

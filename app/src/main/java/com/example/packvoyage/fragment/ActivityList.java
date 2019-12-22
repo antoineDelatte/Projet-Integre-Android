@@ -1,4 +1,4 @@
-package com.example.packvoyage.activity;
+package com.example.packvoyage.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

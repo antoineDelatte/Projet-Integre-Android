@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".activity.FlightListOfPack">
+    tools:context=".fragment.FlightListOfPack"
+    android:layout_margin="12sp">
 
     <TextView
         android:id="@+id/flight_details_title"
@@ -16,41 +17,52 @@
         android:textColor="@color/text_title"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/fragment_flight_details_outward_journey_title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="@string/flight_details_going"
-        android:textColor="@color/text_title"
-        android:textSize="20sp" />
+        android:background="@drawable/activity_item_rounded_corner">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/outward_flight_details_rv"
+        <TextView
+            android:id="@+id/fragment_flight_details_outward_journey_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/flight_details_going"
+            android:textColor="@color/text_title"
+            android:textSize="20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/outward_flight_details_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_margin="10sp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/activity_item_rounded_corner"
-        android:layout_margin="10sp"/>
-
-    <TextView
-        android:id="@+id/fragment_flight_details_homeward_journey_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="@string/flight_details_coming_back"
-        android:textColor="@color/text_title"
-        android:textSize="20sp" />
+        android:background="@drawable/activity_item_rounded_corner">
+        <TextView
+            android:id="@+id/fragment_flight_details_homeward_journey_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/flight_details_coming_back"
+            android:textColor="@color/text_title"
+            android:textSize="20sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homeward_flight_details_rv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/activity_item_rounded_corner"
-        android:layout_margin="10sp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeward_flight_details_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_margin="10sp"/>
+    </LinearLayout>
 </LinearLayout>

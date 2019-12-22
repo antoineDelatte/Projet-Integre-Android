@@ -66,4 +66,8 @@
     <string name="comment_hint">Ecrire un commentaire</string>
     <string name="comment_is_empty">Votre commentaire est vide</string>
     <string name="delete_comment_button">Supprimer mon commentaire</string>
+    <string name="accommodation_list_title">Logements</string>
+    <string name="accommodation_name">Nom du logement</string>
+    <string name="accommodation_description">Description du logement</string>
+    <string name="locality">Localité</string>
 </resources>

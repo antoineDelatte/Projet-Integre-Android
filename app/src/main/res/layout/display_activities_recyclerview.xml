@@ -23,11 +23,12 @@
     <TextView
         android:id="@+id/activities_recycler_activity_name"
         android:layout_width="wrap_content"
+        android:maxWidth="180sp"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:layout_marginStart="12sp"
         android:text="activity name"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/text_title"/>

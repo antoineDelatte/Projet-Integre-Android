@@ -172,7 +172,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         if(getCurrentFragmentTag() == fragmentBookedPackDetails.TAG){
             boolean somethingHappened;
             fragmentBookedPackDetails fragment = (fragmentBookedPackDetails)getSupportFragmentManager().findFragmentById(R.id.main_activity_fragment_container);
-            Log.i("Trip4", getCurrentFragmentTag());
             if(fragment != null) {
                 somethingHappened = fragment.backPressed();
                 return !somethingHappened;
