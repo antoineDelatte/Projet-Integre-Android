@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.packvoyage.R;
@@ -105,6 +104,12 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     }
 
     private void setCustomAnimation(FragmentTransaction fragmentTransaction, String currentFragmentTag, String selectedFragmentTag){
+
+        //spinning
+        if(selectedFragmentTag == fragmentBookedPackDetails.SECRET_CODE){
+            fragmentTransaction.setCustomAnimations(R.anim.rotation, R.anim.fade_out_personalized);
+            return;
+        }
 
         // de home à pack details
         if(currentFragmentTag == fragmentHomePackList.TAG && selectedFragmentTag == fragmentHomePackDetails.TAG){

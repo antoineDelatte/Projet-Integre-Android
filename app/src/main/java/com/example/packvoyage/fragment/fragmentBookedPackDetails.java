@@ -1,13 +1,17 @@
 package com.example.packvoyage.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +19,14 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
+import com.example.packvoyage.activity.IMainActivity;
 import com.example.packvoyage.adapterRecyclerView.CommentsAdapter;
 import com.example.packvoyage.model.Comment;
 import com.example.packvoyage.model.User;
@@ -35,6 +41,7 @@ import butterknife.ButterKnife;
 public class fragmentBookedPackDetails extends Fragment implements CommentsAdapter.OnCommentClick {
 
     public static final String TAG = "BOOKED_PACK_DETAILS";
+    public static final String SECRET_CODE = "ROLL";
 
     private PackDetailVM packVM;
     private PackDao packDao;
@@ -52,7 +59,10 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
     public ConstraintLayout commentOptionsLayout;
     @BindView(R.id.delete_comment_button)
     public Button delete_comment_button;
+    @BindView(R.id.booked_pack_details)
+    public LinearLayout booked_pack_details;
     private int selectedCommentPosition;
+    public IMainActivity parent;
 
     public fragmentBookedPackDetails() { }
 
@@ -85,6 +95,9 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
                         comments.add(0, new Comment(message, currentUser));
                         rVAdapter.notifyItemInserted(0);
                         rVAdapter.notifyItemRangeChanged(0, comments.size());
+                        if(message.equals("roll")){
+                            parent.changeFragment(fragmentBookedPackDetails.SECRET_CODE);
+                        }
                     }
                     else{
                         Toast.makeText(getContext(), getResources().getString(R.string.comment_is_empty), Toast.LENGTH_SHORT).show();
@@ -143,5 +156,16 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        try{
+            parent = (IMainActivity)context;
+        }
+        catch (ClassCastException e){
+            e.printStackTrace();
+        }
     }
 }
