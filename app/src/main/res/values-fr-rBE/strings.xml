@@ -62,7 +62,7 @@
         \n* Seuls les activités payantes sont affichées ci-dessus</string>
     <string name="comment_text">Comment text placeholder</string>
     <string name="comment_section_title">Commentaires</string>
-    <string name="my_bookings_section_title">MES RESERVATIONS</string>
+    <string name="my_bookings_section_title">Mes réservations</string>
     <string name="comment_hint">Ecrire un commentaire</string>
     <string name="comment_is_empty">Votre commentaire est vide</string>
     <string name="delete_comment_button">Supprimer mon commentaire</string>
@@ -70,4 +70,12 @@
     <string name="accommodation_name">Nom du logement</string>
     <string name="accommodation_description">Description du logement</string>
     <string name="locality">Localité</string>
+    <string name="favourite_activity_tag_title">Mon type d\'activité favoris</string>
+    <string name="favourite_housing_type">Mon type de logement préféré</string>
+    <string name="apartment">Appartement</string>
+    <string name="SHARED_PREF_FILE_KEY">SharedPref</string>
+    <string name="ACTI_TAG_PREF_1">ActTag1</string>
+    <string name="ACTI_TAG_PREF_2">ActTag2</string>
+    <string name="ACTI_TAG_PREF_3">ActTag3</string>
+    <string name="acti_tag_pref_limit">*Maximum 3 activités sélectionnées</string>
 </resources>

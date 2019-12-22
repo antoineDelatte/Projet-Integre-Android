@@ -40,7 +40,7 @@ public class BookingActivitiesAdapter extends RecyclerView.Adapter<BookingActivi
             @Override
             public void onClick(View v) {
                 Activity activity = payingActivities.get(position);
-                checkboxListener.OnActivityCheckboxClick(activity.getId(), activity.getPrice(), holder.activity_checkbox.isSelected());
+                checkboxListener.OnActivityCheckboxClick(activity.getId(), activity.getPrice(), holder.activity_checkbox.isChecked());
             }
         });
     }

@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.fragmentMyPreferences">
+    tools:context=".fragment.fragmentMyPreferences"
+    android:orientation="vertical"
+    android:weightSum="100">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="MY PREFERENCES"
-        android:textSize="30sp"/>
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:background="@drawable/activity_item_squared_corner"
+        android:gravity="center"
+        android:text="@string/my_preferences"
+        android:textColor="@color/text_title"
+        android:textSize="22sp" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="12sp"
+        android:background="@drawable/activity_item_rounded_corner">
+        <TextView
+            android:id="@+id/activity_tags_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/favourite_activity_tag_title"
+            android:layout_margin="5sp"
+            android:textSize="22sp"
+            android:layout_gravity="center"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activity_tags_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="@string/acti_tag_pref_limit"/>
+    </LinearLayout>
+
+</LinearLayout>

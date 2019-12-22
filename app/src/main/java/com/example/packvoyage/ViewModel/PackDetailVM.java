@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.packvoyage.model.Accommodation;
+import com.example.packvoyage.model.ActivityTag;
 import com.example.packvoyage.model.Comment;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.model.User;
@@ -23,6 +24,15 @@ public class PackDetailVM extends androidx.lifecycle.ViewModel {
     private MutableLiveData<ArrayList<Comment>>selectedBookedPackComments = new MutableLiveData<>();
     private MutableLiveData<User>currentUser = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Accommodation>>currentPackAccommodations = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<ActivityTag>>activityTags = new MutableLiveData<>();
+
+    public LiveData<ArrayList<ActivityTag>> getActivityTags() {
+        return activityTags;
+    }
+
+    public void setActivityTags(ArrayList<ActivityTag> activityTags) {
+        this.activityTags.setValue(activityTags);
+    }
 
     public LiveData<ArrayList<Accommodation>> getCurrentPackAccommodations() {
         return currentPackAccommodations;

@@ -61,7 +61,7 @@
     \n* Only the paying activities are being displayed above</string>
     <string name="comment_text">Comment text placeholder</string>
     <string name="comment_section_title">Comment section</string>
-    <string name="my_bookings_section_title">MY BOOKINGS</string>
+    <string name="my_bookings_section_title">My bookings</string>
     <string name="comment_hint">Write a comment</string>
     <string name="comment_is_empty">Your comment is empty</string>
     <string name="delete_comment_button">Delete my comment</string>
@@ -69,4 +69,12 @@
     <string name="accommodation_name">Accommodation name</string>
     <string name="accommodation_description">Accommodation description</string>
     <string name="locality">Locality</string>
+    <string name="favourite_activity_tag_title">My favourite activity types</string>
+    <string name="favourite_housing_type">My favourite housing types</string>
+    <string name="apartment">Apartment</string>
+    <string name="SHARED_PREF_FILE_KEY">SharedPref</string>
+    <string name="ACTI_TAG_PREF_1">ActTag1</string>
+    <string name="ACTI_TAG_PREF_2">ActTag2</string>
+    <string name="ACTI_TAG_PREF_3">ActTag3</string>
+    <string name="acti_tag_pref_limit">*Maximum 3 activities selected</string>
 </resources>

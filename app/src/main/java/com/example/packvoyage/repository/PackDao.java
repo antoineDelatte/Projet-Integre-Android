@@ -6,6 +6,7 @@ import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.model.Accommodation;
 import com.example.packvoyage.model.Activity;
+import com.example.packvoyage.model.ActivityTag;
 import com.example.packvoyage.model.Airport;
 import com.example.packvoyage.model.BedRoom;
 import com.example.packvoyage.model.Comment;
@@ -314,5 +315,15 @@ public class PackDao {
         accommodations.add(new Accommodation("hotel bicky", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
         accommodations.add(new Accommodation("hotel béarnaise", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
         packVM.setCurrentPackAccommodations(accommodations);
+    }
+
+    public void loadActivityPreferences(PackDetailVM packVM){
+        ArrayList<ActivityTag>activityTags = new ArrayList<>();
+        activityTags.add(new ActivityTag(1, "sport"));
+        activityTags.add(new ActivityTag(2, "nature"));
+        activityTags.add(new ActivityTag(3, "culture"));
+        activityTags.add(new ActivityTag(4, "relaxation"));
+        activityTags.add(new ActivityTag(4, "aventure"));
+        packVM.setActivityTags(activityTags);
     }
 }
