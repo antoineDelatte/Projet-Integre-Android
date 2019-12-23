@@ -92,11 +92,13 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
                 if(actionId == EditorInfo.IME_ACTION_SEND){
                     String message = add_comment_section.getText().toString();
                     if(message.length() != 0){
-                        comments.add(0, new Comment(message, currentUser));
-                        rVAdapter.notifyItemInserted(0);
-                        rVAdapter.notifyItemRangeChanged(0, comments.size());
                         if(message.equals("roll")){
                             parent.changeFragment(fragmentBookedPackDetails.SECRET_CODE);
+                        }
+                        else{
+                            comments.add(0, new Comment(message, currentUser));
+                            rVAdapter.notifyItemInserted(0);
+                            rVAdapter.notifyItemRangeChanged(0, comments.size());
                         }
                     }
                     else{

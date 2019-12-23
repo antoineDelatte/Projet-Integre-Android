@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PackDao {
 
-    public void loadPacks(PackDetailVM packVM) {
+    public void loadPacks(PackDetailVM packVM, int pageIndex) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(PackService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

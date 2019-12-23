@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
@@ -32,6 +34,16 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
 
     @BindView(R.id.pack_display_rv)
     public RecyclerView rVPackList;
+    @BindView(R.id.pack_list_nested_scrollview)
+    public NestedScrollView nestedScrollView;
+    @BindView(R.id.loadingPanel)
+    public RelativeLayout loadingPanel;
+    private RecyclerView.Adapter rVAdapter;
+
+    private ArrayList<Pack>packs = new ArrayList<>();
+    private int nbPacksRecentlyAdded;
+    private int pageIndex;
+    private boolean requestBeingTreated = false;
 
     private PackDao packDao;
     private PackDetailVM packVM;
@@ -45,15 +57,22 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_home_pack_list, container, false);
         ButterKnife.bind(this, view);
-        packVM.getPacks().observe(getActivity(), list -> initRecyclerView(list));
+        packVM.getPacks().observe(getActivity(), list -> {
+            packs.addAll(list);
+            nbPacksRecentlyAdded = list.size();
+            updateRecyclerView();
+        });
+        nestedScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
 
-        /*ArrayList<Pack> packList = new ArrayList<>();
-        packList.add(new Pack(1, "Voyage Combodge", null, "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
-        packList.add(new Pack(2, "Voyage Belgique", null, "https://media.routard.com/image/73/7/belgique-gand.1487737.c1000x300.jpg"));
-        packList.add(new Pack(3, "Voyage Zambie", null, "https://img.ev.mu/images/portfolio/pays/245/600x400/846346.jpg"));
-        packList.add(new Pack(4, "Voyage Bois de boulogne", null, "https://ak.jogurucdn.com/media/image/p25/place-2016-01-4-12-Boisdeboulogne2065e49fc359db8a638314b88f9f216d.jpg"));
-        packList.add(new Pack(5, "Voyage Danemark", null, "https://live.staticflickr.com/1831/42367565350_b3577e9f9b_b.jpg"));
-        initRecyclerView(packList);*/
+                int bottomDetector = rVPackList.getBottom() - (nestedScrollView.getHeight()-loadingPanel.getHeight() + scrollY);
+                if(!requestBeingTreated && bottomDetector == 0){
+                    requestBeingTreated = true;
+                    packDao.loadPacks(packVM, pageIndex);
+                }
+            }
+        });
         return view;
     }
 
@@ -62,14 +81,27 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
         super.onCreate(savedInstanceState);
         packVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
         packDao = SingletonDao.getPackDao();
-        packDao.loadPacks(packVM);
+        pageIndex = 0;
+        packDao.loadPacks(packVM, pageIndex);
     }
 
-    public void initRecyclerView(ArrayList<Pack>packList){
-        rVPackList.setHasFixedSize(true);
-        rVPackList.setLayoutManager(new LinearLayoutManager(getContext()));
-        RecyclerView.Adapter rVAdapter = new PackListAdapter(packList, getContext(), this);
-        rVPackList.setAdapter(rVAdapter);
+    public void updateRecyclerView(){
+        if(pageIndex == 0){
+            rVPackList.setHasFixedSize(true);
+            rVPackList.setLayoutManager(new LinearLayoutManager(getContext()));
+            rVAdapter = new PackListAdapter(packs, getContext(), this);
+            rVPackList.setAdapter(rVAdapter);
+        }
+        else{
+            // notifier changement dans la liste
+            int packsSize = packs.size();
+            for(int i = nbPacksRecentlyAdded-1; i >= 0; i--){
+                rVAdapter.notifyItemInserted(packsSize-i);
+                rVAdapter.notifyItemRangeChanged(packsSize-1-i, packsSize-i);
+            }
+        }
+        requestBeingTreated = false;
+        pageIndex++;
     }
 
     @Override

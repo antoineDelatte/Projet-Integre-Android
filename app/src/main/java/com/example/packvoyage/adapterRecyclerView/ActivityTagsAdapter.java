@@ -32,11 +32,9 @@ public class ActivityTagsAdapter extends RecyclerView.Adapter<ActivityTagsAdapte
     }
 
     public void disableUncheckedCheckboxes(){
-        Log.i("Trip4", Integer.toString(checkBoxes.size()));
         for(CheckBox checkBox : checkBoxes){
             if(!checkBox.isChecked()){
                 checkBox.setEnabled(false);
-                Log.i("Trip4", "disabling");
             }
         }
     }
