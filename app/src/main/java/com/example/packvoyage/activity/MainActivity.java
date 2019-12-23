@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         }
 
         boolean fragmentPopped = fragmentManager.popBackStackImmediate(newFragment.getClass().getName(), 0);
-        if(!fragmentPopped){
+        if(!fragmentPopped) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             setCustomAnimation(fragmentTransaction, currentFragmentTag, selectedFragmentTag);
             fragmentTransaction.replace(R.id.main_activity_fragment_container, newFragment);

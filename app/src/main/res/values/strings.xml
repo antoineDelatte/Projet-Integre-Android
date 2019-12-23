@@ -77,4 +77,5 @@
     <string name="ACTI_TAG_PREF_2">ActTag2</string>
     <string name="ACTI_TAG_PREF_3">ActTag3</string>
     <string name="acti_tag_pref_limit">*Maximum 3 activities selected</string>
+    <string name="load_more_button">-> More packs</string>
 </resources>

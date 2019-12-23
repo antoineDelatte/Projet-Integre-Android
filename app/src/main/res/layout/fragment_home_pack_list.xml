@@ -16,16 +16,14 @@
                 android:id="@+id/pack_display_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <RelativeLayout
-                android:id="@+id/loadingPanel"
+            <Button
+                android:id="@+id/load_more_button"
+                android:gravity="start"
+                android:layout_margin="8sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center" >
-                <ProgressBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:indeterminate="true" />
-            </RelativeLayout>
+                android:textSize="15sp"
+                android:text="@string/load_more_button"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>
