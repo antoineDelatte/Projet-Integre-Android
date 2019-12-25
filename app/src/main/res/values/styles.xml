@@ -10,7 +10,7 @@
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textColorHint">@color/colorAccent</item>
         <item name="editTextColor">@color/text_color</item>
-        <item name="android:windowBackground">@drawable/sea_from_above</item>
+        <item name="android:windowBackground">@drawable/sky</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

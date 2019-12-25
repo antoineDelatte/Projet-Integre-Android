@@ -2,6 +2,7 @@
     <string name="app_name">Trip4Student</string>
     <string name="connection_title">Connection</string>
     <string name="username">Username</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="connection_button">Sign in</string>
     <string name="forgotten_username_password">Forgot Username or Password?</string>
@@ -78,4 +79,7 @@
     <string name="ACTI_TAG_PREF_3">ActTag3</string>
     <string name="acti_tag_pref_limit">*Maximum 3 activities selected</string>
     <string name="load_more_button">-> More packs</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="confirm_password">Confirm password</string>
 </resources>
