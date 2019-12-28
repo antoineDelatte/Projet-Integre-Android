@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Trip4Student</string>
     <string name="connection_button">S\'identifier</string>
-    <string name="connection_title">Connexion</string>
+    <string name="connection_title">Connection</string>
     <string name="create_account">Créer un compte</string>
     <string name="forgotten_username_password">Nom d\'utilisateur ou mot de passe oublié ?</string>
     <string name="password">Mot de passe</string>
@@ -83,4 +83,10 @@
     <string name="first_name">Prénom</string>
     <string name="last_name">Nom de famille</string>
     <string name="confirm_password">Confirmez votre mot de passe</string>
+    <string name="error_during_sign_up">Erreur lors de la création du compte</string>
+    <string name="email_already_exists">Your email address already exists</string>
+    <string name="registration_successful">Votre nouveau compte a été enregistré</string>
+    <string name="wrong_account_information">Informations de compte invalides</string>
+    <string name="invalid_account_information">Informations de compte invalides</string>
+    <string name="ACCESS_TOKEN">ACCESS_TOKEN</string>
 </resources>

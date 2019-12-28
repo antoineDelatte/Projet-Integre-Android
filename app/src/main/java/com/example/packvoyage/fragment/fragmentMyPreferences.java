@@ -23,6 +23,7 @@ import com.example.packvoyage.repository.PackDao;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,7 +86,7 @@ public class fragmentMyPreferences extends Fragment implements ActivityTagsAdapt
                 }
             }
             else {
-                Toast.makeText(getContext(), R.string.acti_tag_pref_limit, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.acti_tag_pref_limit), Toast.LENGTH_SHORT).show();
             }
         }
         else {

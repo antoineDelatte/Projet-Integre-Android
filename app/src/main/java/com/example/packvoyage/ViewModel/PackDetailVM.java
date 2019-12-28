@@ -1,7 +1,5 @@
 package com.example.packvoyage.ViewModel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -23,8 +21,17 @@ public class PackDetailVM extends androidx.lifecycle.ViewModel {
     private MutableLiveData<String>selectedBookedPackName = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Comment>>selectedBookedPackComments = new MutableLiveData<>();
     private MutableLiveData<User>currentUser = new MutableLiveData<>();
+    private MutableLiveData<Integer>currentUserId = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Accommodation>>currentPackAccommodations = new MutableLiveData<>();
     private MutableLiveData<ArrayList<ActivityTag>>activityTags = new MutableLiveData<>();
+
+    public LiveData<Integer> getCurrentUserId() {
+        return currentUserId;
+    }
+
+    public void setCurrentUserId(Integer currentUserId) {
+        this.currentUserId.setValue(currentUserId);
+    }
 
     public LiveData<ArrayList<ActivityTag>> getActivityTags() {
         return activityTags;

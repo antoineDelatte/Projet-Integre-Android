@@ -140,7 +140,7 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
         this.selectedCommentPosition = selectedCommentPosition;
         if(currentUser == null)
             return;
-        if(currentUser.getId() == commentOwnerId){
+        if(currentUser.getUser_id() == commentOwnerId){
             commentOptionsLayout.setVisibility(View.VISIBLE);
         }
     }

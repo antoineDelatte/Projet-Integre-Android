@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.packvoyage.R;
+import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.fragment.fragmentBookedPackDetails;
 import com.example.packvoyage.fragment.fragmentHomeBookingOptions;
 import com.example.packvoyage.fragment.fragmentHomePackDetails;
@@ -28,12 +32,14 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     @BindView(R.id.bottom_navigation)
     public BottomNavigationView bottom_navbar;
     private HashMap<String, Integer>fragment_nav_bar_order = new HashMap<>();
+    private PackDetailVM packVM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        Log.i("Trip4", "on create main acti");
 
         fragment_nav_bar_order.put(fragmentMyPreferences.TAG, 1);
         fragment_nav_bar_order.put(fragmentHomePackList.TAG, 2);
@@ -42,7 +48,14 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         fragment_nav_bar_order.put(fragmentMyBookings.TAG, 3);
         fragment_nav_bar_order.put(fragmentBookedPackDetails.TAG, 3);
 
-        changeFragment(fragmentHomePackList.TAG);
+        packVM = ViewModelProviders.of(this).get(PackDetailVM.class);
+        packVM.setCurrentUserId(getIntent().getIntExtra("user_id", 0));
+
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment newFragment = new fragmentHomePackList();
+        fragmentTransaction.replace(R.id.main_activity_fragment_container, newFragment);
+        fragmentTransaction.commit();
 
         bottom_navbar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -144,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         // go right
         if(fragment_nav_bar_order.get(currentFragmentTag) < fragment_nav_bar_order.get(selectedFragmentTag))
             fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        // go left
+            // go left
         else
             fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
     }

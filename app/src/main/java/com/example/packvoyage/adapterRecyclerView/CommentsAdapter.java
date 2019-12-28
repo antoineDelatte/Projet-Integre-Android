@@ -42,12 +42,12 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     public void onBindViewHolder(@NonNull CommentHolder holder, int position) {
         Comment comment = comments.get(position);
         Glide.with(context).load(comment.getUser().getProfile_pic_uri()).apply(RequestOptions.circleCropTransform()).into(holder.userProfilePic);
-        holder.userName.setText(comment.getUser().getName());
+        holder.userName.setText(comment.getUser().getFirstName());
         holder.commentText.setText(comment.getMessage());
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                listener.onCommentClick(comment.getUser().getId(), position);
+                listener.onCommentClick(comment.getUser().getUser_id(), position);
                 return true;
             }
         });
