@@ -1,5 +1,7 @@
 package com.example.packvoyage.activity;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -17,9 +19,6 @@ import com.example.packvoyage.ViewModel.LoginVM;
 import com.example.packvoyage.bindingModel.UserBindingModel;
 import com.example.packvoyage.model.User;
 import com.example.packvoyage.repository.LoginDao;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class Login extends AppCompatActivity {
 
