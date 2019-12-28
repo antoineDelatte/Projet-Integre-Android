@@ -94,4 +94,7 @@
     <string name="password_must_contain_capital_letter">Password must contain at least one capital letter</string>
     <string name="password_must_contain_small_letter">Password must contain at least one small letter</string>
     <string name="must_match_password">This field must match with password</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="confirm_password">Confirm password</string>
 </resources>

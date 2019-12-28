@@ -95,4 +95,7 @@
     <string name="password_must_contain_capital_letter">Le mot de passe doit contenir au moins une lettre majuscule</string>
     <string name="password_must_contain_small_letter">Le mot de passe doit contenir au moins une lettre minuscule</string>
     <string name="must_match_password">Ce champ doit correspondre au mot de passe</string>
+    <string name="first_name">Prénom</string>
+    <string name="last_name">Nom de famille</string>
+    <string name="confirm_password">Confirmez votre mot de passe</string>
 </resources>

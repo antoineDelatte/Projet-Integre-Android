@@ -2,7 +2,7 @@
 <resources>
     <color name="colorAccent">#D81B60</color>
     <color name="checkbox_color">#D81B60</color>
-    <color name="hint_color">#D81B60</color>
+    <color name="hint_color">#FFFFFF</color>
     <color name="mainColor">#000000</color>
     <color name="secondaryColor">#000000</color>
     <color name="button_background_color">#BF000000</color>
