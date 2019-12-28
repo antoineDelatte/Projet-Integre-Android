@@ -62,7 +62,7 @@ public class SignUp extends AppCompatActivity {
                 boolean confirmPasswordOk = validateConfirmPassword();
                 if(usernameOk && firstnameOk && lastnameOk && emailAddressOk && passwordOk && confirmPasswordOk){
                     Toast.makeText(getApplicationContext(), "intent vers activité suivante et peut-être appel pour jeton", Toast.LENGTH_SHORT).show();
-                }
+                }//lier au login
             }
         });
     }
