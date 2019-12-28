@@ -16,15 +16,14 @@ import android.widget.Toast;
 import com.example.packvoyage.R;
 import com.example.packvoyage.ViewModel.LoginVM;
 import com.example.packvoyage.bindingModel.UserBindingModel;
-import com.example.packvoyage.model.User;
 import com.example.packvoyage.repository.LoginDao;
+import com.google.android.material.textfield.TextInputEditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class Login extends AppCompatActivity {
 
-    private User user;
     private UserBindingModel userToLogin;
     private LoginVM loginVM;
     private LoginDao loginDao;
@@ -35,10 +34,10 @@ public class Login extends AppCompatActivity {
     public Button connection_button;
     @BindView(R.id.create_account)
     public TextView register;
-    @BindView(R.id.login_email_text)
-    public TextView email;
+    @BindView(R.id.email)
+    public TextInputEditText email;
     @BindView(R.id.login_password_text)
-    public TextView password;
+    public TextInputEditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
