@@ -4,11 +4,12 @@ import com.example.packvoyage.bindingModel.UserBindingModel;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ISignUpService {
     String BASE_URL = "https://trip4students.azurewebsites.net/Account/";
 
     @POST("Register")
-    Call<ResponseBody> register(UserBindingModel user);
+    Call<ResponseBody> register(@Body UserBindingModel user);
 }

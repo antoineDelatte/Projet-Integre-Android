@@ -42,7 +42,7 @@ public class SignUp extends AppCompatActivity {
     @BindView(R.id.textInputLayout_confirm_password)
     public TextInputLayout confirm_password;
 
-    @BindView(R.id.button_sign_in)
+    @BindView(R.id.button_sign_up)
     Button signIn;
 
     @Override

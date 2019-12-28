@@ -102,4 +102,5 @@
     <string name="invalid_account_information">Informations de compte invalides</string>
     <string name="ACCESS_TOKEN">ACCESS_TOKEN</string>
     <string name="email">Addresse email</string>
+    <string name="button_sign_up">S\'inscrire</string>
 </resources>
