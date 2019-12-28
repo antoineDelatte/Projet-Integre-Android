@@ -79,4 +79,20 @@
     <string name="ACTI_TAG_PREF_3">ActTag3</string>
     <string name="acti_tag_pref_limit">*Maximum 3 activités sélectionnées</string>
     <string name="load_more_button">-> Plus de packs</string>
+    <string name="email_address">Adresse mail</string>
+    <string name="last_name">Nom de famille</string>
+    <string name="first_name">Prénom</string>
+    <string name="confirm_password">Confirmez votre mot de passe</string>
+    <string name="sign_in">S\'inscrire</string>
+    <string name="can_not_be_empty">Ce champ ne peut pas être vide</string>
+    <string name="min_character_username">Doit contenir au moins 6 caractères</string>
+    <string name="min_character_name">Doit contenir au moins 2 caractères</string>
+    <string name="can_not_contain_digit">Ce champ ne peut pas contenir de chiffres</string>
+    <string name="can_not_contain_special_character">Ce champ ne peut pas contenir de caractères spécieux</string>
+    <string name="must_be_email">"Ce champ doit correspondre à une adresse mail "</string>
+    <string name="min_character_password">Le mot de passe doit contenir au moins 8 caractères</string>
+    <string name="password_must_contain_digit">Le mot de passe doit contenir au moins un chiffre</string>
+    <string name="password_must_contain_capital_letter">Le mot de passe doit contenir au moins une lettre majuscule</string>
+    <string name="password_must_contain_small_letter">Le mot de passe doit contenir au moins une lettre minuscule</string>
+    <string name="must_match_password">Ce champ doit correspondre au mot de passe</string>
 </resources>

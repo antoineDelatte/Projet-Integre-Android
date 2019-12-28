@@ -2,23 +2,28 @@ package com.example.packvoyage.model;
 
 public class User {
     private int id;
-    private String name;
+    private String userName;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String confirmPassword;
     private String profile_pic_uri;
 
     public User() {}
 
-    public User(int id, String name, String profile_pic_uri) {
+    public User(int id, String userName, String profile_pic_uri) {
         this.id = id;
-        this.name = name;
+        this.userName = userName;
         this.profile_pic_uri = profile_pic_uri;
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String userName) {
+        this.userName = userName;
     }
 
     public String getProfile_pic_uri() {
