@@ -7,14 +7,12 @@ import android.widget.Toast;
 
 import com.example.packvoyage.R;
 import com.example.packvoyage.ViewModel.LoginVM;
-import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.bindingModel.UserBindingModel;
 import com.example.packvoyage.model.User;
 import com.example.packvoyage.service.ILoginService;
 
 import java.util.Objects;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,9 +20,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginDao {
-
-    private static SharedPreferences sharedPref;
-    private static SharedPreferences.Editor editor;
 
     public void login(LoginVM loginVM, UserBindingModel userToSignIn, Context context) {
         Retrofit retrofit = new Retrofit.Builder()

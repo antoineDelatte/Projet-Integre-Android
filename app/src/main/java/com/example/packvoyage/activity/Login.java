@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,6 +18,9 @@ import com.example.packvoyage.ViewModel.LoginVM;
 import com.example.packvoyage.bindingModel.UserBindingModel;
 import com.example.packvoyage.model.User;
 import com.example.packvoyage.repository.LoginDao;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class Login extends AppCompatActivity {
 
