@@ -1,5 +1,8 @@
 package com.example.packvoyage.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,10 +12,18 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.packvoyage.R;
+import com.example.packvoyage.ViewModel.LoginVM;
+import com.example.packvoyage.bindingModel.UserBindingModel;
+import com.example.packvoyage.repository.LoginDao;
+import com.example.packvoyage.repository.SignUpDao;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +33,13 @@ public class SignUp extends AppCompatActivity {
     public static final int MIN_LENGTH_USERNAME = 6;
     public static final int MIN_LENGTH_NAME = 2;
     public static final int MIN_LENGTH_PASSWORD = 8;
+    public static final String DEFAULT_PROFILE_PICTURE_URI = "https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg";
+
+    private LoginVM loginVM;
+    private LoginDao loginDao;
+    private SignUpDao signUpDao;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
 
 
     @BindView(R.id.textinputlayout_username)
@@ -51,6 +69,45 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
 
+        loginVM = ViewModelProviders.of(this).get(LoginVM.class);
+        loginDao = new LoginDao();
+        signUpDao = new SignUpDao();
+
+        loginVM.getSignUpStatus().observe(this, signUpStatus -> {
+            switch (signUpStatus){
+                case 409 :
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.email_already_exists), Toast.LENGTH_SHORT).show();
+                    break;
+                case 400 :
+                case 500 :
+                    // internal server error
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.internal_server_error), Toast.LENGTH_SHORT).show();
+                    break;
+                default :
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.registration_successful), Toast.LENGTH_SHORT).show();
+                    // generate token for the user
+                    UserBindingModel userBindingModel = new UserBindingModel();
+                    userBindingModel.setEmail(Objects.requireNonNull(emailAddress.getEditText()).getText().toString());
+                    userBindingModel.setPassword(Objects.requireNonNull(password.getEditText()).toString());
+                    loginDao.login(loginVM, userBindingModel, getApplicationContext());
+            }
+                Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.error_during_sign_up), Toast.LENGTH_SHORT).show();
+            return;
+        });
+
+        loginVM.getLoggedUser().observe(this, userWithIdAndToken -> {
+            if(userWithIdAndToken == null)
+                return;
+            sharedPref = getSharedPreferences(getResources().getString(R.string.ACCESS_TOKEN), Context.MODE_PRIVATE);
+            editor = sharedPref.edit();
+            editor.putString(getResources().getString(R.string.ACCESS_TOKEN), userWithIdAndToken.getAccess_token());
+            editor.apply();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("user_id", userWithIdAndToken.getUser_id());
+            Toast.makeText(this, R.string.registration_successful, Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+        });
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +118,16 @@ public class SignUp extends AppCompatActivity {
                 boolean passwordOk = validatePassword();
                 boolean confirmPasswordOk = validateConfirmPassword();
                 if(usernameOk && firstnameOk && lastnameOk && emailAddressOk && passwordOk && confirmPasswordOk){
-                    Toast.makeText(getApplicationContext(), "intent vers activité suivante et peut-être appel pour jeton", Toast.LENGTH_SHORT).show();
-                }//lier au login
+                    // signup the user
+                    UserBindingModel userBindingModel = new UserBindingModel();
+                    userBindingModel.setConfirmPassword(Objects.requireNonNull(confirm_password.getEditText()).toString());
+                    userBindingModel.setFirstName(Objects.requireNonNull(firstname.getEditText()).toString());
+                    userBindingModel.setLastName(Objects.requireNonNull(lastname.getEditText()).toString());
+                    userBindingModel.setEmail(Objects.requireNonNull(emailAddress.getEditText()).getText().toString());
+                    userBindingModel.setPassword(Objects.requireNonNull(password.getEditText()).toString());
+                    userBindingModel.setProfile_pic_uri(DEFAULT_PROFILE_PICTURE_URI);
+                    signUpDao.registerAccount(loginVM, userBindingModel, getApplicationContext());
+                }
             }
         });
     }
@@ -84,7 +149,7 @@ public class SignUp extends AppCompatActivity {
 
     private boolean validateFirstName(){
         this.firstname.setError(null);
-        String name = this .firstname.getEditText().getText().toString().trim();
+        String name = this.firstname.getEditText().getText().toString().trim();
         if(name.isEmpty()){
             this.firstname.setError(getResources().getString(R.string.can_not_be_empty));
             return false;

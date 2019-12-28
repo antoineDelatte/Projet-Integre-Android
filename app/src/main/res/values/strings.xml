@@ -96,10 +96,11 @@
     <string name="must_match_password">This field must match with password</string>
     <string name="error_during_sign_up">An error occurred while creating your account</string>
     <string name="email_already_exists">Your email address already exists</string>
-    <string name="registration_successful">Registration successful</string>
+    <string name="registration_successful">Registration successful, logging you in</string>
     <string name="wrong_account_information">Wrong account information</string>
     <string name="invalid_account_information">Invalid login information</string>
     <string name="ACCESS_TOKEN">ACCESS_TOKEN</string>
     <string name="email">Email address</string>
     <string name="button_sign_up">Sign up</string>
+    <string name="internal_server_error">Server error</string>
 </resources>

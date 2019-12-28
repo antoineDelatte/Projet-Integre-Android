@@ -59,6 +59,7 @@ public class Login extends AppCompatActivity {
             editor.apply();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.putExtra("user_id", userWithIdAndToken.getUser_id());
+
             startActivity(intent);
         });
 

@@ -97,10 +97,11 @@
     <string name="first_name">Prénom</string>
     <string name="error_during_sign_up">Erreur lors de la création du compte</string>
     <string name="email_already_exists">Your email address already exists</string>
-    <string name="registration_successful">Votre nouveau compte a été enregistré</string>
+    <string name="registration_successful">Votre nouveau compte a été enregistré, connection en cours</string>
     <string name="wrong_account_information">Informations de compte invalides</string>
     <string name="invalid_account_information">Informations de compte invalides</string>
     <string name="ACCESS_TOKEN">ACCESS_TOKEN</string>
     <string name="email">Addresse email</string>
     <string name="button_sign_up">S\'inscrire</string>
+    <string name="internal_server_error">Erreur du serveur</string>
 </resources>

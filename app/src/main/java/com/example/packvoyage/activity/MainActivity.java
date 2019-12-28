@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        Log.i("Trip4", "on create main acti");
+
+        Log.i("Trip4", "on create main");
 
         fragment_nav_bar_order.put(fragmentMyPreferences.TAG, 1);
         fragment_nav_bar_order.put(fragmentHomePackList.TAG, 2);

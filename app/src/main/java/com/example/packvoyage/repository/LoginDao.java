@@ -32,10 +32,15 @@ public class LoginDao {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(context, context.getResources().getString(R.string.wrong_account_information), Toast.LENGTH_SHORT).show();
-                    return;
+                    if(response.code() == 401){
+                        Toast.makeText(context, context.getResources().getString(R.string.wrong_account_information), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(response.code() == 400){
+                        Toast.makeText(context, context.getResources().getString(R.string.internal_server_error), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
-                Toast.makeText(context, R.string.registration_successful, Toast.LENGTH_SHORT).show();
                 User user = response.body();
                 loginVM.setLoggedUser(user);
             }
