@@ -72,22 +72,24 @@ public class SignUp extends AppCompatActivity {
             switch (signUpStatus){
                 case 409 :
                     Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.email_or_username_already_exists), Toast.LENGTH_SHORT).show();
-                    break;
+                    return;
                 case 400 :
+                case 408 :
                 case 500 :
                     // internal server error
                     Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.internal_server_error), Toast.LENGTH_SHORT).show();
-                    break;
-                default :
+                    return;
+                case 200 :
                     Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.registration_successful), Toast.LENGTH_SHORT).show();
                     // generate token for the user
                     UserBindingModel userBindingModel = new UserBindingModel();
                     userBindingModel.setEmail(Objects.requireNonNull(emailAddress.getEditText()).getText().toString());
                     userBindingModel.setPassword(Objects.requireNonNull(password.getEditText()).getText().toString());
                     loginDao.login(loginVM, userBindingModel, getApplicationContext());
+                    return;
+                default :
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.error_during_sign_up), Toast.LENGTH_SHORT).show();
             }
-                Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.error_during_sign_up), Toast.LENGTH_SHORT).show();
-            return;
         });
 
         loginVM.getLoggedUser().observe(this, userWithIdAndToken -> {

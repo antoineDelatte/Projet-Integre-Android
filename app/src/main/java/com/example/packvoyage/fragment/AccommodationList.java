@@ -38,9 +38,6 @@ public class AccommodationList extends Fragment {
         super.onCreate(savedInstanceState);
         packDao = SingletonDao.getPackDao();
         packVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
-        packVM.getSelectedPackId().observe(getViewLifecycleOwner(), id -> {
-            packDao.loadAccommodations(packVM, id);
-        });
     }
 
     @Override
@@ -49,6 +46,10 @@ public class AccommodationList extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_accommodation_list, container, false);
         ButterKnife.bind(this, v);
+
+        packVM.getSelectedPackId().observe(getViewLifecycleOwner(), id -> {
+            packDao.loadAccommodations(packVM, id);
+        });
 
         packVM.getCurrentPackAccommodations().observe(getViewLifecycleOwner(), accommodations -> initRecyclerView(accommodations));
         return v;

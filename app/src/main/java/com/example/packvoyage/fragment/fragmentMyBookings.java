@@ -22,6 +22,7 @@ import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +42,8 @@ public class fragmentMyBookings extends Fragment implements PackListAdapter.OnPa
         View view =  inflater.inflate(R.layout.fragment_my_bookings, container, false);
         ButterKnife.bind(this, view);
 
+        packDao.loadMyBookings(packVM);
+
         packVM.getMyBookedPacks().observe(getViewLifecycleOwner(), list -> initRecyclerView(list));
         return view;
     }
@@ -48,9 +51,8 @@ public class fragmentMyBookings extends Fragment implements PackListAdapter.OnPa
     @Override
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        packVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
+        packVM = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PackDetailVM.class);
         packDao = SingletonDao.getPackDao();
-        packDao.loadMyBookings(packVM);
     }
 
     public void initRecyclerView(ArrayList<Pack> packList){

@@ -31,6 +31,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -117,7 +118,7 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
     @Override
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        packDetailVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
+        packDetailVM = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PackDetailVM.class);
         packDao = SingletonDao.getPackDao();
     }
 

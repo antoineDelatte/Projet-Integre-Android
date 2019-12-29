@@ -3,6 +3,7 @@ package com.example.packvoyage.fragment;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -21,6 +22,7 @@ import com.example.packvoyage.activity.IMainActivity;
 import com.example.packvoyage.repository.PackDao;
 
 import java.util.Locale;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,6 +61,17 @@ public class fragmentHomePackDetails extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_home_pack_details, container, false);
         ButterKnife.bind(this, view);
 
+        String languageCode = Locale.getDefault().getLanguage().equals("fr") ? "fr":"en";
+        packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), id -> {
+            packId = id;
+            packDao.loadPackDescription(id, languageCode, packDetailVM);
+        });
+
+        packDetailVM.getCurrentPackDescription().observe(getViewLifecycleOwner(), description -> {
+            packDescriptionText = description;
+        });
+        packDetailVM.getSelectedPackName().observe(getViewLifecycleOwner(), name -> packName = name);
+
         changeFragment(ACTIVITIES);
 
         bookThisPack.setOnClickListener(new View.OnClickListener() {
@@ -94,24 +107,14 @@ public class fragmentHomePackDetails extends Fragment {
     @Override
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        packDetailVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
+        packDetailVM = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PackDetailVM.class);
         packDao = SingletonDao.getPackDao();
-
-        String languageCode = Locale.getDefault().getLanguage().equals("fr") ? "fr":"en";
-        packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), id -> {
-            packId = id;
-            packDao.loadPackDescription(id, languageCode, packDetailVM);
-        });
-
-        /*packDetailVM.getCurrentPackDescription().observe(getViewLifecycleOwner(), description -> {
-            packDescriptionText = description;
-        });*/
-        packDetailVM.getSelectedPackName().observe(getViewLifecycleOwner(), name -> packName = name);
     }
 
     private void changeFragment(int selectedFragment){
         try {
             FragmentManager fragmentManager = getFragmentManager();
+            assert fragmentManager != null;
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             Fragment newFragment;
             switch (selectedFragment){
@@ -133,7 +136,7 @@ public class fragmentHomePackDetails extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context){
+    public void onAttach(@NonNull Context context){
         super.onAttach(context);
         try{
             parent = (IMainActivity)context;

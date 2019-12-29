@@ -1,6 +1,7 @@
 package com.example.packvoyage.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,6 @@ public class ActivityList extends Fragment {
 
     @BindView(R.id.activity_list_rv)
     public RecyclerView activityList_rv;
-    private PackDao packDao;
     private ActivityListAdapter rvAdapter;
     private Pack pack;
     private PackDetailVM packDetailVM;
@@ -35,13 +35,14 @@ public class ActivityList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        packDetailVM = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PackDetailVM.class);
-        packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), packId -> selectedPackId = packId);
         View view =  inflater.inflate(R.layout.fragment_activity_list, container, false);
         ButterKnife.bind(this, view);
-        packDao = SingletonDao.getPackDao();
+
+        packDetailVM = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PackDetailVM.class);
+        packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), packId -> selectedPackId = packId);
+        PackDao packDao = SingletonDao.getPackDao();
         pack = packDao.getPackActivities(selectedPackId);
-        // /!\ laisser cette ligne à la fin
+
         initRecyclerView();
         return view;
     }
