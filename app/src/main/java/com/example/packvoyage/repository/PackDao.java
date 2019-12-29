@@ -2,6 +2,7 @@ package com.example.packvoyage.repository;
 
 import android.util.Log;
 
+import com.example.packvoyage.Constant.Constants;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.model.Accommodation;
@@ -34,7 +35,7 @@ public class PackDao {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         PackService pack = retrofit.create(PackService.class);
-        Call<List<PackBindingModel>> call = pack.getPacks(pageIndex, 2);
+        Call<List<PackBindingModel>> call = pack.getPacks(pageIndex, Constants.PAGING_SIZE);
         call.enqueue(new Callback<List<PackBindingModel>>() {
             @Override
             public void onResponse(Call<List<PackBindingModel>> call, Response<List<PackBindingModel>> response) {

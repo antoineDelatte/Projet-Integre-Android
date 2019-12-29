@@ -103,9 +103,9 @@ public class fragmentHomePackDetails extends Fragment {
             packDao.loadPackDescription(id, languageCode, packDetailVM);
         });
 
-        packDetailVM.getCurrentPackDescription().observe(getViewLifecycleOwner(), description -> {
+        /*packDetailVM.getCurrentPackDescription().observe(getViewLifecycleOwner(), description -> {
             packDescriptionText = description;
-        });
+        });*/
         packDetailVM.getSelectedPackName().observe(getViewLifecycleOwner(), name -> packName = name);
     }
 

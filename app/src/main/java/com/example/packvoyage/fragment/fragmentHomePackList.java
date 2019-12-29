@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
@@ -26,6 +27,7 @@ import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,7 +81,7 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        packVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
+        packVM = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PackDetailVM.class);
         packDao = SingletonDao.getPackDao();
     }
 
@@ -97,6 +99,7 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
                 rVAdapter.notifyItemInserted(packsSize-i);
                 rVAdapter.notifyItemRangeChanged(packsSize-1-i, packsSize-i);
             }
+            Toast.makeText(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.scroll_down_for_more), Toast.LENGTH_SHORT).show();
         }
         pageIndex++;
     }
