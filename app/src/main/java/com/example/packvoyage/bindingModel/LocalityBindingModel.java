@@ -1,21 +1,10 @@
-package com.example.packvoyage.model;
+package com.example.packvoyage.bindingModel;
 
-public class Locality {
+public class LocalityBindingModel {
     private Integer id;
     private String name;
     private String zipCode;
     private String countryName;
-
-    public Locality(String name) {
-        this.name = name;
-    }
-
-    public Locality(Integer id, String name, String zipCode, String countryName) {
-        this.id = id;
-        this.name = name;
-        this.zipCode = zipCode;
-        this.countryName = countryName;
-    }
 
     public Integer getId() {
         return id;
@@ -47,9 +36,5 @@ public class Locality {
 
     public void setCountryName(String countryName) {
         this.countryName = countryName;
-    }
-
-    public String toString(){
-        return name + " - " + countryName;
     }
 }

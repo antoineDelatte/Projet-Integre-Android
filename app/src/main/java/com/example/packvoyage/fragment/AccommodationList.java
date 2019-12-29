@@ -48,7 +48,7 @@ public class AccommodationList extends Fragment {
         ButterKnife.bind(this, v);
 
         packVM.getSelectedPackId().observe(getViewLifecycleOwner(), id -> {
-            packDao.loadAccommodations(packVM, id);
+            packDao.loadAccommodations(packVM, id, getContext());
         });
 
         packVM.getCurrentPackAccommodations().observe(getViewLifecycleOwner(), accommodations -> initRecyclerView(accommodations));

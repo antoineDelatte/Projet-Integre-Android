@@ -6,6 +6,9 @@ import android.util.Log;
 import com.example.packvoyage.Constant.Constants;
 import com.example.packvoyage.Utils.ConnectionState;
 import com.example.packvoyage.ViewModel.PackDetailVM;
+import com.example.packvoyage.bindingModel.AccommodationOfPackBindingModel;
+import com.example.packvoyage.bindingModel.AccommodationTypeBindingModel;
+import com.example.packvoyage.bindingModel.LocalityBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.model.Accommodation;
 import com.example.packvoyage.model.Activity;
@@ -87,6 +90,48 @@ public class PackDao {
 
             @Override
             public void onFailure(Call<PackBindingModel> call, Throwable t) {
+                Log.e("Trip4Student", t.getMessage());
+            }
+        });
+    }
+
+    public void loadAccommodations(PackDetailVM packVM, int packId, Context context){
+        if(!ConnectionState.isNetworkAvailable(context)){
+            packVM.setApiCallStatus(Constants.NO_CONNECTION);
+            return;
+        }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(PackService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        PackService service = retrofit.create(PackService.class);
+        Call<List<AccommodationOfPackBindingModel>> call = service.getAccommodationsOfPack(packId);
+        call.enqueue(new Callback<List<AccommodationOfPackBindingModel>>() {
+            @Override
+            public void onResponse(Call<List<AccommodationOfPackBindingModel>> call, Response<List<AccommodationOfPackBindingModel>> response) {
+                if (!response.isSuccessful()) {
+                    packVM.setApiCallStatus(response.code());
+                    return;
+                }
+
+                ArrayList<Accommodation>accommodations = new ArrayList<>();
+                Accommodation accommodation;
+                List<AccommodationOfPackBindingModel>apiAccommodations = response.body();
+
+                for(AccommodationOfPackBindingModel accommodationOfPackBindingModel : apiAccommodations){
+                    accommodation = new Accommodation();
+                    accommodation.setName(accommodationOfPackBindingModel.getAccommodation().getName());
+                    accommodation.setImage_uri(accommodationOfPackBindingModel.getAccommodation().getPictureOrVideo().get(0).getContent());
+                    LocalityBindingModel lBM = accommodationOfPackBindingModel.getAccommodation().getLocality();
+                    accommodation.setLocality(new Locality(lBM.getId(), lBM.getName(), lBM.getZipCode(), lBM.getCountryName()));
+                    accommodations.add(accommodation);
+                }
+                packVM.setCurrentPackAccommodations(accommodations);
+            }
+
+            @Override
+            public void onFailure(Call<List<AccommodationOfPackBindingModel>> call, Throwable t) {
                 Log.e("Trip4Student", t.getMessage());
             }
         });
@@ -286,20 +331,6 @@ public class PackDao {
         comments.add(new Comment("Such an amazing trip!", user));
         comments.add(new Comment("Such a crazy trip!", user));
         packVM.setSelectedBookedPackComments(comments);
-    }
-
-    public void loadAccommodations(PackDetailVM packVM, int packId){
-        ArrayList<Accommodation>accommodations = new ArrayList<>();
-        Locality locality = new Locality("Sauce-ville");
-        accommodations.add(new Accommodation("hotel samourai", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
-        accommodations.add(new Accommodation("hotel poivre", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
-        accommodations.add(new Accommodation("hotel barbecue", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
-        accommodations.add(new Accommodation("hotel andalouse", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
-        accommodations.add(new Accommodation("hotel mayonnaise", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
-        accommodations.add(new Accommodation("hotel brasil", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
-        accommodations.add(new Accommodation("hotel bicky", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
-        accommodations.add(new Accommodation("hotel béarnaise", locality, "https://fs17.lt/wp-content/uploads/2019/11/Ketchup-Factory-2.jpg"));
-        packVM.setCurrentPackAccommodations(accommodations);
     }
 
     public void loadActivityPreferences(PackDetailVM packVM){

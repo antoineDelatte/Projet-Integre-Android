@@ -10,6 +10,8 @@ public class Accommodation {
     private ArrayList<BedRoom> bedrooms;
     private String image_uri;
 
+    public Accommodation(){}
+
     public Accommodation(String name, Locality locality, ArrayList<BedRoom> bedrooms, String image_uri) {
         this.name = name;
         this.locality = locality;

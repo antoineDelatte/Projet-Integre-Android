@@ -39,7 +39,7 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
         Accommodation accommodation = accommodations.get(position);
         holder.accommodation_name.setText(accommodation.getName());
         String locality = holder.itemView.getContext().getResources().getString(R.string.locality);
-        holder.accommodation_description.setText(locality + " : " + accommodation.getLocality().getName());
+        holder.accommodation_description.setText(locality + " : " + accommodation.getLocality().toString());
         Glide.with(this.context).load(accommodation.getImage_uri()).into(holder.accommodation_image);
     }
 
