@@ -10,6 +10,15 @@ import com.example.packvoyage.model.User;
 public class LoginVM extends androidx.lifecycle.ViewModel{
     private MutableLiveData<User> loggedUser = new MutableLiveData<>();
     private MutableLiveData<Integer> signUpStatus = new MutableLiveData<>();
+    private MutableLiveData<Integer> loginStatus = new MutableLiveData<>();
+
+    public LiveData<Integer> getLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(Integer loginStatus) {
+        this.loginStatus.setValue(loginStatus);
+    }
 
     public LiveData<Integer> getSignUpStatus() {
         return signUpStatus;

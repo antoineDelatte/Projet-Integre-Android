@@ -104,4 +104,5 @@
     <string name="email">Addresse email</string>
     <string name="button_sign_up">S\'inscrire</string>
     <string name="internal_server_error">Erreur du serveur</string>
+    <string name="no_connection">Vous n\'êtes pas connecté à internet</string>
 </resources>

@@ -98,15 +98,15 @@ public class fragmentHomePackDetails extends Fragment {
         packDao = SingletonDao.getPackDao();
 
         String languageCode = Locale.getDefault().getLanguage().equals("fr") ? "fr":"en";
-        packDetailVM.getSelectedPackId().observe(getActivity(), id -> {
+        packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), id -> {
             packId = id;
             packDao.loadPackDescription(id, languageCode, packDetailVM);
         });
 
-        packDetailVM.getCurrentPackDescription().observe(getActivity(), description -> {
+        packDetailVM.getCurrentPackDescription().observe(getViewLifecycleOwner(), description -> {
             packDescriptionText = description;
         });
-        packDetailVM.getSelectedPackName().observe(getActivity(), name -> packName = name);
+        packDetailVM.getSelectedPackName().observe(getViewLifecycleOwner(), name -> packName = name);
     }
 
     private void changeFragment(int selectedFragment){

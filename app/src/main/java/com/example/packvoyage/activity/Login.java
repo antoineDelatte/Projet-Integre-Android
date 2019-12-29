@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.packvoyage.Constant.Constants;
 import com.example.packvoyage.R;
 import com.example.packvoyage.ViewModel.LoginVM;
 import com.example.packvoyage.bindingModel.UserBindingModel;
@@ -51,6 +52,24 @@ public class Login extends AppCompatActivity {
         loginDao = new LoginDao();
 
         loginVM.setLoggedUser(null);
+        loginVM.setLoginStatus(null);
+
+        loginVM.getLoginStatus().observe(this, status -> {
+            if(status == null)
+                return;
+            switch (status){
+                case 401:
+                    Toast.makeText(this, this.getResources().getString(R.string.wrong_account_information), Toast.LENGTH_SHORT).show();
+                    break;
+                case 400:
+                case 404:
+                    Toast.makeText(this, this.getResources().getString(R.string.internal_server_error), Toast.LENGTH_SHORT).show();
+                    break;
+                case Constants.NO_CONNECTION :
+                    Toast.makeText(this, this.getResources().getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         loginVM.getLoggedUser().observe(this, userWithIdAndToken -> {
             if(userWithIdAndToken == null)
                 return;

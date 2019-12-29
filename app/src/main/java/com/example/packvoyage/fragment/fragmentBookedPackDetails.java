@@ -80,12 +80,12 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
             }
         });
 
-        packVM.getSelectedBookedPackName().observe(getActivity(), name -> packName.setText(name));
-        packVM.getSelectedBookedPackComments().observe(getActivity(), comments -> {
+        packVM.getSelectedBookedPackName().observe(getViewLifecycleOwner(), name -> packName.setText(name));
+        packVM.getSelectedBookedPackComments().observe(getViewLifecycleOwner(), comments -> {
             this.comments = comments;
             initRecyclerView(comments);
         });
-        packVM.getCurrentUser().observe(getActivity(), user -> currentUser = user);
+        packVM.getCurrentUser().observe(getViewLifecycleOwner(), user -> currentUser = user);
         add_comment_section.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
@@ -128,7 +128,7 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
         super.onCreate(savedInstanceState);
         packVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
         packDao = SingletonDao.getPackDao();
-        packVM.getSelectedBookedPackId().observe(getActivity(), id -> {
+        packVM.getSelectedBookedPackId().observe(getViewLifecycleOwner(), id -> {
             packDao.loadComments(packVM, id);
         });
         // todo retirer l'ajout d'un utilisateur bidon

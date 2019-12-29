@@ -70,8 +70,8 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
         View view =  inflater.inflate(R.layout.fragment_home_booking_options, container, false);
         ButterKnife.bind(this, view);
 
-        packDetailVM.getSelectedPackId().observe(getActivity(), id -> packId = id);
-        packDetailVM.getSelectedPackName().observe(getActivity(), name -> packName.setText(name));
+        packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), id -> packId = id);
+        packDetailVM.getSelectedPackName().observe(getViewLifecycleOwner(), name -> packName.setText(name));
 
         nbTravelers.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

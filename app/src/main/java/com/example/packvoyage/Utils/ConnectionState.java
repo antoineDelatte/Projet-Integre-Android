@@ -5,7 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 public class ConnectionState {
-    public Boolean isNetworkAvailable(Context context){
+    public static Boolean isNetworkAvailable(Context context){
 
         ConnectivityManager cm =
                 (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);

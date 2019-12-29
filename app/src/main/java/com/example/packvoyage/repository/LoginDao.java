@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.packvoyage.Constant.Constants;
 import com.example.packvoyage.R;
+import com.example.packvoyage.Utils.ConnectionState;
 import com.example.packvoyage.ViewModel.LoginVM;
 import com.example.packvoyage.bindingModel.UserBindingModel;
 import com.example.packvoyage.model.User;
@@ -22,6 +24,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginDao {
 
     public void login(LoginVM loginVM, UserBindingModel userToSignIn, Context context) {
+
+        if(!ConnectionState.isNetworkAvailable(context)){
+            loginVM.setLoginStatus(Constants.NO_CONNECTION);
+            return;
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ILoginService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -33,11 +41,11 @@ public class LoginDao {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (!response.isSuccessful()) {
                     if(response.code() == 401){
-                        Toast.makeText(context, context.getResources().getString(R.string.wrong_account_information), Toast.LENGTH_SHORT).show();
+                        loginVM.setLoginStatus(response.code());
                         return;
                     }
                     if(response.code() == 400 || response.code() == 404){
-                        Toast.makeText(context, context.getResources().getString(R.string.internal_server_error), Toast.LENGTH_SHORT).show();
+                        loginVM.setLoginStatus(response.code());
                         return;
                     }
                 }

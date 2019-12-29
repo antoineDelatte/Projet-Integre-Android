@@ -17,6 +17,8 @@ import com.example.packvoyage.adapterRecyclerView.ActivityListAdapter;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -33,8 +35,8 @@ public class ActivityList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        packDetailVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
-        packDetailVM.getSelectedPackId().observe(getActivity(), packId -> selectedPackId = packId);
+        packDetailVM = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PackDetailVM.class);
+        packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), packId -> selectedPackId = packId);
         View view =  inflater.inflate(R.layout.fragment_activity_list, container, false);
         ButterKnife.bind(this, view);
         packDao = SingletonDao.getPackDao();

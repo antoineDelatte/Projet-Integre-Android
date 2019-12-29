@@ -18,6 +18,8 @@ import com.example.packvoyage.adapterRecyclerView.FlightListAdapter;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -42,8 +44,8 @@ public class FlightListOfPack extends Fragment {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_flight_list_of_pack, container, false);
         ButterKnife.bind(this, view);
-        packDetailVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
-        packDetailVM.getSelectedPackId().observe(getActivity(), packId -> selectedPackId = packId);
+        packDetailVM = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PackDetailVM.class);
+        packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), packId -> selectedPackId = packId);
         packDao = SingletonDao.getPackDao();
         pack = packDao.getPackWithGeneralFlightInfos(selectedPackId);
         initOutwardFlightsRV();

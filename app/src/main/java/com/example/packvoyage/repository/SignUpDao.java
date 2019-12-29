@@ -29,7 +29,6 @@ public class SignUpDao {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.i("Trip4", response.raw().toString());
                 loginVM.setSignUpStatus(response.code());
             }
 

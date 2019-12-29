@@ -49,7 +49,7 @@ public class fragmentMyPreferences extends Fragment implements ActivityTagsAdapt
         View v =  inflater.inflate(R.layout.fragment_my_preferences, container, false);
         ButterKnife.bind(this, v);
 
-        packVM.getActivityTags().observe(getActivity(), tags -> initRecyclerView(tags));
+        packVM.getActivityTags().observe(getViewLifecycleOwner(), tags -> initRecyclerView(tags));
         return v;
     }
 
