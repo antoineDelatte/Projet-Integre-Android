@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/login_background"
+    tools:context=".activity.Login"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="0sp"
+        android:layout_weight="10"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/connection_title"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="89"
+        android:orientation="horizontal"
+        android:layout_marginTop="20sp">
+        <LinearLayout
+            android:id="@+id/login_input_layout"
+            android:layout_width="350sp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:background="@drawable/activity_item_rounded_corner"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="25sp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/login_email_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12sp"
+                android:textColorHint="@color/hint_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:textColor="@color/text_color"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12sp"
+                android:textColorHint="@color/hint_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/login_password_text"
+                    android:textColor="@color/text_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/password"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/connection_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15sp"
+                android:text="@string/connection_button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30sp"
+            android:orientation="vertical"
+            android:background="@drawable/activity_item_squared_corner"
+            android:padding="8sp">
+            <TextView
+                android:id="@+id/forgotten_username_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/forgotten_username_password" />
+
+            <TextView
+                android:id="@+id/create_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14sp"
+                android:text="@string/create_account"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

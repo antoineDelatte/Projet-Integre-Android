@@ -36,7 +36,7 @@ public class LoginDao {
                         Toast.makeText(context, context.getResources().getString(R.string.wrong_account_information), Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if(response.code() == 400){
+                    if(response.code() == 400 || response.code() == 404){
                         Toast.makeText(context, context.getResources().getString(R.string.internal_server_error), Toast.LENGTH_SHORT).show();
                         return;
                     }

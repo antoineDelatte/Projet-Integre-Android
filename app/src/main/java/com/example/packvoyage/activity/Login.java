@@ -19,6 +19,8 @@ import com.example.packvoyage.bindingModel.UserBindingModel;
 import com.example.packvoyage.repository.LoginDao;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -66,8 +68,8 @@ public class Login extends AppCompatActivity {
         connection_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailText = email.getText().toString();
-                String passwordText = password.getText().toString();
+                String emailText = Objects.requireNonNull(email.getText()).toString();
+                String passwordText = Objects.requireNonNull(password.getText()).toString();
                 if(emailText.length() == 0 || passwordText.length() == 0){
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.invalid_account_information), Toast.LENGTH_SHORT).show();
                     return;

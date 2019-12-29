@@ -132,15 +132,15 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
             packDao.loadComments(packVM, id);
         });
         // todo retirer l'ajout d'un utilisateur bidon
-        packVM.setCurrentUser(new User(2, "Nathan Surquin", "https://archzine.fr/wp-content/uploads/2019/08/lifestyle-actualite%CC%81s-divertissement-actu-se%CC%81ries-cine%CC%81ma-cine%CC%81ma-vod-He-Man-Musclor-et-les-Mai%CC%82tres-de-l-Univers-netflix-se%CC%81rie-kevin-smith-mattel-tv-1983.jpg"));
+        packVM.setCurrentUser(new User("2", "Nathan Surquin", "https://archzine.fr/wp-content/uploads/2019/08/lifestyle-actualite%CC%81s-divertissement-actu-se%CC%81ries-cine%CC%81ma-cine%CC%81ma-vod-He-Man-Musclor-et-les-Mai%CC%82tres-de-l-Univers-netflix-se%CC%81rie-kevin-smith-mattel-tv-1983.jpg"));
     }
 
     @Override
-    public void onCommentClick(int commentOwnerId, int selectedCommentPosition) {
+    public void onCommentClick(String commentOwnerId, int selectedCommentPosition) {
         this.selectedCommentPosition = selectedCommentPosition;
         if(currentUser == null)
             return;
-        if(currentUser.getUser_id() == commentOwnerId){
+        if(currentUser.getUser_id().equals(commentOwnerId)){
             commentOptionsLayout.setVisibility(View.VISIBLE);
         }
     }

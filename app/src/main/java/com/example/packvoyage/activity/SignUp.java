@@ -4,15 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.packvoyage.R;
@@ -20,7 +16,6 @@ import com.example.packvoyage.ViewModel.LoginVM;
 import com.example.packvoyage.bindingModel.UserBindingModel;
 import com.example.packvoyage.repository.LoginDao;
 import com.example.packvoyage.repository.SignUpDao;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
@@ -76,7 +71,7 @@ public class SignUp extends AppCompatActivity {
         loginVM.getSignUpStatus().observe(this, signUpStatus -> {
             switch (signUpStatus){
                 case 409 :
-                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.email_already_exists), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.email_or_username_already_exists), Toast.LENGTH_SHORT).show();
                     break;
                 case 400 :
                 case 500 :
@@ -88,7 +83,7 @@ public class SignUp extends AppCompatActivity {
                     // generate token for the user
                     UserBindingModel userBindingModel = new UserBindingModel();
                     userBindingModel.setEmail(Objects.requireNonNull(emailAddress.getEditText()).getText().toString());
-                    userBindingModel.setPassword(Objects.requireNonNull(password.getEditText()).toString());
+                    userBindingModel.setPassword(Objects.requireNonNull(password.getEditText()).getText().toString());
                     loginDao.login(loginVM, userBindingModel, getApplicationContext());
             }
                 Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.error_during_sign_up), Toast.LENGTH_SHORT).show();
@@ -120,12 +115,12 @@ public class SignUp extends AppCompatActivity {
                 if(usernameOk && firstnameOk && lastnameOk && emailAddressOk && passwordOk && confirmPasswordOk){
                     // signup the user
                     UserBindingModel userBindingModel = new UserBindingModel();
-                    userBindingModel.setConfirmPassword(Objects.requireNonNull(confirm_password.getEditText()).toString());
-                    userBindingModel.setFirstName(Objects.requireNonNull(firstname.getEditText()).toString());
-                    userBindingModel.setLastName(Objects.requireNonNull(lastname.getEditText()).toString());
+                    userBindingModel.setConfirmPassword(Objects.requireNonNull(confirm_password.getEditText()).getText().toString());
+                    userBindingModel.setFirstName(Objects.requireNonNull(firstname.getEditText()).getText().toString());
+                    userBindingModel.setLastName(Objects.requireNonNull(lastname.getEditText()).getText().toString());
                     userBindingModel.setEmail(Objects.requireNonNull(emailAddress.getEditText()).getText().toString());
-                    userBindingModel.setPassword(Objects.requireNonNull(password.getEditText()).toString());
-                    userBindingModel.setProfile_pic_uri(DEFAULT_PROFILE_PICTURE_URI);
+                    userBindingModel.setPassword(Objects.requireNonNull(password.getEditText()).getText().toString());
+                    userBindingModel.setUsername(Objects.requireNonNull(username.getEditText()).getText().toString());
                     signUpDao.registerAccount(loginVM, userBindingModel, getApplicationContext());
                 }
             }

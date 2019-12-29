@@ -10,7 +10,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface PackService {
-    String BASE_URL = "https://trip4students.azurewebsites.net/Pack/";
+    String BASE_URL = "https://trip4studentnathansurquin.azurewebsites.net/Pack/";
 
     @GET("imageOfThePack")
     Call<List<PackBindingModel>> getPacks();

@@ -8,8 +8,8 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ISignUpService {
-    String BASE_URL = "https://trip4students.azurewebsites.net/Account/";
+    String BASE_URL = "https://trip4studentnathansurquin.azurewebsites.net/";
 
-    @POST("Register")
+    @POST("Account")
     Call<ResponseBody> register(@Body UserBindingModel user);
 }

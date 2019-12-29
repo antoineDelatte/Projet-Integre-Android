@@ -21,15 +21,15 @@ public class PackDetailVM extends androidx.lifecycle.ViewModel {
     private MutableLiveData<String>selectedBookedPackName = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Comment>>selectedBookedPackComments = new MutableLiveData<>();
     private MutableLiveData<User>currentUser = new MutableLiveData<>();
-    private MutableLiveData<Integer>currentUserId = new MutableLiveData<>();
+    private MutableLiveData<String>currentUserId = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Accommodation>>currentPackAccommodations = new MutableLiveData<>();
     private MutableLiveData<ArrayList<ActivityTag>>activityTags = new MutableLiveData<>();
 
-    public LiveData<Integer> getCurrentUserId() {
+    public LiveData<String> getCurrentUserId() {
         return currentUserId;
     }
 
-    public void setCurrentUserId(Integer currentUserId) {
+    public void setCurrentUserId(String currentUserId) {
         this.currentUserId.setValue(currentUserId);
     }
 

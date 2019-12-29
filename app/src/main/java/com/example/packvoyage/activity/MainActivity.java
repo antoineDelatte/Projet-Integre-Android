@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         fragment_nav_bar_order.put(fragmentBookedPackDetails.TAG, 3);
 
         packVM = ViewModelProviders.of(this).get(PackDetailVM.class);
-        packVM.setCurrentUserId(getIntent().getIntExtra("user_id", 0));
+        packVM.setCurrentUserId(getIntent().getStringExtra("user_id"));
 
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

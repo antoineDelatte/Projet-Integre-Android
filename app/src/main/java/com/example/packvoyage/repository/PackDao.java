@@ -293,7 +293,7 @@ public class PackDao {
     public void loadComments(PackDetailVM packVM, int packId){
         // todo charger les commentaires, et pour chaque commentaire, le user correspondant
         ArrayList<Comment>comments = new ArrayList<>();
-        User user = new User(1, "Caeleb Dressel", "https://cdn.swimswam.com/wp-content/uploads/2019/06/Caeleb-Dressel-By-Jack-Spitser-CD8I8265-1080x720.jpg");
+        User user = new User("1", "Caeleb Dressel", "https://cdn.swimswam.com/wp-content/uploads/2019/06/Caeleb-Dressel-By-Jack-Spitser-CD8I8265-1080x720.jpg");
         comments.add(new Comment("Such a great trip!", user));
         comments.add(new Comment("Such a cool trip!", user));
         comments.add(new Comment("Such a nice trip!", user));

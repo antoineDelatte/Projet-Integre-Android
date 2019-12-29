@@ -1,7 +1,7 @@
 package com.example.packvoyage.model;
 
 public class User {
-    private Integer user_id;
+    private String user_id;
     private String FirstName;
     private String profile_pic_uri;
     private String access_token;
@@ -12,7 +12,7 @@ public class User {
 
     public User() {}
 
-    public User(Integer user_id, String FirstName, String profile_pic_uri) {
+    public User(String user_id, String FirstName, String profile_pic_uri) {
         this.user_id = user_id;
         this.FirstName = FirstName;
         this.profile_pic_uri = profile_pic_uri;
@@ -58,11 +58,11 @@ public class User {
         Username = username;
     }
 
-    public Integer getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Integer user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 

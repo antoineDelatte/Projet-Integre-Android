@@ -59,7 +59,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     }
 
     public interface OnCommentClick{
-        void onCommentClick(int commentOwnerId, int selectedCommentPosition);
+        void onCommentClick(String commentOwnerId, int selectedCommentPosition);
     }
 
     public static class CommentHolder extends RecyclerView.ViewHolder {

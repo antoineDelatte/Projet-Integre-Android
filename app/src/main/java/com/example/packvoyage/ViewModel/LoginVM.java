@@ -1,5 +1,7 @@
 package com.example.packvoyage.ViewModel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -22,6 +24,8 @@ public class LoginVM extends androidx.lifecycle.ViewModel{
     }
 
     public void setLoggedUser(User loggedUser) {
+        if(loggedUser != null)
+            Log.i("Trip4", loggedUser.getAccess_token());
         this.loggedUser.setValue(loggedUser);
     }
 }

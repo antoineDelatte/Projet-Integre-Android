@@ -8,8 +8,8 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ILoginService {
-    String BASE_URL = "https://trip4students.azurewebsites.net/Jwt/";
+    String BASE_URL = "https://trip4studentnathansurquin.azurewebsites.net/";
 
-    @POST("Login")
+    @POST("Jwt")
     Call<User> login(@Body UserBindingModel user);
 }
