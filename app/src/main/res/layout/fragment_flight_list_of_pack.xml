@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".fragment.FlightListOfPack"
-    android:layout_margin="12sp">
+    android:layout_margin="12sp"
+    android:background="@drawable/sky">
 
     <TextView
         android:id="@+id/flight_details_title"
