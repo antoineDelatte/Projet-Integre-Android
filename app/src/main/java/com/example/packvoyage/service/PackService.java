@@ -13,7 +13,7 @@ public interface PackService {
     String BASE_URL = "https://trip4studentnathansurquin.azurewebsites.net/";
 
     @GET("AllPacksWithPicture")
-    Call<List<PackBindingModel>> getPacks();
+    Call<List<PackBindingModel>> getPacks(@Query("index")int index, @Query("number")int number);
 
     @GET("description/{packId}")
     Call<PackBindingModel> getPackDescription(@Query("packId") int packId, @Query("languageCode")String languageCode);

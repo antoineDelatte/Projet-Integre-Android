@@ -34,7 +34,7 @@ public class PackDao {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         PackService pack = retrofit.create(PackService.class);
-        Call<List<PackBindingModel>> call = pack.getPacks();
+        Call<List<PackBindingModel>> call = pack.getPacks(pageIndex, 2);
         call.enqueue(new Callback<List<PackBindingModel>>() {
             @Override
             public void onResponse(Call<List<PackBindingModel>> call, Response<List<PackBindingModel>> response) {
@@ -265,7 +265,7 @@ public class PackDao {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         PackService pack = retrofit.create(PackService.class);
-        Call<List<PackBindingModel>> call = pack.getPacks();
+        Call<List<PackBindingModel>> call = pack.getPacks(0,2);
         call.enqueue(new Callback<List<PackBindingModel>>() {
             @Override
             public void onResponse(Call<List<PackBindingModel>> call, Response<List<PackBindingModel>> response) {
