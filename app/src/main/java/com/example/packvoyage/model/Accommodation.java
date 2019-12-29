@@ -9,6 +9,7 @@ public class Accommodation {
     private Locality locality;
     private ArrayList<BedRoom> bedrooms;
     private String image_uri;
+    private AccommodationType accommodationType;
 
     public Accommodation(){}
 
@@ -57,5 +58,13 @@ public class Accommodation {
 
     public void setImage_uri(String image_uri) {
         this.image_uri = image_uri;
+    }
+
+    public AccommodationType getAccommodationType() {
+        return accommodationType;
+    }
+
+    public void setAccommodationType(AccommodationType accommodationType) {
+        this.accommodationType = accommodationType;
     }
 }

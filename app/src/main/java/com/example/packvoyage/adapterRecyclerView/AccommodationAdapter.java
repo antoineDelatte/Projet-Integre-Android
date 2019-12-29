@@ -37,9 +37,10 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
     @Override
     public void onBindViewHolder(@NonNull AccommodationHolder holder, int position) {
         Accommodation accommodation = accommodations.get(position);
-        holder.accommodation_name.setText(accommodation.getName());
-        String locality = holder.itemView.getContext().getResources().getString(R.string.locality);
-        holder.accommodation_description.setText(locality + " : " + accommodation.getLocality().toString());
+        String nameInfo = accommodation.getName() + " (" + accommodation.getAccommodationType().getType() + ")";
+                holder.accommodation_name.setText(nameInfo);
+        String localityInfo = holder.itemView.getContext().getResources().getString(R.string.locality) + " : " + accommodation.getLocality().toString();
+        holder.accommodation_description.setText(localityInfo);
         Glide.with(this.context).load(accommodation.getImage_uri()).into(holder.accommodation_image);
     }
 

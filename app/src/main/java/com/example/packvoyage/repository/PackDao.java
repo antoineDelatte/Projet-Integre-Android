@@ -11,6 +11,7 @@ import com.example.packvoyage.bindingModel.AccommodationTypeBindingModel;
 import com.example.packvoyage.bindingModel.LocalityBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.model.Accommodation;
+import com.example.packvoyage.model.AccommodationType;
 import com.example.packvoyage.model.Activity;
 import com.example.packvoyage.model.ActivityTag;
 import com.example.packvoyage.model.Airport;
@@ -125,6 +126,7 @@ public class PackDao {
                     accommodation.setImage_uri(accommodationOfPackBindingModel.getAccommodation().getPictureOrVideo().get(0).getContent());
                     LocalityBindingModel lBM = accommodationOfPackBindingModel.getAccommodation().getLocality();
                     accommodation.setLocality(new Locality(lBM.getId(), lBM.getName(), lBM.getZipCode(), lBM.getCountryName()));
+                    accommodation.setAccommodationType(new AccommodationType(accommodationOfPackBindingModel.getAccommodation().getAccommodationType().getName()));
                     accommodations.add(accommodation);
                 }
                 packVM.setCurrentPackAccommodations(accommodations);

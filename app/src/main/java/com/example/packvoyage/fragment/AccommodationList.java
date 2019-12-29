@@ -19,6 +19,7 @@ import com.example.packvoyage.model.Accommodation;
 import com.example.packvoyage.repository.PackDao;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +38,7 @@ public class AccommodationList extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         packDao = SingletonDao.getPackDao();
-        packVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
+        packVM = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PackDetailVM.class);
     }
 
     @Override
