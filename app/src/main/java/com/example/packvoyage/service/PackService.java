@@ -15,12 +15,6 @@ public interface PackService {
     @GET("AllPacksWithPicture")
     Call<List<PackBindingModel>> getPacks(@Query("index")int index, @Query("number")int number);
 
-    @GET("description/{packId}")
+    @GET("PackWithDescription")
     Call<PackBindingModel> getPackDescription(@Query("packId") int packId, @Query("languageCode")String languageCode);
-
-    @GET("packs/{packId}")
-    Call<PackBindingModel> getPackActivities(@Path("packId") int packId);
-
-    //@POST("packs")
-    //Call<Pack> postUser(@Body Pack pack)
 }

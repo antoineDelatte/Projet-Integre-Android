@@ -11,7 +11,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.packvoyage.Constant.Constants;
 import com.example.packvoyage.R;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.fragment.fragmentBookedPackDetails;
@@ -40,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Log.i("Trip4", "on create main");
-
         fragment_nav_bar_order.put(fragmentMyPreferences.TAG, 1);
         fragment_nav_bar_order.put(fragmentHomePackList.TAG, 2);
         fragment_nav_bar_order.put(fragmentHomeBookingOptions.TAG, 2);
@@ -57,6 +57,20 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         Fragment newFragment = new fragmentHomePackList();
         fragmentTransaction.replace(R.id.main_activity_fragment_container, newFragment);
         fragmentTransaction.commit();
+
+        packVM.getApiCallStatus().observe(this, status -> {
+            String message = "";
+            switch (status) {
+                case Constants.NO_CONNECTION :
+                    message = this.getResources().getString(R.string.no_connection);
+                    break;
+                case 400:
+                case 404:
+                    message = this.getResources().getString(R.string.internal_server_error);
+                    break;
+            }
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        });
 
         bottom_navbar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

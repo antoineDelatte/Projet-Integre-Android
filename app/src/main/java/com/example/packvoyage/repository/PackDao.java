@@ -1,8 +1,10 @@
 package com.example.packvoyage.repository;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.packvoyage.Constant.Constants;
+import com.example.packvoyage.Utils.ConnectionState;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.model.Accommodation;
@@ -60,7 +62,12 @@ public class PackDao {
         });
     }
 
-    public void loadPackDescription(int packId, String language, PackDetailVM packVM){
+    public void loadPackDescription(int packId, String language, PackDetailVM packVM, Context context){
+        if(!ConnectionState.isNetworkAvailable(context)){
+            packVM.setApiCallStatus(Constants.NO_CONNECTION);
+            return;
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(PackService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -71,6 +78,7 @@ public class PackDao {
             @Override
             public void onResponse(Call<PackBindingModel> call, Response<PackBindingModel> response) {
                 if (!response.isSuccessful()) {
+                    packVM.setApiCallStatus(response.code());
                     return;
                 }
                 PackBindingModel packBindingModel = response.body();
@@ -83,18 +91,6 @@ public class PackDao {
             }
         });
     }
-
-    /*public ArrayList<Pack> getPacks() {
-        //this.loadPacks();
-        //Pour les tests
-        if(packs != null){
-            packs.add(new Pack(1, "Voyage Combodge", null, "https://www.routesdumonde.com/wp-content/uploads/thumb/thumb-circuit-cambodge.jpg"));
-            packs.add(new Pack(2, "Voyage Belgique", null, "https://media.routard.com/image/73/7/belgique-gand.1487737.c1000x300.jpg"));
-            packs.add(new Pack(3, "Voyage Zambie", null, "https://img.ev.mu/images/portfolio/pays/245/600x400/846346.jpg"));
-            packs.add(new Pack(4, "Voyage Bois de boulogne", null, "https://ak.jogurucdn.com/media/image/p25/place-2016-01-4-12-Boisdeboulogne2065e49fc359db8a638314b88f9f216d.jpg"));
-            packs.add(new Pack(5, "Voyage Danemark", null, "https://live.staticflickr.com/1831/42367565350_b3577e9f9b_b.jpg"));
-        }
-    }*/
 
     public Pack getPackActivities(int packId){
         //appel methode correspondante
@@ -152,19 +148,7 @@ public class PackDao {
         pack.setFlights(flights);
         return pack;
     }
-    public String getPackDescription(int packId){
-        return "Voyage voyage Au dessus des vieux volcans\n" +
-                "Glissent des ailes sous les tapis du vent\n" +
-                "Voyage, voyage\n" +
-                "Éternellement\n" +
-                "De nuages en marécages\n" +
-                "De vent d'Espagne en pluie d'équateur\n" +
-                "Voyage, voyage\n" +
-                "Vole dans les hauteurs\n" +
-                "Au dessus des capitales\n" +
-                "Des idées fatales\n" +
-                "Regardent l'océan";
-    }
+
     public ArrayList<Flight>getFlightsWithAirportAndSeats(int packId){
         Locality depLocality = new Locality("New York");
         Airport depAirport = new Airport("JFk", depLocality);

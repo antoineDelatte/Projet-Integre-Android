@@ -24,6 +24,15 @@ public class PackDetailVM extends androidx.lifecycle.ViewModel {
     private MutableLiveData<String>currentUserId = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Accommodation>>currentPackAccommodations = new MutableLiveData<>();
     private MutableLiveData<ArrayList<ActivityTag>>activityTags = new MutableLiveData<>();
+    private MutableLiveData<Integer> apiCallStatus= new MutableLiveData<>();
+
+    public LiveData<Integer> getApiCallStatus() {
+        return apiCallStatus;
+    }
+
+    public void setApiCallStatus(Integer apiCallStatus) {
+        this.apiCallStatus.setValue(apiCallStatus);
+    }
 
     public LiveData<String> getCurrentUserId() {
         return currentUserId;

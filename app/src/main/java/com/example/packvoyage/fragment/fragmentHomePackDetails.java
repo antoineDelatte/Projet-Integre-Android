@@ -35,7 +35,6 @@ public class fragmentHomePackDetails extends Fragment {
     public TextView pack_description;
     @BindView(R.id.pack_details_pack_name)
     public TextView pack_name;
-    private String packName;
     @BindView(R.id.pack_details_book_this_pack)
     public Button bookThisPack;
     @BindView(R.id.pack_details_show_activity_fragment)
@@ -47,8 +46,7 @@ public class fragmentHomePackDetails extends Fragment {
     private PackDao packDao;
     private PackDetailVM packDetailVM;
     private IMainActivity parent;
-    private int packId;
-    private String packDescriptionText;
+
     private static final int ACTIVITIES = 1;
     private static final int FLIGHTS = 2;
     private static final int HOUSING = 3;
@@ -63,14 +61,15 @@ public class fragmentHomePackDetails extends Fragment {
 
         String languageCode = Locale.getDefault().getLanguage().equals("fr") ? "fr":"en";
         packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), id -> {
-            packId = id;
-            packDao.loadPackDescription(id, languageCode, packDetailVM);
+            packDao.loadPackDescription(id, languageCode, packDetailVM, getContext());
         });
 
         packDetailVM.getCurrentPackDescription().observe(getViewLifecycleOwner(), description -> {
-            packDescriptionText = description;
+            pack_description.setText(description);
         });
-        packDetailVM.getSelectedPackName().observe(getViewLifecycleOwner(), name -> packName = name);
+        packDetailVM.getSelectedPackName().observe(getViewLifecycleOwner(), name -> {
+            pack_name.setText(name);
+        });
 
         changeFragment(ACTIVITIES);
 
@@ -98,8 +97,6 @@ public class fragmentHomePackDetails extends Fragment {
                 changeFragment(HOUSING);
             }
         });
-        //pack_description.setText(packDescriptionText);
-        pack_name.setText(packName);
 
         return view;
     }

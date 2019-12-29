@@ -60,15 +60,19 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_home_pack_list, container, false);
         ButterKnife.bind(this, view);
-
         pageIndex = 0;
+        packs = new ArrayList<>();
+        packVM.setPacks(packs);
         packDao.loadPacks(packVM, pageIndex);
 
         packVM.getPacks().observe(getViewLifecycleOwner(), list -> {
-            packs.addAll(list);
-            nbPacksRecentlyAdded = list.size();
-            updateRecyclerView();
+            if(list.size() > 0){
+                packs.addAll(list);
+                nbPacksRecentlyAdded = list.size();
+                updateRecyclerView();
+            }
         });
+
         load_more_packs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

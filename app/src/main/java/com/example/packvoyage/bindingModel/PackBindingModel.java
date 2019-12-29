@@ -8,6 +8,7 @@ public class PackBindingModel {
     private String name;
     private ArrayList<ImageOrVideoBindingModel> pictureOrVideo;
     private ArrayList<TraductionBindingModel> traduction;
+    private Double price;
 
     public PackBindingModel(Integer id, String name, ArrayList<ImageOrVideoBindingModel> pictureOrVideo) {
         this.id = id;
@@ -51,5 +52,13 @@ public class PackBindingModel {
 
     public void setPictureOrVideo(ArrayList<ImageOrVideoBindingModel> pictureOrVideo) {
         this.pictureOrVideo = pictureOrVideo;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }
