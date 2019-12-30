@@ -29,8 +29,7 @@ public class BookingPlaneSeatsSelectionAdapter extends RecyclerView.Adapter<Book
     public PlaneSeatSelectionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.plane_seats_booking_recyclerview, parent, false);
-        BookingPlaneSeatsSelectionAdapter.PlaneSeatSelectionHolder holder = new BookingPlaneSeatsSelectionAdapter.PlaneSeatSelectionHolder(view);
-        return holder;
+        return new PlaneSeatSelectionHolder(view);
     }
 
     @Override

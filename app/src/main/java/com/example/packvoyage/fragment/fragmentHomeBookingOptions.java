@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -140,6 +141,7 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
     }
 
     private void initFlightBookingRV(ArrayList<Flight>flightsWithSeats){
+        Log.i("Trip4", "init flights size : " + flightsWithSeats.size());
         bookingPlaneSeatsAdapter = new BookingFlightParentAdapter(flightsWithSeats, this);
         book_plane_seats_rv.setHasFixedSize(true);
         book_plane_seats_rv.setAdapter(bookingPlaneSeatsAdapter);

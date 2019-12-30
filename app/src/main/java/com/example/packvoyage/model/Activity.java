@@ -60,7 +60,7 @@ public class Activity {
     }
 
     public String getShortDescription(){
-        return name + " " + price;
+        return name + " " + price + "€";
     }
 
     public static ArrayList<Activity> getPayingActivities(ArrayList<Activity>activities){
