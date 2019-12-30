@@ -117,12 +117,12 @@ public class SignUp extends AppCompatActivity {
                 if(usernameOk && firstnameOk && lastnameOk && emailAddressOk && passwordOk && confirmPasswordOk){
                     // signup the user
                     UserBindingModel userBindingModel = new UserBindingModel();
-                    userBindingModel.setConfirmPassword(Objects.requireNonNull(confirm_password.getEditText()).getText().toString());
+                    userBindingModel.setConfirmPassword(Objects.requireNonNull(confirm_password.getEditText()).getText().toString().trim());
                     userBindingModel.setFirstName(Objects.requireNonNull(firstname.getEditText()).getText().toString());
                     userBindingModel.setLastName(Objects.requireNonNull(lastname.getEditText()).getText().toString());
-                    userBindingModel.setEmail(Objects.requireNonNull(emailAddress.getEditText()).getText().toString());
-                    userBindingModel.setPassword(Objects.requireNonNull(password.getEditText()).getText().toString());
-                    userBindingModel.setUsername(Objects.requireNonNull(username.getEditText()).getText().toString());
+                    userBindingModel.setEmail(Objects.requireNonNull(emailAddress.getEditText()).getText().toString().trim());
+                    userBindingModel.setPassword(Objects.requireNonNull(password.getEditText()).getText().toString().trim());
+                    userBindingModel.setUsername(Objects.requireNonNull(username.getEditText()).getText().toString().trim());
                     signUpDao.registerAccount(loginVM, userBindingModel, getApplicationContext());
                 }
             }
