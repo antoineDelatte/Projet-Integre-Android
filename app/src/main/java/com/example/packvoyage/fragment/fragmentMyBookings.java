@@ -42,7 +42,9 @@ public class fragmentMyBookings extends Fragment implements PackListAdapter.OnPa
         View view =  inflater.inflate(R.layout.fragment_my_bookings, container, false);
         ButterKnife.bind(this, view);
 
-        packDao.loadMyBookings(packVM);
+        packVM.getCurrentUserId().observe(getViewLifecycleOwner(), userId -> {
+            packDao.loadMyBookings(packVM, userId, getContext());
+        });
 
         packVM.getMyBookedPacks().observe(getViewLifecycleOwner(), list -> initRecyclerView(list));
         return view;

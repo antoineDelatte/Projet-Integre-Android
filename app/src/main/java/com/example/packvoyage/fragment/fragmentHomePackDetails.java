@@ -142,5 +142,4 @@ public class fragmentHomePackDetails extends Fragment {
             e.printStackTrace();
         }
     }
-
 }

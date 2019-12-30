@@ -105,4 +105,7 @@
     <string name="internal_server_error">Server error</string>
     <string name="no_connection">You are not connected to internet</string>
     <string name="scroll_down_for_more">Scroll down to see more</string>
+    <string name="reservation_successful">Reservation successful !</string>
+    <string name="reservation_unsuccessful">Problem during the reservation</string>
+
 </resources>

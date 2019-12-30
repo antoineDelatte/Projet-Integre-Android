@@ -31,6 +31,15 @@ public class PackDetailVM extends androidx.lifecycle.ViewModel {
     private MutableLiveData<ArrayList<Flight>> currentPackFlights= new MutableLiveData<>();
     private MutableLiveData<ArrayList<Flight>> currentPackFlightsWithSeats = new MutableLiveData<>();
     private MutableLiveData<ArrayList<ActivityTag>> allActivityTags = new MutableLiveData<>();
+    private MutableLiveData<Integer>registerStatus = new MutableLiveData<>();
+
+    public LiveData<Integer> getRegisterStatus() {
+        return registerStatus;
+    }
+
+    public void setRegisterStatus(Integer registerStatus) {
+        this.registerStatus.setValue(registerStatus);
+    }
 
     public LiveData<ArrayList<ActivityTag>> getAllActivityTags() {
         return allActivityTags;

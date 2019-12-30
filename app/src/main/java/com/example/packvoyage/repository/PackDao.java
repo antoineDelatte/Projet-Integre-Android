@@ -26,14 +26,18 @@ import com.example.packvoyage.model.Flight;
 import com.example.packvoyage.model.Locality;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.model.PlaneSeat;
+import com.example.packvoyage.model.Reservation;
 import com.example.packvoyage.model.User;
 import com.example.packvoyage.service.IActivityService;
 import com.example.packvoyage.service.IFlightService;
+import com.example.packvoyage.service.ILoginService;
 import com.example.packvoyage.service.PackService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -395,19 +399,43 @@ public class PackDao {
         return accommodations;
     }
 
-    public void RegisterNewBooking(ArrayList<Integer>bedroomsId, ArrayList<Integer>payingActivitiesId, ArrayList<Integer>planeSeatsId){
-        // todo enregistrer commande
-        // todo prévenir l'utilisateur si la commande se passe mal
-    }
+    public void RegisterNewBooking(Reservation reservation, Context context, PackDetailVM packVM){
+        if(!ConnectionState.isNetworkAvailable(context)){
+            packVM.setApiCallStatus(Constants.NO_CONNECTION);
+            return;
+        }
 
-    public void loadMyBookings(PackDetailVM packVM){
-        // todo charger mes réservations
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(PackService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         PackService pack = retrofit.create(PackService.class);
-        Call<List<PackBindingModel>> call = pack.getPacks(0,2);
+        Call<ResponseBody> call = pack.register(reservation);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                packVM.setRegisterStatus(response.code());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Trip4Student", t.getMessage());
+            }
+        });
+    }
+
+    public void loadMyBookings(PackDetailVM packVM, String userId, Context context){
+        if(!ConnectionState.isNetworkAvailable(context)){
+            packVM.setApiCallStatus(Constants.NO_CONNECTION);
+            return;
+        }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(PackService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        PackService pack = retrofit.create(PackService.class);
+        Call<List<PackBindingModel>> call = pack.getMyBookings(userId);
         call.enqueue(new Callback<List<PackBindingModel>>() {
             @Override
             public void onResponse(Call<List<PackBindingModel>> call, Response<List<PackBindingModel>> response) {

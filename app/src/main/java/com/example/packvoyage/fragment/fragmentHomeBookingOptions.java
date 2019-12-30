@@ -1,7 +1,9 @@
 package com.example.packvoyage.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
+import com.example.packvoyage.activity.IMainActivity;
 import com.example.packvoyage.adapterRecyclerView.BookingActivitiesAdapter;
 import com.example.packvoyage.adapterRecyclerView.BookingFlightParentAdapter;
 import com.example.packvoyage.adapterRecyclerView.BookingPlaneSeatsSelectionAdapter;
@@ -28,6 +31,8 @@ import com.example.packvoyage.adapterRecyclerView.BookingRoomsAdapter;
 import com.example.packvoyage.adapterRecyclerView.BookingRoomsParentAdapter;
 import com.example.packvoyage.model.Activity;
 import com.example.packvoyage.model.Flight;
+import com.example.packvoyage.model.Reservation;
+import com.example.packvoyage.model.User;
 import com.example.packvoyage.repository.PackDao;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -66,6 +71,8 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
     public RecyclerView book_housing_rooms_rv;
     @BindView(R.id.add_to_my_bookings_button)
     public Button add_to_my_bookings;
+    private String currentUserId;
+    private IMainActivity parent;
 
 
     @Override
@@ -75,6 +82,7 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
         ButterKnife.bind(this, view);
 
         packDetailVM.getSelectedPackName().observe(getViewLifecycleOwner(), name -> packName.setText(name));
+        packDetailVM.getCurrentUserId().observe(getViewLifecycleOwner(), userId -> this.currentUserId = userId);
 
         packDetailVM.getCurrentPackFlightsWithSeats().observe(getViewLifecycleOwner(), this::initFlightBookingRV);
         packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), id -> {
@@ -85,7 +93,18 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
             initActivitiesBookingRV(Activity.getPayingActivities(activities));
         });
 
-
+        packDetailVM.getRegisterStatus().observe(getViewLifecycleOwner(), status -> {
+            switch(status){
+                case 201:
+                    Toast.makeText(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.reservation_successful), Toast.LENGTH_SHORT).show();
+                    parent.changeFragment(fragmentMyBookings.TAG);
+                    break;
+                default :
+                    Toast.makeText(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.reservation_unsuccessful), Toast.LENGTH_LONG).show();
+                    break;
+            }
+        });
+        
         nbTravelers.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -122,7 +141,8 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
                 double totalPriceActivities = getTotalPriceForMap(selectedActivitiesWithPrice) * numberOfTravelers;
                 double totalPriceRooms = getTotalPriceForMap(selectedRoomsWithPrice);
 
-                packDao.RegisterNewBooking(getKeys(selectedRoomsWithPrice), getKeys(selectedActivitiesWithPrice), getKeys(selectedSeatsWithPrice));
+                Reservation reservation = new Reservation(false, numberOfTravelers, totalPricePlaneSeats, 0.0, totalPriceActivities, totalPriceRooms, currentUserId, packId);
+                packDao.RegisterNewBooking(reservation, getContext(), packDetailVM);
             }
         });
         //initRoomsBookingRV();
@@ -193,5 +213,16 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
             total += entry.getValue();
         }
         return total;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context){
+        super.onAttach(context);
+        try{
+            parent = (IMainActivity)context;
+        }
+        catch (ClassCastException e){
+            e.printStackTrace();
+        }
     }
 }
