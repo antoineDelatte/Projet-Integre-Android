@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.packvoyage.R;
+import com.example.packvoyage.Utils.SharedPrefUtil;
 import com.example.packvoyage.model.Activity;
 
 import java.util.ArrayList;
@@ -44,6 +45,9 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         String activityPrice = activity.getPrice() + " €";
         holder.activity_price.setText(activityPrice);
         holder.activity_location.setText(activity.getLocation());
+        if(activity.getTag() == null || !SharedPrefUtil.checkIfUserHasThisPreference(context, activity.getTag().getName())){
+            holder.activity_heart_icon.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -56,6 +60,7 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         private TextView activity_name;
         private TextView activity_price;
         private TextView activity_location;
+        private ImageView activity_heart_icon;
 
         public ActivityHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +68,7 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
             activity_name = itemView.findViewById(R.id.activities_recycler_activity_name);
             activity_price = itemView.findViewById(R.id.activities_recycler_activity_price);
             activity_location = itemView.findViewById(R.id.activities_recycler_activity_location);
+            activity_heart_icon = itemView.findViewById(R.id.activity_heart_icon);
         }
     }
 }

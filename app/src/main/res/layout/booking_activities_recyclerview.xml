@@ -12,7 +12,7 @@
         android:layout_weight="90"
         android:layout_height="wrap_content"
         android:text="@string/booking_activities_activity_info"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:padding="5sp"/>
     <CheckBox
         android:id="@+id/booking_activities_activity_checkbox"

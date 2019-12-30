@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.adapterRecyclerView.ActivityTagsAdapter;
 import com.example.packvoyage.model.ActivityTag;
 import com.example.packvoyage.repository.PackDao;
+import com.example.packvoyage.repository.PreferencesDao;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -42,6 +44,7 @@ public class fragmentMyPreferences extends Fragment implements ActivityTagsAdapt
     private Map<String, ?> savedActivityTags;
     private ActivityTagsAdapter tagsAdapter;
     private boolean checkboxesLocked = false;
+    private PreferencesDao preferencesDao;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +52,7 @@ public class fragmentMyPreferences extends Fragment implements ActivityTagsAdapt
         View v =  inflater.inflate(R.layout.fragment_my_preferences, container, false);
         ButterKnife.bind(this, v);
 
-        packVM.getActivityTags().observe(getViewLifecycleOwner(), tags -> initRecyclerView(tags));
+        packVM.getAllActivityTags().observe(getViewLifecycleOwner(), tags -> initRecyclerView(tags));
         return v;
     }
 
@@ -58,9 +61,12 @@ public class fragmentMyPreferences extends Fragment implements ActivityTagsAdapt
         super.onCreate(savedInstance);
         packVM = ViewModelProviders.of(getActivity()).get(PackDetailVM.class);
         packDao = SingletonDao.getPackDao();
-        packDao.loadActivityPreferences(packVM);
+        preferencesDao = SingletonDao.getPreferencesDao();
+
+        preferencesDao.loadAllPreferences(packVM, getContext());
         sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.SHARED_PREF_FILE_KEY), Context.MODE_PRIVATE);
         savedActivityTags = sharedPref.getAll();
+        Log.i("Trip4", "size : " + savedActivityTags.size());
     }
 
     private void initRecyclerView(ArrayList<ActivityTag>tags){

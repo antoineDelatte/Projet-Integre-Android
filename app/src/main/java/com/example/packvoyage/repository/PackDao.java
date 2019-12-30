@@ -14,6 +14,7 @@ import com.example.packvoyage.bindingModel.FlightOfPackBindingModel;
 import com.example.packvoyage.bindingModel.LocalityBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.bindingModel.PlaneSeatBindingModel;
+import com.example.packvoyage.bindingModel.TagBindingModel;
 import com.example.packvoyage.model.Accommodation;
 import com.example.packvoyage.model.AccommodationType;
 import com.example.packvoyage.model.Activity;
@@ -29,8 +30,6 @@ import com.example.packvoyage.model.User;
 import com.example.packvoyage.service.IActivityService;
 import com.example.packvoyage.service.IFlightService;
 import com.example.packvoyage.service.PackService;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -185,6 +184,10 @@ public class PackDao {
                     activity.setImage_url(activityBindingModel.getPictureOrVideo().get(0).getContent());
                     activity.setPrice(activityBindingModel.getPrice());
                     activity.setName(activityBindingModel.getName());
+                    if(activityBindingModel.getTagOfActivity() != null){
+                        TagBindingModel tagBindingModel = activityBindingModel.getTagOfActivity().get(0).getTag();
+                        activity.setTag(new ActivityTag(tagBindingModel.getId(), tagBindingModel.getName()));
+                    }
                     location = activityBindingModel.getLocality().getName() + " : " + activityBindingModel.getLocality().getCountryName();
                     activity.setLocation(location);
                     activities.add(activity);
@@ -353,75 +356,6 @@ public class PackDao {
         });
     }
 
-    public ArrayList<Flight>getFlightsWithAirportAndSeats(int packId){
-        Locality depLocality = new Locality("New York");
-        Airport depAirport = new Airport("JFk", depLocality);
-        Locality arrLocality = new Locality("Sydney");
-        Airport arrAirport = new Airport("Croco airport", arrLocality);
-
-        ArrayList<Flight>flights = new ArrayList<>();
-
-        ArrayList<PlaneSeat>planeSeatsF1 = new ArrayList<>();
-        planeSeatsF1.add(new PlaneSeat(1, "A3", 120.5));
-        planeSeatsF1.add(new PlaneSeat(2, "A4", 120.5));
-        planeSeatsF1.add(new PlaneSeat(3, "B3", 120.5));
-        planeSeatsF1.add(new PlaneSeat(4, "C3", 120.5));
-        planeSeatsF1.add(new PlaneSeat(5, "D3", 120.5));
-        Flight flight1 = new Flight(1, true);
-        flight1.setDepartureAirport(depAirport);
-        flight1.setArrivalAirport(arrAirport);
-        flight1.setPlaneSeats(planeSeatsF1);
-
-
-        ArrayList<PlaneSeat>planeSeatsF2 = new ArrayList<>();
-        planeSeatsF2.add(new PlaneSeat(6, "E3", 120.5));
-        planeSeatsF2.add(new PlaneSeat(7, "F3", 120.5));
-        planeSeatsF2.add(new PlaneSeat(8, "G3", 120.5));
-        planeSeatsF2.add(new PlaneSeat(9, "H3", 120.5));
-        planeSeatsF2.add(new PlaneSeat(10, "I3", 120.5));
-        Flight flight2 = new Flight(2, true);
-        flight2.setDepartureAirport(depAirport);
-        flight2.setArrivalAirport(arrAirport);
-        flight2.setPlaneSeats(planeSeatsF2);
-
-
-        ArrayList<PlaneSeat>planeSeatsF3 = new ArrayList<>();
-        planeSeatsF3.add(new PlaneSeat(11, "J3", 120.5));
-        planeSeatsF3.add(new PlaneSeat(12, "K3", 120.5));
-        planeSeatsF3.add(new PlaneSeat(13, "L3", 120.5));
-        planeSeatsF3.add(new PlaneSeat(14, "M3", 120.5));
-        planeSeatsF3.add(new PlaneSeat(15, "N3", 120.5));
-        Flight flight3 = new Flight(2, false);
-        flight3.setPlaneSeats(planeSeatsF2);
-        flight3.setDepartureAirport(depAirport);
-        flight3.setArrivalAirport(arrAirport);
-
-        flights.add(flight1);
-        flights.add(flight2);
-        flights.add(flight3);
-
-        return flights;
-    }
-
-    public Pack getPackActivities(int packId){
-        //appel methode correspondante
-        // todo
-        ArrayList<Activity>activities = new ArrayList<>();
-        activities.add(new Activity(1, "ISL 8eme de finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
-        activities.add(new Activity(2, "ISL quart de finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
-        activities.add(new Activity(3, "ISL demi finale", 0, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
-        activities.add(new Activity(4, "ISL finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
-        activities.add(new Activity(5, "ISL Post finale bières", 0, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
-        Pack pack = new Pack(1, "Voyage Zambie", "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés" +
-                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
-                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
-                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
-                        "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
-                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés", "https://img.ev.mu/images/portfolio/pays/245/600x400/846346.jpg");
-        pack.setActivities(activities);
-        return pack;
-    }
-
     public ArrayList<Accommodation> getAccommodationsWithRooms(int packId){
         ArrayList<Accommodation>accommodations = new ArrayList<>();
 
@@ -509,15 +443,5 @@ public class PackDao {
         comments.add(new Comment("Such an amazing trip!", user));
         comments.add(new Comment("Such a crazy trip!", user));
         packVM.setSelectedBookedPackComments(comments);
-    }
-
-    public void loadActivityPreferences(PackDetailVM packVM){
-        ArrayList<ActivityTag>activityTags = new ArrayList<>();
-        activityTags.add(new ActivityTag(1, "sport"));
-        activityTags.add(new ActivityTag(2, "nature"));
-        activityTags.add(new ActivityTag(3, "culture"));
-        activityTags.add(new ActivityTag(4, "relaxation"));
-        activityTags.add(new ActivityTag(5, "aventure"));
-        packVM.setActivityTags(activityTags);
     }
 }

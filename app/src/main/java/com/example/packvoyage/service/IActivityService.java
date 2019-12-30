@@ -1,6 +1,8 @@
 package com.example.packvoyage.service;
 
+import com.example.packvoyage.bindingModel.ActivityTagBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
+import com.example.packvoyage.bindingModel.TagBindingModel;
 
 import java.util.List;
 
@@ -13,4 +15,7 @@ public interface IActivityService {
 
     @GET("PackWithActivity")
     Call<List<PackBindingModel>> getActivitiesOfPack(@Query("packId") int packId);
+
+    @GET("Tag")
+    Call<List<TagBindingModel>> getAllActivityTags();
 }

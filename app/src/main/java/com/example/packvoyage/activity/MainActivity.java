@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
                     break;
                 case 400:
                 case 404:
+                case 500:
                     message = this.getResources().getString(R.string.internal_server_error);
                     break;
             }

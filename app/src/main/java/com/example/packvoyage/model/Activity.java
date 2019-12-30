@@ -8,6 +8,7 @@ public class Activity {
     private Double price;
     private String location;
     private String image_url;
+    private ActivityTag tag;
 
     public Activity(){ }
 
@@ -61,6 +62,14 @@ public class Activity {
 
     public String getShortDescription(){
         return name + " " + price + "€";
+    }
+
+    public ActivityTag getTag() {
+        return tag;
+    }
+
+    public void setTag(ActivityTag tag) {
+        this.tag = tag;
     }
 
     public static ArrayList<Activity> getPayingActivities(ArrayList<Activity>activities){

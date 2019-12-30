@@ -10,6 +10,7 @@ public class ActivityBindingModel {
     private String streetNumber;
     private LocalityBindingModel locality;
     private ArrayList<ImageOrVideoBindingModel> pictureOrVideo;
+    private ArrayList<ActivityTagBindingModel>tagOfActivity;
 
     public ActivityBindingModel(){}
 
@@ -67,5 +68,13 @@ public class ActivityBindingModel {
 
     public void setPictureOrVideo(ArrayList<ImageOrVideoBindingModel> pictureOrVideo) {
         this.pictureOrVideo = pictureOrVideo;
+    }
+
+    public ArrayList<ActivityTagBindingModel> getTagOfActivity() {
+        return tagOfActivity;
+    }
+
+    public void setTagOfActivity(ArrayList<ActivityTagBindingModel> tagOfActivity) {
+        this.tagOfActivity = tagOfActivity;
     }
 }

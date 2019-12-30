@@ -91,7 +91,7 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_ACTION_DONE){
                     try{
-                        numberOfTravelers =  Integer.parseInt(nbTravelers.getText().toString());
+                        numberOfTravelers =  Integer.parseInt(Objects.requireNonNull(nbTravelers.getText()).toString());
                         if(numberOfTravelers < 1){
                             Toast.makeText(getContext(), getResources().getString(R.string.booking_negative_nb_of_travelers_input), Toast.LENGTH_SHORT).show();
                             nbTravelers.setText("1");
@@ -105,6 +105,7 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
                     }
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
                     return true;
                 }
                 return false;
@@ -113,10 +114,14 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
         add_to_my_bookings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numberOfTravelers == null){
+                if(numberOfTravelers == null || numberOfTravelers == 0){
                     Toast.makeText(getContext(), R.string.please_enter_a_number_of_traveler, Toast.LENGTH_SHORT).show();
                     return;
                 }
+                double totalPricePlaneSeats = getTotalPriceForMap(selectedSeatsWithPrice);
+                double totalPriceActivities = getTotalPriceForMap(selectedActivitiesWithPrice) * numberOfTravelers;
+                double totalPriceRooms = getTotalPriceForMap(selectedRoomsWithPrice);
+
                 packDao.RegisterNewBooking(getKeys(selectedRoomsWithPrice), getKeys(selectedActivitiesWithPrice), getKeys(selectedSeatsWithPrice));
             }
         });
@@ -180,5 +185,13 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
     private ArrayList<Integer>getKeys(Map<Integer, Double> hashMap){
         ArrayList<Integer> keys = new ArrayList<>(hashMap.keySet());
         return keys;
+    }
+
+    private double getTotalPriceForMap(Map<Integer, Double> hashMap){
+        double total = 0.;
+        for(Map.Entry<Integer, Double>entry : hashMap.entrySet()){
+            total += entry.getValue();
+        }
+        return total;
     }
 }
