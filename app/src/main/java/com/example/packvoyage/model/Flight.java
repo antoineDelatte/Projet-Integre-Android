@@ -10,6 +10,8 @@ public class Flight {
     private Airport departureAirport;
     private Airport arrivalAirport;
 
+    public Flight(){}
+
     public Flight(int flightNumber, boolean isGoing) {
         this.flightNumber = flightNumber;
         this.isGoing = isGoing;
@@ -67,21 +69,35 @@ public class Flight {
         this.arrivalAirport = arrivalAirport;
     }
 
-    public String getFullDescription(){
-        return  "Brussels - New York" +
-                "\n-Company : Ryanair" +
-                "\n-Departure : Airport Charles Henry 15 january 2019 6AM, Belgium Brussels" +
-                "\n-Arrival : Airport Jean Claude 15 january 2019 3PM, United Stated New York"; // todo
-    }
-
     public String getArrivalAndDestinationTitle(){
-        //return departureAirport.getLocality() + " - " + arrivalAirport.getLocality();
-        return "Brussels - New York";
+        return departureAirport.getLocality().getName() + " ("
+                + departureAirport.getLocality().getCountryName() + ") - "
+                + arrivalAirport.getLocality().getName() + " (" + arrivalAirport.getName() + ")";
     }
     public String getDepartureInfo(){
-        return "Bruxelles Nord, Brussels, 6AM";
+        return departureAirport.getName() + ", " + departureAirport.getLocality().getName();
+        //return "Bruxelles Nord, Brussels, 6AM";
     }
     public String getArrivalInfo(){
-        return "JFK Airport, New York, 3PM";
+        return arrivalAirport.getName() + ", " + arrivalAirport.getLocality().getName();
+        //return "JFK Airport, New York, 3PM";
+    }
+
+    public static ArrayList<Flight>getOutwardsFlights(ArrayList<Flight>flights){
+        ArrayList<Flight>outwardsFlights = new ArrayList<>();
+        for(Flight flight : flights){
+            if(flight.isGoing())
+                outwardsFlights.add(flight);
+        }
+        return outwardsFlights;
+    }
+
+    public static ArrayList<Flight>getHomewardsFlights(ArrayList<Flight>flights){
+        ArrayList<Flight>homewardsFlights = new ArrayList<>();
+        for(Flight flight : flights){
+            if(!flight.isGoing())
+                homewardsFlights.add(flight);
+        }
+        return homewardsFlights;
     }
 }

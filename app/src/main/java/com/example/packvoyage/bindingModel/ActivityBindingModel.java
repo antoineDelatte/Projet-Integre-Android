@@ -1,7 +1,6 @@
 package com.example.packvoyage.bindingModel;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ActivityBindingModel {
     private Integer id;

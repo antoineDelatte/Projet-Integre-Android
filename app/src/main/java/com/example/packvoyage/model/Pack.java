@@ -18,24 +18,6 @@ public class Pack {
         this.image_url = image_url;
     }
 
-    public ArrayList<Flight>getOutwardsFlights(){
-        ArrayList<Flight>outwardsFlights = new ArrayList<>();
-        for(Flight flight : flights){
-            if(flight.isGoing())
-                outwardsFlights.add(flight);
-        }
-        return outwardsFlights;
-    }
-
-    public ArrayList<Flight>getHomewardsFlights(){
-        ArrayList<Flight>homewardsFlights = new ArrayList<>();
-        for(Flight flight : flights){
-            if(!flight.isGoing())
-                homewardsFlights.add(flight);
-        }
-        return homewardsFlights;
-    }
-
     public ArrayList<Flight> getFlights() {
         return flights;
     }
