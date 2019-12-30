@@ -9,18 +9,9 @@ public class PackBindingModel {
     private ArrayList<ImageOrVideoBindingModel> pictureOrVideo;
     private ArrayList<TraductionBindingModel> traduction;
     private Double price;
+    private ArrayList<ActivityBindingModel>activity;
 
-    public PackBindingModel(Integer id, String name, ArrayList<ImageOrVideoBindingModel> pictureOrVideo) {
-        this.id = id;
-        this.name = name;
-        this.pictureOrVideo = pictureOrVideo;
-    }
-
-    public PackBindingModel(Integer id, ArrayList<TraductionBindingModel> traduction, String name) {
-        this.id = id;
-        this.name = name;
-        this.traduction = traduction;
-    }
+    public PackBindingModel(){}
 
     public TraductionBindingModel getTraduction() {
         return traduction.get(0);
@@ -60,5 +51,13 @@ public class PackBindingModel {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public ArrayList<ActivityBindingModel> getActivity() {
+        return activity;
+    }
+
+    public void setActivity(ArrayList<ActivityBindingModel> activity) {
+        this.activity = activity;
     }
 }

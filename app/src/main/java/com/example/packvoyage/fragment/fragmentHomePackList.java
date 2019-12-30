@@ -63,7 +63,7 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
         pageIndex = 0;
         packs = new ArrayList<>();
         packVM.setPacks(packs);
-        packDao.loadPacks(packVM, pageIndex);
+        packDao.loadPacks(packVM, pageIndex, getContext());
 
         packVM.getPacks().observe(getViewLifecycleOwner(), list -> {
             if(list.size() > 0){
@@ -76,7 +76,7 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
         load_more_packs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                packDao.loadPacks(packVM, pageIndex);
+                packDao.loadPacks(packVM, pageIndex, getContext());
             }
         });
         return view;
@@ -90,7 +90,6 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
     }
 
     private void updateRecyclerView(){
-        Log.i("Trip4", Integer.toString(pageIndex));
         if(pageIndex == 0){
             rVPackList.setHasFixedSize(true);
             rVPackList.setLayoutManager(new LinearLayoutManager(getContext()));

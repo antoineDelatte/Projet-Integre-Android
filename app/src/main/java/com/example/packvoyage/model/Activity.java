@@ -7,9 +7,7 @@ public class Activity {
     private String location;
     private String image_url;
 
-    public Activity(){
-
-    }
+    public Activity(){ }
 
     public Activity(int id, String name, double price, String location, String image_url) {
         this.id = id;

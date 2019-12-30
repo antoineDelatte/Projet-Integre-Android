@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,9 +16,11 @@ import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.adapterRecyclerView.ActivityListAdapter;
+import com.example.packvoyage.model.Activity;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.repository.PackDao;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -28,9 +31,8 @@ public class ActivityList extends Fragment {
     @BindView(R.id.activity_list_rv)
     public RecyclerView activityList_rv;
     private ActivityListAdapter rvAdapter;
-    private Pack pack;
     private PackDetailVM packDetailVM;
-    private int selectedPackId;
+    private PackDao packDao;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,19 +40,27 @@ public class ActivityList extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_activity_list, container, false);
         ButterKnife.bind(this, view);
 
-        packDetailVM = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PackDetailVM.class);
-        packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), packId -> selectedPackId = packId);
-        PackDao packDao = SingletonDao.getPackDao();
-        pack = packDao.getPackActivities(selectedPackId);
+        packDao = SingletonDao.getPackDao();
 
-        initRecyclerView();
+        packDetailVM.getSelectedPackId().observe(getViewLifecycleOwner(), packId -> {
+            packDao.loadPackActivities(packDetailVM, packId, getContext());
+        });
+
+        packDetailVM.getCurrentPackActivities().observe(getViewLifecycleOwner(), this::initRecyclerView);
+
         return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        packDetailVM = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(PackDetailVM.class);
     }
 
     public ActivityList(){ }
 
-    private void initRecyclerView(){
-        rvAdapter = new ActivityListAdapter(getContext(), pack.getActivities());
+    private void initRecyclerView(ArrayList<Activity> activities){
+        rvAdapter = new ActivityListAdapter(getContext(), activities);
         activityList_rv.setHasFixedSize(true);
         activityList_rv.setAdapter(rvAdapter);
         activityList_rv.setLayoutManager(new LinearLayoutManager(getContext()));

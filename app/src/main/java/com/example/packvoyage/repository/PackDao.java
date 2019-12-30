@@ -8,6 +8,7 @@ import com.example.packvoyage.Utils.ConnectionState;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.bindingModel.AccommodationOfPackBindingModel;
 import com.example.packvoyage.bindingModel.AccommodationTypeBindingModel;
+import com.example.packvoyage.bindingModel.ActivityBindingModel;
 import com.example.packvoyage.bindingModel.LocalityBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.model.Accommodation;
@@ -22,6 +23,7 @@ import com.example.packvoyage.model.Locality;
 import com.example.packvoyage.model.Pack;
 import com.example.packvoyage.model.PlaneSeat;
 import com.example.packvoyage.model.User;
+import com.example.packvoyage.service.IActivityService;
 import com.example.packvoyage.service.PackService;
 
 import java.util.ArrayList;
@@ -35,7 +37,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PackDao {
 
-    public void loadPacks(PackDetailVM packVM, int pageIndex) {
+    public void loadPacks(PackDetailVM packVM, int pageIndex, Context context) {
+        if(!ConnectionState.isNetworkAvailable(context)){
+            packVM.setApiCallStatus(Constants.NO_CONNECTION);
+            return;
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(PackService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -135,6 +142,53 @@ public class PackDao {
             @Override
             public void onFailure(Call<List<AccommodationOfPackBindingModel>> call, Throwable t) {
                 Log.e("Trip4Student", t.getMessage());
+            }
+        });
+    }
+
+    public void loadPackActivities(PackDetailVM packVM, int packId, Context context) {
+        if (!ConnectionState.isNetworkAvailable(context)) {
+            packVM.setApiCallStatus(Constants.NO_CONNECTION);
+            return;
+        }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(IActivityService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        IActivityService service = retrofit.create(IActivityService.class);
+        Call<List<PackBindingModel>> call = service.getActivitiesOfPack(packId);
+        call.enqueue(new Callback<List<PackBindingModel>>() {
+            @Override
+            public void onResponse(Call<List<PackBindingModel>> call, Response<List<PackBindingModel>> response) {
+                if (!response.isSuccessful()) {
+                    packVM.setApiCallStatus(response.code());
+                    return;
+                }
+                List<PackBindingModel> apiListOfPackWithActi = response.body();
+                if(apiListOfPackWithActi.size() == 0)
+                    return;
+
+                PackBindingModel apiPackWithActi = apiListOfPackWithActi.get(0);
+                ArrayList<Activity> activities = new ArrayList<>();
+                Activity activity;
+                String location;
+                for(ActivityBindingModel activityBindingModel : apiPackWithActi.getActivity()){
+                    activity = new Activity();
+                    activity.setId(activityBindingModel.getId());
+                    activity.setImage_url(activityBindingModel.getPictureOrVideo().get(0).getContent());
+                    activity.setPrice(activityBindingModel.getPrice());
+                    activity.setName(activityBindingModel.getName());
+                    location = activityBindingModel.getLocality().getName() + " : " + activityBindingModel.getLocality().getCountryName();
+                    activity.setLocation(location);
+                    activities.add(activity);
+                }
+                packVM.setCurrentPackActivities(activities);
+            }
+
+            @Override
+            public void onFailure(Call<List<PackBindingModel>> call, Throwable t) {
+                Log.e("Trip4Student", "erreur : " + t.getMessage());
             }
         });
     }

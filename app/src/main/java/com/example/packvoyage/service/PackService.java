@@ -2,6 +2,7 @@ package com.example.packvoyage.service;
 
 import com.example.packvoyage.bindingModel.AccommodationOfPackBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
+import com.example.packvoyage.model.Activity;
 
 import java.util.List;
 

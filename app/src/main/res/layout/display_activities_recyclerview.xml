@@ -9,7 +9,7 @@
     android:layout_margin="12sp"
     android:background="@drawable/activity_item_rounded_corner">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/activities_recycler_activity_image"
         android:layout_width="140dp"
         android:layout_height="140dp"

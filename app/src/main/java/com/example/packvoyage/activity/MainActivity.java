@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         fragmentTransaction.commit();
 
         packVM.getApiCallStatus().observe(this, status -> {
+            if(status == null)
+                return;
             String message = "";
             switch (status) {
                 case Constants.NO_CONNECTION :
@@ -69,7 +71,8 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
                     message = this.getResources().getString(R.string.internal_server_error);
                     break;
             }
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            packVM.setApiCallStatus(null);
         });
 
         bottom_navbar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
