@@ -1,5 +1,7 @@
 package com.example.packvoyage.model;
 
+import java.util.ArrayList;
+
 public class Activity {
     private int id;
     private String name;
@@ -59,5 +61,14 @@ public class Activity {
 
     public String getShortDescription(){
         return name + " " + price;
+    }
+
+    public static ArrayList<Activity> getPayingActivities(ArrayList<Activity>activities){
+        ArrayList<Activity>payingActivities = new ArrayList<>();
+        for(Activity act : activities){
+            if(act.getPrice() != null && act.getPrice() > 0)
+                payingActivities.add(act);
+        }
+        return payingActivities;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.packvoyage.bindingModel;
 
+import java.util.ArrayList;
+
 public class AccommodationOfPackBindingModel {
     private Integer accommodationId;
     private AccommodationBindingModel accommodation;

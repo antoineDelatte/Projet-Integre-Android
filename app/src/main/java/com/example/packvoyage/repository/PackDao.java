@@ -13,6 +13,7 @@ import com.example.packvoyage.bindingModel.AirportBindingModel;
 import com.example.packvoyage.bindingModel.FlightOfPackBindingModel;
 import com.example.packvoyage.bindingModel.LocalityBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
+import com.example.packvoyage.bindingModel.PlaneSeatBindingModel;
 import com.example.packvoyage.model.Accommodation;
 import com.example.packvoyage.model.AccommodationType;
 import com.example.packvoyage.model.Activity;
@@ -205,7 +206,7 @@ public class PackDao {
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(IActivityService.BASE_URL)
+                .baseUrl(IFlightService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         IFlightService service = retrofit.create(IFlightService.class);
@@ -267,61 +268,89 @@ public class PackDao {
         });
     }
 
-    public Pack getPackWithGeneralFlightInfos(int packId){
-        // todo
-        ArrayList<Flight>flights = new ArrayList<>();
-        flights.add(new Flight(1, true));
-        flights.add(new Flight(2, false));
-        flights.add(new Flight(3, true));
-        flights.add(new Flight(4, false));
-        flights.add(new Flight(5, true));
-        flights.add(new Flight(6, false));
-        flights.add(new Flight(7, true));
-        flights.add(new Flight(8, false));
-        flights.add(new Flight(9, true));
-        flights.add(new Flight(10, false));
-        Pack pack = new Pack(1, "voyage en afganistan", "Voyage voyage Au dessus des vieux volcans\n" +
-                "Glissent des ailes sous les tapis du vent\n" +
-                "Voyage, voyage\n" +
-                "Éternellement\n" +
-                "De nuages en marécages\n" +
-                "De vent d'Espagne en pluie d'équateur\n" +
-                "Voyage, voyage\n" +
-                "Vole dans les hauteurs\n" +
-                "Au dessus des capitales\n" +
-                "Des idées fatales\n" +
-                "Regardent l'océan", "https://images.unsplash.com/photo-1507234897433-06646bd0e673?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80");
-        pack.setFlights(flights);
-        return pack;
-    }
-
-    public Pack getPackActivities(int packId){
-        //appel methode correspondante
-        // todo
-        ArrayList<Activity>activities = new ArrayList<>();
-        activities.add(new Activity(1, "ISL 8eme de finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
-        activities.add(new Activity(2, "ISL quart de finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
-        activities.add(new Activity(3, "ISL demi finale", 0, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
-        activities.add(new Activity(4, "ISL finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
-        activities.add(new Activity(5, "ISL Post finale bières", 0, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
-        Pack pack = new Pack(1, "Voyage Zambie", "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés" +
-                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
-                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
-                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
-                        "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
-                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés", "https://img.ev.mu/images/portfolio/pays/245/600x400/846346.jpg");
-        pack.setActivities(activities);
-        return pack;
-    }
-
-    public ArrayList<Activity> getPayingActivities(int packId){
-        Pack pack = getPackActivities(packId);
-        ArrayList<Activity>payingActivities = new ArrayList<>();
-        for(Activity act : pack.getActivities()){
-            if(act.getPrice() != null && act.getPrice() > 0)
-                payingActivities.add(act);
+    public void loadFlightsWithSeats(PackDetailVM packVM, int packId, Context context){
+        if (!ConnectionState.isNetworkAvailable(context)) {
+            packVM.setApiCallStatus(Constants.NO_CONNECTION);
+            return;
         }
-        return payingActivities;
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(IFlightService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        IFlightService service = retrofit.create(IFlightService.class);
+        Call<List<FlightOfPackBindingModel>> call = service.getPackFlightsWithSeats(packId);
+        call.enqueue(new Callback<List<FlightOfPackBindingModel>>() {
+            @Override
+            public void onResponse(Call<List<FlightOfPackBindingModel>> call, Response<List<FlightOfPackBindingModel>> response) {
+                if (!response.isSuccessful()) {
+                    packVM.setApiCallStatus(response.code());
+                    return;
+                }
+                List<FlightOfPackBindingModel> apiFlightOfPackBMs = response.body();
+                if(apiFlightOfPackBMs.size() == 0)
+                    return;
+
+                ArrayList<Flight> flights = new ArrayList<>();
+                Flight flight;
+                // destination airport
+                AirportBindingModel destinationAirportBM;
+                LocalityBindingModel destinationAirportLocalityBM;
+                Airport destinationAirport;
+                Locality destinationAirportLocality;
+
+                //departure airport
+                AirportBindingModel departureAirportBM;
+                LocalityBindingModel departureAirportLocalityBM;
+                Airport departureAirport;
+                Locality departureAirportLocality;
+
+                // plane seats
+                PlaneSeat planeSeat;
+                ArrayList<PlaneSeat>planeSeats;
+
+                for(FlightOfPackBindingModel flightOfPackBM: apiFlightOfPackBMs){
+                    flight = new Flight();
+                    flight.setGoing(flightOfPackBM.getGoing());
+
+                    // destination airport
+                    destinationAirportBM = flightOfPackBM.getFlight().getDestinationAirportNavigation();
+                    destinationAirportLocalityBM = flightOfPackBM.getFlight().getDestinationAirportNavigation().getLocality();
+                    destinationAirportLocality = new Locality(destinationAirportLocalityBM.getId(), destinationAirportLocalityBM.getName(),
+                            destinationAirportLocalityBM.getZipCode(), destinationAirportLocalityBM.getCountryName());
+                    destinationAirport = new Airport(destinationAirportBM.getName(), destinationAirportLocality);
+                    flight.setArrivalAirport(destinationAirport);
+
+                    // departure airport
+                    departureAirportBM = flightOfPackBM.getFlight().getDepartureAirportNavigation();
+                    departureAirportLocalityBM = flightOfPackBM.getFlight().getDepartureAirportNavigation().getLocality();
+                    departureAirportLocality = new Locality(departureAirportLocalityBM.getId(), departureAirportLocalityBM.getName(),
+                            departureAirportLocalityBM.getZipCode(), departureAirportLocalityBM.getCountryName());
+                    departureAirport = new Airport(departureAirportBM.getName(), departureAirportLocality);
+                    flight.setDepartureAirport(departureAirport);
+
+                    // plane seats
+                    planeSeats = new ArrayList<>();
+                    for(PlaneSeatBindingModel planeSeatBindingModel : flightOfPackBM.getPlaneSeat()){
+                        planeSeat = new PlaneSeat();
+                        planeSeat.setPrice(planeSeatBindingModel.getPrice());
+                        planeSeat.setSeatNumber(planeSeatBindingModel.getSeatNumber());
+                        planeSeat.setId(planeSeatBindingModel.getId());
+                        planeSeat.setBusinessClass(planeSeatBindingModel.getBusinessClass());
+                        planeSeats.add(planeSeat);
+                    }
+
+                    flight.setPlaneSeats(planeSeats);
+                    flights.add(flight);
+                }
+                packVM.setCurrentPackFlightsWithSeats(flights);
+            }
+
+            @Override
+            public void onFailure(Call<List<FlightOfPackBindingModel>> call, Throwable t) {
+                Log.e("Trip4Student", "erreur : " + t.getMessage());
+            }
+        });
     }
 
     public ArrayList<Flight>getFlightsWithAirportAndSeats(int packId){
@@ -372,6 +401,25 @@ public class PackDao {
         flights.add(flight3);
 
         return flights;
+    }
+
+    public Pack getPackActivities(int packId){
+        //appel methode correspondante
+        // todo
+        ArrayList<Activity>activities = new ArrayList<>();
+        activities.add(new Activity(1, "ISL 8eme de finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
+        activities.add(new Activity(2, "ISL quart de finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
+        activities.add(new Activity(3, "ISL demi finale", 0, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
+        activities.add(new Activity(4, "ISL finale", 200.5, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
+        activities.add(new Activity(5, "ISL Post finale bières", 0, "London oympic pool", "https://japantoday-asset.scdn3.secure.raxcdn.com/img/store/b3/a7/44f82be596a68366d52059e37116b974bc79/urn:publicid:ap.org:d6697388b6364fe885538c9205009cf3/_w850.jpg"));
+        Pack pack = new Pack(1, "Voyage Zambie", "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés" +
+                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
+                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
+                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
+                        "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés"+
+                "super voyage en zambie pour visiter la savane et se faire dévorer par des lions affamés", "https://img.ev.mu/images/portfolio/pays/245/600x400/846346.jpg");
+        pack.setActivities(activities);
+        return pack;
     }
 
     public ArrayList<Accommodation> getAccommodationsWithRooms(int packId){
@@ -469,7 +517,7 @@ public class PackDao {
         activityTags.add(new ActivityTag(2, "nature"));
         activityTags.add(new ActivityTag(3, "culture"));
         activityTags.add(new ActivityTag(4, "relaxation"));
-        activityTags.add(new ActivityTag(4, "aventure"));
+        activityTags.add(new ActivityTag(5, "aventure"));
         packVM.setActivityTags(activityTags);
     }
 }

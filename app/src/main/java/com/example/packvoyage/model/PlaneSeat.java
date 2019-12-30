@@ -6,6 +6,8 @@ public class PlaneSeat {
     private double price;
     private boolean isBusinessClass;
 
+    public PlaneSeat(){}
+
     public PlaneSeat(int id, String seatNumber, double price) {
         this.id = id;
         this.seatNumber = seatNumber;
@@ -14,6 +16,18 @@ public class PlaneSeat {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isBusinessClass() {
+        return isBusinessClass;
+    }
+
+    public void setBusinessClass(boolean businessClass) {
+        isBusinessClass = businessClass;
     }
 
     public String getSeatNumber() {

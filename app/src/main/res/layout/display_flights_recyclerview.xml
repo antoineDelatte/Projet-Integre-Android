@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:text="@string/flight_departure"
         android:textColor="@color/text_color"
         android:layout_marginTop="7dp"

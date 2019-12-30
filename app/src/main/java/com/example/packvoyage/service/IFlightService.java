@@ -13,4 +13,7 @@ public interface IFlightService {
 
     @GET("FlightOfPackWithAirport")
     Call<List<FlightOfPackBindingModel>> getPackFlights(@Query("packId") int packId);
+
+    @GET("FlightOfPackWithPlaneSeatAndAirport")
+    Call<List<FlightOfPackBindingModel>> getPackFlightsWithSeats(@Query("packId") int packId);
 }

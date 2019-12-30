@@ -1,10 +1,13 @@
 package com.example.packvoyage.bindingModel;
 
+import java.util.ArrayList;
+
 public class FlightOfPackBindingModel {
     private Integer packId;
     private Integer flightId;
     private Boolean isGoing;
     private FlightBindingModel flight;
+    private ArrayList<PlaneSeatBindingModel> planeSeat;
 
     public FlightOfPackBindingModel(){}
 
@@ -38,5 +41,13 @@ public class FlightOfPackBindingModel {
 
     public void setFlight(FlightBindingModel flight) {
         this.flight = flight;
+    }
+
+    public ArrayList<PlaneSeatBindingModel> getPlaneSeat() {
+        return planeSeat;
+    }
+
+    public void setPlaneSeat(ArrayList<PlaneSeatBindingModel> planeSeat) {
+        this.planeSeat = planeSeat;
     }
 }
