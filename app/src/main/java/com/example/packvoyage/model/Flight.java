@@ -72,7 +72,7 @@ public class Flight {
     public String getArrivalAndDestinationTitle(){
         return departureAirport.getLocality().getName() + " ("
                 + departureAirport.getLocality().getCountryName() + ") - "
-                + arrivalAirport.getLocality().getName() + " (" + arrivalAirport.getName() + ")";
+                + arrivalAirport.getLocality().getName() + " (" + arrivalAirport.getLocality().getCountryName() + ")";
     }
     public String getDepartureInfo(){
         return departureAirport.getName() + ", " + departureAirport.getLocality().getName();
