@@ -18,6 +18,12 @@ public class User {
         this.profile_pic_uri = profile_pic_uri;
     }
 
+    public User(String user_id, String first_name, String last_name) {
+        this.user_id = user_id;
+        LastName = first_name;
+        FirstName = last_name;
+    }
+
     public String getFirstName() {
         return FirstName;
     }

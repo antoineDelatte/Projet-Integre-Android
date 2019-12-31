@@ -481,7 +481,6 @@ public class PackDao {
                 }
                 List<EvaluationBindingModel> evaluationBindingModels = response.body();
                 ArrayList<Comment> comments = new ArrayList<>();
-                Log.i("Trip4", "packId : " + packId);
                 Comment comment;
                 User user;
                 for(EvaluationBindingModel evaluationBindingModel : evaluationBindingModels){
@@ -489,7 +488,6 @@ public class PackDao {
                             evaluationBindingModel.getUser().getLastName(), evaluationBindingModel.getUser().getPictureOrVideo().get(0).getContent());
                     comment = new Comment(evaluationBindingModel.getId(), evaluationBindingModel.getComment(), user);
                     comments.add(comment);
-                    Log.i("Trip4", "comment id : " + comment.getId());
                 }
                 packVM.setSelectedBookedPackComments(comments);
             }

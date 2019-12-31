@@ -22,6 +22,7 @@ import com.example.packvoyage.fragment.fragmentHomePackDetails;
 import com.example.packvoyage.fragment.fragmentHomePackList;
 import com.example.packvoyage.fragment.fragmentMyBookings;
 import com.example.packvoyage.fragment.fragmentMyPreferences;
+import com.example.packvoyage.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashMap;
@@ -51,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
 
         packVM = ViewModelProviders.of(this).get(PackDetailVM.class);
         packVM.setCurrentUserId(getIntent().getStringExtra("user_id"));
+        //todo charger des infos sur l'utilisateur loggé
+
+        packVM.setCurrentUser(new User("todo", "first name", "last name"));
 
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

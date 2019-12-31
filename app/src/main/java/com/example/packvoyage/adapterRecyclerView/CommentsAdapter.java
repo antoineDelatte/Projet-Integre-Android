@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.packvoyage.Constant.Constants;
 import com.example.packvoyage.R;
 import com.example.packvoyage.model.Comment;
 
@@ -41,6 +42,8 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     @Override
     public void onBindViewHolder(@NonNull CommentHolder holder, int position) {
         Comment comment = comments.get(position);
+        if(comment.getUser().getProfile_pic_uri() == null)
+            comment.getUser().setProfile_pic_uri(Constants.DEFAULT_PROFILE_PIC_URL);
         Glide.with(context).load(comment.getUser().getProfile_pic_uri()).apply(RequestOptions.circleCropTransform()).into(holder.userProfilePic);
         holder.userName.setText(comment.getUser().getFirstName());
         holder.commentText.setText(comment.getMessage());
