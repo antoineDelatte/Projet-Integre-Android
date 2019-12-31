@@ -34,7 +34,6 @@ import com.example.packvoyage.service.PackService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -65,6 +64,12 @@ public class PackDao {
                 }
                 List<PackBindingModel> packList = response.body();
                 ArrayList<Pack> packs = new ArrayList<>();
+
+                if(packList.size() == 0){
+                    packVM.setPacks(packs);
+                    return;
+                }
+
                 Pack pack;
                 packs.clear();
                 for(PackBindingModel packBindingModel : packList){
@@ -101,6 +106,9 @@ public class PackDao {
                     return;
                 }
                 PackBindingModel packBindingModel = response.body();
+                if(packBindingModel == null)
+                    packVM.setCurrentPackDescription("");
+
                 packVM.setCurrentPackDescription(packBindingModel.getTraduction().getDescription());
             }
 
@@ -134,6 +142,11 @@ public class PackDao {
                 ArrayList<Accommodation>accommodations = new ArrayList<>();
                 Accommodation accommodation;
                 List<AccommodationOfPackBindingModel>apiAccommodations = response.body();
+
+                if(apiAccommodations.size() == 0){
+                    packVM.setCurrentPackAccommodations(accommodations);
+                    return;
+                }
 
                 for(AccommodationOfPackBindingModel accommodationOfPackBindingModel : apiAccommodations){
                     accommodation = new Accommodation();
@@ -174,11 +187,14 @@ public class PackDao {
                     return;
                 }
                 List<PackBindingModel> apiListOfPackWithActi = response.body();
-                if(apiListOfPackWithActi.size() == 0)
+                ArrayList<Activity> activities = new ArrayList<>();
+
+                if(apiListOfPackWithActi.size() == 0){
+                    packVM.setCurrentPackActivities(activities);
                     return;
+                }
 
                 PackBindingModel apiPackWithActi = apiListOfPackWithActi.get(0);
-                ArrayList<Activity> activities = new ArrayList<>();
                 Activity activity;
                 String location;
                 for(ActivityBindingModel activityBindingModel : apiPackWithActi.getActivity()){
@@ -225,10 +241,12 @@ public class PackDao {
                     return;
                 }
                 List<FlightOfPackBindingModel> apiFlightOfPackBMs = response.body();
-                if(apiFlightOfPackBMs.size() == 0)
-                    return;
-
                 ArrayList<Flight> flights = new ArrayList<>();
+                if(apiFlightOfPackBMs.size() == 0){
+                    packVM.setCurrentPackFlights(flights);
+                    return;
+                }
+
                 Flight flight;
                 // destination airport
                 AirportBindingModel destinationAirportBM;
@@ -294,10 +312,12 @@ public class PackDao {
                     return;
                 }
                 List<FlightOfPackBindingModel> apiFlightOfPackBMs = response.body();
-                if(apiFlightOfPackBMs.size() == 0)
-                    return;
-
                 ArrayList<Flight> flights = new ArrayList<>();
+                if(apiFlightOfPackBMs.size() == 0){
+                    packVM.setCurrentPackFlightsWithSeats(flights);
+                    return;
+                }
+
                 Flight flight;
                 // destination airport
                 AirportBindingModel destinationAirportBM;
@@ -349,6 +369,7 @@ public class PackDao {
                     flight.setPlaneSeats(planeSeats);
                     flights.add(flight);
                 }
+                Log.i("Trip4", "avant le set des vols, taille des vols : " + flights.size());
                 packVM.setCurrentPackFlightsWithSeats(flights);
             }
 
@@ -444,6 +465,11 @@ public class PackDao {
                 }
                 List<PackBindingModel> packList = response.body();
                 ArrayList<Pack> packs = new ArrayList<>();
+
+                if(packList.size() == 0){
+                    packVM.setMyBookedPacks(packs);
+                    return;
+                }
                 Pack pack;
                 packs.clear();
                 for(PackBindingModel packBindingModel : packList){
@@ -481,6 +507,12 @@ public class PackDao {
                 }
                 List<EvaluationBindingModel> evaluationBindingModels = response.body();
                 ArrayList<Comment> comments = new ArrayList<>();
+
+                if(evaluationBindingModels.size() == 0){
+                    packVM.setSelectedBookedPackComments(comments);
+                    return;
+                }
+
                 Comment comment;
                 User user;
                 for(EvaluationBindingModel evaluationBindingModel : evaluationBindingModels){
