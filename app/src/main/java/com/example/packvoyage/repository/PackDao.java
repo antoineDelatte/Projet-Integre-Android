@@ -7,9 +7,9 @@ import com.example.packvoyage.Constant.Constants;
 import com.example.packvoyage.Utils.ConnectionState;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.bindingModel.AccommodationOfPackBindingModel;
-import com.example.packvoyage.bindingModel.AccommodationTypeBindingModel;
 import com.example.packvoyage.bindingModel.ActivityBindingModel;
 import com.example.packvoyage.bindingModel.AirportBindingModel;
+import com.example.packvoyage.bindingModel.EvaluationBindingModel;
 import com.example.packvoyage.bindingModel.FlightOfPackBindingModel;
 import com.example.packvoyage.bindingModel.LocalityBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
@@ -30,7 +30,6 @@ import com.example.packvoyage.model.Reservation;
 import com.example.packvoyage.model.User;
 import com.example.packvoyage.service.IActivityService;
 import com.example.packvoyage.service.IFlightService;
-import com.example.packvoyage.service.ILoginService;
 import com.example.packvoyage.service.PackService;
 
 import java.util.ArrayList;
@@ -440,6 +439,7 @@ public class PackDao {
             @Override
             public void onResponse(Call<List<PackBindingModel>> call, Response<List<PackBindingModel>> response) {
                 if (!response.isSuccessful()) {
+                    packVM.setApiCallStatus(response.code());
                     return;
                 }
                 List<PackBindingModel> packList = response.body();
@@ -460,16 +460,44 @@ public class PackDao {
         });
     }
 
-    public void loadComments(PackDetailVM packVM, int packId){
-        // todo charger les commentaires, et pour chaque commentaire, le user correspondant
-        ArrayList<Comment>comments = new ArrayList<>();
-        User user = new User("1", "Caeleb Dressel", "https://cdn.swimswam.com/wp-content/uploads/2019/06/Caeleb-Dressel-By-Jack-Spitser-CD8I8265-1080x720.jpg");
-        comments.add(new Comment("Such a great trip!", user));
-        comments.add(new Comment("Such a cool trip!", user));
-        comments.add(new Comment("Such a nice trip!", user));
-        comments.add(new Comment("Such a beautiful trip!", user));
-        comments.add(new Comment("Such an amazing trip!", user));
-        comments.add(new Comment("Such a crazy trip!", user));
-        packVM.setSelectedBookedPackComments(comments);
+    public void loadComments(PackDetailVM packVM, int packId, Context context){
+        if(!ConnectionState.isNetworkAvailable(context)){
+            packVM.setApiCallStatus(Constants.NO_CONNECTION);
+            return;
+        }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(PackService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        PackService pack = retrofit.create(PackService.class);
+        Call<List<EvaluationBindingModel>> call = pack.getPackEvaluations(packId);
+        call.enqueue(new Callback<List<EvaluationBindingModel>>() {
+            @Override
+            public void onResponse(Call<List<EvaluationBindingModel>> call, Response<List<EvaluationBindingModel>> response) {
+                if (!response.isSuccessful()) {
+                    packVM.setApiCallStatus(response.code());
+                    return;
+                }
+                List<EvaluationBindingModel> evaluationBindingModels = response.body();
+                ArrayList<Comment> comments = new ArrayList<>();
+                Log.i("Trip4", "packId : " + packId);
+                Comment comment;
+                User user;
+                for(EvaluationBindingModel evaluationBindingModel : evaluationBindingModels){
+                    user = new User(evaluationBindingModel.getUserId(), evaluationBindingModel.getUser().getFirstName(),
+                            evaluationBindingModel.getUser().getLastName(), evaluationBindingModel.getUser().getPictureOrVideo().get(0).getContent());
+                    comment = new Comment(evaluationBindingModel.getId(), evaluationBindingModel.getComment(), user);
+                    comments.add(comment);
+                    Log.i("Trip4", "comment id : " + comment.getId());
+                }
+                packVM.setSelectedBookedPackComments(comments);
+            }
+
+            @Override
+            public void onFailure(Call<List<EvaluationBindingModel>> call, Throwable t) {
+                Log.e("Trip4Student", t.getMessage());
+            }
+        });
     }
 }

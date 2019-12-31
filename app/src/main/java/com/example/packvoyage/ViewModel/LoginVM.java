@@ -33,8 +33,6 @@ public class LoginVM extends androidx.lifecycle.ViewModel{
     }
 
     public void setLoggedUser(User loggedUser) {
-        if(loggedUser != null)
-            Log.i("Trip4", loggedUser.getAccess_token());
         this.loggedUser.setValue(loggedUser);
     }
 }

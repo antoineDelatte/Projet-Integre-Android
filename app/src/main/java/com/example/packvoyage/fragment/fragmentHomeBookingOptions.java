@@ -104,7 +104,7 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
                     break;
             }
         });
-        
+
         nbTravelers.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -166,7 +166,6 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
     }
 
     private void initFlightBookingRV(ArrayList<Flight>flightsWithSeats){
-        Log.i("Trip4", "init flights size : " + flightsWithSeats.size());
         bookingPlaneSeatsAdapter = new BookingFlightParentAdapter(flightsWithSeats, this);
         book_plane_seats_rv.setHasFixedSize(true);
         book_plane_seats_rv.setAdapter(bookingPlaneSeatsAdapter);

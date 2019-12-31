@@ -66,7 +66,6 @@ public class fragmentMyPreferences extends Fragment implements ActivityTagsAdapt
         preferencesDao.loadAllPreferences(packVM, getContext());
         sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.SHARED_PREF_FILE_KEY), Context.MODE_PRIVATE);
         savedActivityTags = sharedPref.getAll();
-        Log.i("Trip4", "size : " + savedActivityTags.size());
     }
 
     private void initRecyclerView(ArrayList<ActivityTag>tags){

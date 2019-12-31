@@ -81,7 +81,7 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
         });
 
         packVM.getSelectedBookedPackId().observe(getViewLifecycleOwner(), id -> {
-            packDao.loadComments(packVM, id);
+            packDao.loadComments(packVM, id, getContext());
         });
 
         packVM.getSelectedBookedPackName().observe(getViewLifecycleOwner(), name -> packName.setText(name));

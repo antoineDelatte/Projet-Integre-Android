@@ -1,6 +1,7 @@
 package com.example.packvoyage.service;
 
 import com.example.packvoyage.bindingModel.AccommodationOfPackBindingModel;
+import com.example.packvoyage.bindingModel.EvaluationBindingModel;
 import com.example.packvoyage.bindingModel.PackBindingModel;
 import com.example.packvoyage.bindingModel.UserBindingModel;
 import com.example.packvoyage.model.Activity;
@@ -33,4 +34,7 @@ public interface PackService {
 
     @POST("Reservation")
     Call<ResponseBody> register(@Body Reservation reservation);
+
+    @GET("Evaluation")
+    Call<List<EvaluationBindingModel>> getPackEvaluations(@Query("packId") Integer packId);
 }

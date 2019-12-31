@@ -12,7 +12,7 @@ public class User {
 
     public User() {}
 
-    public User(String user_id, String FirstName, String profile_pic_uri) {
+    public User(String user_id, String FirstName, String LastName, String profile_pic_uri) {
         this.user_id = user_id;
         this.FirstName = FirstName;
         this.profile_pic_uri = profile_pic_uri;
