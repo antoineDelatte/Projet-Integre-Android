@@ -17,5 +17,5 @@ public interface IEvaluationService {
     Call<List<EvaluationBindingModel>> get(@Query("packId") int packId);
 
     @DELETE("Evaluation")
-    Call<ResponseBody> deleteComment(@Query("packId") int packId);
+    Call<ResponseBody> deleteComment(@Query("evaluationId") int evaluationId);
 }

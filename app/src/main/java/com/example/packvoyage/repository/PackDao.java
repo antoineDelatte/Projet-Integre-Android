@@ -30,6 +30,7 @@ import com.example.packvoyage.model.PlaneSeat;
 import com.example.packvoyage.model.Reservation;
 import com.example.packvoyage.model.User;
 import com.example.packvoyage.service.IActivityService;
+import com.example.packvoyage.service.IEvaluationService;
 import com.example.packvoyage.service.IFlightService;
 import com.example.packvoyage.service.PackService;
 
@@ -561,7 +562,23 @@ public class PackDao {
             packVM.setApiCallStatus(Constants.NO_CONNECTION);
             return;
         }
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(PackService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        IEvaluationService pack = retrofit.create(IEvaluationService.class);
+        Call<ResponseBody> call = pack.deleteComment(commentId);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                packVM.setDeletionStatus(response.code());
+            }
 
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Trip4Student", t.getMessage());
+            }
+        });
 
     }
 }

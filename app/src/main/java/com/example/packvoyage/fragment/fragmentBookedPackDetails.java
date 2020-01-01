@@ -159,10 +159,13 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
     }
 
     public void removeSelectedComment(){
+        Comment commentToDelete = comments.get(selectedCommentPosition);
+
         comments.remove(selectedCommentPosition);
         rVAdapter.notifyItemRemoved(selectedCommentPosition);
         rVAdapter.notifyItemRangeChanged(selectedCommentPosition, comments.size());
         commentOptionsLayout.setVisibility(View.GONE);
+        packDao.deleteComment(commentToDelete.getId(), getContext(), packVM);
     }
 
     public boolean backPressed(){

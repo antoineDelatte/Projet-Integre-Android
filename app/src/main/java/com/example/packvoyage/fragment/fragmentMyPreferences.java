@@ -33,6 +33,7 @@ import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.adapterRecyclerView.ActivityTagsAdapter;
+import com.example.packvoyage.bindingModel.ProfilePictureToSaveBindingModel;
 import com.example.packvoyage.model.ActivityTag;
 import com.example.packvoyage.model.User;
 import com.example.packvoyage.repository.AccountDao;
@@ -188,6 +189,8 @@ public class fragmentMyPreferences extends Fragment implements ActivityTagsAdapt
             String url = (String)resultData.get("secure_url");
             currentUser.setProfile_pic_uri(url);
             packVM.setCurrentUser(currentUser);
+            accountDao.setNewUserProfilePicture(new ProfilePictureToSaveBindingModel(url, null,
+                            null, currentUser.getUser_id(), null), context, packVM);
         }
 
         @Override
