@@ -6,6 +6,7 @@ public class UserForEvaluationBindingModel {
     private String lastName;
     private String firstName;
     private ArrayList<ImageOrVideoBindingModel> pictureOrVideo;
+    private String userName;
 
     public String getLastName() {
         return lastName;
@@ -29,5 +30,13 @@ public class UserForEvaluationBindingModel {
 
     public void setPictureOrVideo(ArrayList<ImageOrVideoBindingModel> pictureOrVideo) {
         this.pictureOrVideo = pictureOrVideo;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

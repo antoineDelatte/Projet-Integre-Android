@@ -108,4 +108,7 @@
     <string name="scroll_down_for_more">Scrollez vers le bas pour voir les packs suivants</string>
     <string name="reservation_successful">Réservation enregistrée !</string>
     <string name="reservation_unsuccessful">Problème lors de la réservation</string>
+    <string name="my_account">Mon compte</string>
+    <string name="my_username">Mon nom d\'utilisateur</string>
+    <string name="about_me">A propos de moi</string>
 </resources>

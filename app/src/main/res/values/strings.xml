@@ -107,5 +107,8 @@
     <string name="scroll_down_for_more">Scroll down to see more</string>
     <string name="reservation_successful">Reservation successful !</string>
     <string name="reservation_unsuccessful">Problem during the reservation</string>
+    <string name="my_account">My account</string>
+    <string name="my_username">My username</string>
+    <string name="about_me">About me</string>
 
 </resources>

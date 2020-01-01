@@ -42,6 +42,12 @@ public class PreferencesDao {
                 }
                 List<TagBindingModel>tagBindingModels = response.body();
                 ArrayList<ActivityTag>activityTags = new ArrayList<>();
+
+                if(tagBindingModels.size() == 0){
+                    packVM.setAllActivityTags(activityTags);
+                    return;
+                }
+
                 for(TagBindingModel tagBindingModel : tagBindingModels){
                     activityTags.add(new ActivityTag(tagBindingModel.getId(), tagBindingModel.getName()));
                 }

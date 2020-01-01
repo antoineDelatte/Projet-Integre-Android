@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.packvoyage.Constant.Constants;
 import com.example.packvoyage.R;
+import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.fragment.RollingFragment;
 import com.example.packvoyage.fragment.fragmentBookedPackDetails;
@@ -51,11 +52,10 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         fragment_nav_bar_order.put(fragmentMyBookings.TAG, 3);
         fragment_nav_bar_order.put(fragmentBookedPackDetails.TAG, 3);
 
+        String userId = getIntent().getStringExtra("user_id");
         packVM = ViewModelProviders.of(this).get(PackDetailVM.class);
-        packVM.setCurrentUserId(getIntent().getStringExtra("user_id"));
-        //todo charger des infos sur l'utilisateur loggé
-
-        packVM.setCurrentUser(new User("todo", "first name", "last name"));
+        packVM.setCurrentUserId(userId);
+        SingletonDao.getAccountDao().loadAccountInformations(packVM, this, userId);
 
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -71,9 +71,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
                 case Constants.NO_CONNECTION :
                     message = this.getResources().getString(R.string.no_connection);
                     break;
-                case 400:
-                case 404:
-                case 500:
+                default :
                     message = this.getResources().getString(R.string.internal_server_error);
                     break;
             }
