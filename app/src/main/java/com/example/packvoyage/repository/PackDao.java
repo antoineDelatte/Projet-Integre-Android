@@ -8,6 +8,7 @@ import com.example.packvoyage.Utils.ConnectionState;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.bindingModel.AccommodationOfPackBindingModel;
 import com.example.packvoyage.bindingModel.ActivityBindingModel;
+import com.example.packvoyage.bindingModel.ActivityTagBindingModel;
 import com.example.packvoyage.bindingModel.AirportBindingModel;
 import com.example.packvoyage.bindingModel.CommentCreationBindingModel;
 import com.example.packvoyage.bindingModel.EvaluationBindingModel;
@@ -206,8 +207,10 @@ public class PackDao {
                     activity.setPrice(activityBindingModel.getPrice());
                     activity.setName(activityBindingModel.getName());
                     if(activityBindingModel.getTagOfActivity() != null){
-                        TagBindingModel tagBindingModel = activityBindingModel.getTagOfActivity().get(0).getTag();
-                        activity.setTag(new ActivityTag(tagBindingModel.getId(), tagBindingModel.getName()));
+                        for(ActivityTagBindingModel activityTagBindingModel : activityBindingModel.getTagOfActivity()){
+                            TagBindingModel tagBindingModel = activityTagBindingModel.getTag();
+                            activity.addTag(new ActivityTag(tagBindingModel.getId(), tagBindingModel.getName()));
+                        }
                     }
                     location = activityBindingModel.getLocality().getName() + " : " + activityBindingModel.getLocality().getCountryName();
                     activity.setLocation(location);

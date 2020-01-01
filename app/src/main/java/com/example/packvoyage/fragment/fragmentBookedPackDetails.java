@@ -86,8 +86,12 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
         packVM.getSelectedBookedPackId().observe(getViewLifecycleOwner(), id -> packId = id);
 
         packVM.getRegisterStatus().observe(getViewLifecycleOwner(), status ->{
-            if(status != 201 && status != 200)
+            if(status == null)
+                return;
+            if(status != 201 && status != 200){
                 Toast.makeText(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.comment_creation_failed), Toast.LENGTH_LONG).show();
+            }
+            packVM.setRegisterStatus(null);
         });
 
         packVM.getSelectedBookedPackId().observe(getViewLifecycleOwner(), id -> {

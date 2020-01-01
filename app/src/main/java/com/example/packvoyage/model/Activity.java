@@ -8,7 +8,7 @@ public class Activity {
     private Double price;
     private String location;
     private String image_url;
-    private ActivityTag tag;
+    private ArrayList<ActivityTag> tags = new ArrayList<>();
 
     public Activity(){ }
 
@@ -64,12 +64,16 @@ public class Activity {
         return name + " " + price + "€";
     }
 
-    public ActivityTag getTag() {
-        return tag;
+    public ArrayList<ActivityTag> getTags() {
+        return tags;
     }
 
-    public void setTag(ActivityTag tag) {
-        this.tag = tag;
+    public void setTags(ArrayList<ActivityTag> tags) {
+        this.tags = tags;
+    }
+
+    public void addTag(ActivityTag tag){
+        tags.add(tag);
     }
 
     public static ArrayList<Activity> getPayingActivities(ArrayList<Activity>activities){

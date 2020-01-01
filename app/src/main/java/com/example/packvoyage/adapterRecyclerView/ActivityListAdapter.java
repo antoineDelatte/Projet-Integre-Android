@@ -45,7 +45,7 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         String activityPrice = activity.getPrice() + " €";
         holder.activity_price.setText(activityPrice);
         holder.activity_location.setText(activity.getLocation());
-        if(activity.getTag() == null || !SharedPrefUtil.checkIfUserHasThisPreference(context, activity.getTag().getName())){
+        if(activity.getTags() == null || !SharedPrefUtil.checkIfUserHasThisPreference(context, activity.getTags())){
             holder.activity_heart_icon.setVisibility(View.GONE);
         }
     }

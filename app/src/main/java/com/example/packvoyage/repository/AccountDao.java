@@ -6,7 +6,6 @@ import android.util.Log;
 import com.example.packvoyage.Constant.Constants;
 import com.example.packvoyage.Utils.ConnectionState;
 import com.example.packvoyage.ViewModel.PackDetailVM;
-import com.example.packvoyage.bindingModel.CommentCreationBindingModel;
 import com.example.packvoyage.bindingModel.ProfilePictureToSaveBindingModel;
 import com.example.packvoyage.bindingModel.UserForEvaluationBindingModel;
 import com.example.packvoyage.model.User;

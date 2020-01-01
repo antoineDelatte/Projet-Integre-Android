@@ -94,13 +94,17 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
         });
 
         packDetailVM.getRegisterStatus().observe(getViewLifecycleOwner(), status -> {
+            if(status == null)
+                return;
             switch(status){
                 case 201:
                     Toast.makeText(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.reservation_successful), Toast.LENGTH_SHORT).show();
                     parent.changeFragment(fragmentMyBookings.TAG);
+                    packDetailVM.setRegisterStatus(null);
                     break;
                 default :
                     Toast.makeText(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.reservation_unsuccessful), Toast.LENGTH_LONG).show();
+                    packDetailVM.setRegisterStatus(null);
                     break;
             }
         });

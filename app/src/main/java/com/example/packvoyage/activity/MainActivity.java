@@ -134,8 +134,13 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
             default :
                 newFragment = new fragmentHomePackList();
         }
-
-        boolean fragmentPopped = fragmentManager.popBackStackImmediate(newFragment.getClass().getName(), 0);
+        boolean fragmentPopped = false;
+        try{
+            fragmentPopped = fragmentManager.popBackStackImmediate(newFragment.getClass().getName(), 0);
+        }
+        catch (IllegalStateException e){
+            Log.e("Trip4", e.getMessage());
+        }
         if(!fragmentPopped) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             setCustomAnimation(fragmentTransaction, currentFragmentTag, selectedFragmentTag);
