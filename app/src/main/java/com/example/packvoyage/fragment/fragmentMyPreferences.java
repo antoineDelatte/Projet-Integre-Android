@@ -40,19 +40,10 @@ import com.example.packvoyage.repository.AccountDao;
 import com.example.packvoyage.repository.PackDao;
 import com.example.packvoyage.repository.PreferencesDao;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.RandomAccess;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -99,6 +90,15 @@ public class fragmentMyPreferences extends Fragment implements ActivityTagsAdapt
             Glide.with(Objects.requireNonNull(getContext())).load(user.getProfile_pic_uri()).apply(RequestOptions.circleCropTransform()).into(my_profile_picture);
         });
 
+        Map config = new HashMap();
+        config.put("cloud_name", CLOUD_NAME);
+        try{
+            MediaManager.init(Objects.requireNonNull(getContext()), config);
+        }
+        catch (IllegalStateException e){
+            Log.e("Trip4", e.getMessage());
+        }
+
         my_profile_picture.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -123,9 +123,6 @@ public class fragmentMyPreferences extends Fragment implements ActivityTagsAdapt
         preferencesDao.loadAllPreferences(packVM, getContext());
         sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.SHARED_PREF_FILE_KEY), Context.MODE_PRIVATE);
         savedActivityTags = sharedPref.getAll();
-        Map config = new HashMap();
-        config.put("cloud_name", CLOUD_NAME);
-        MediaManager.init(Objects.requireNonNull(getContext()), config);
     }
 
     private void initRecyclerView(ArrayList<ActivityTag>tags){
