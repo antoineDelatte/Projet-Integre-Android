@@ -33,7 +33,6 @@ import com.example.packvoyage.R;
 import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.adapterRecyclerView.ActivityTagsAdapter;
-import com.example.packvoyage.bindingModel.CloudinaryUnsignedUploadBody;
 import com.example.packvoyage.model.ActivityTag;
 import com.example.packvoyage.model.User;
 import com.example.packvoyage.repository.AccountDao;
@@ -95,9 +94,7 @@ public class fragmentMyPreferences extends Fragment implements ActivityTagsAdapt
         try{
             MediaManager.init(Objects.requireNonNull(getContext()), config);
         }
-        catch (IllegalStateException e){
-            Log.e("Trip4", e.getMessage());
-        }
+        catch (IllegalStateException e){ }
 
         my_profile_picture.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -170,7 +167,7 @@ public class fragmentMyPreferences extends Fragment implements ActivityTagsAdapt
         if(requestCode == IMAGE_REQUEST && resultCode == RESULT_OK){
             Uri imageUri = data.getData();
             onImageUploaded onImageUploaded = new onImageUploaded();
-            String requestId = MediaManager.get().upload(imageUri).unsigned(UPLOAD_PRESET).callback(onImageUploaded).dispatch();
+            MediaManager.get().upload(imageUri).unsigned(UPLOAD_PRESET).callback(onImageUploaded).dispatch();
         }
     }
 

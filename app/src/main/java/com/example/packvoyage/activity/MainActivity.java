@@ -66,15 +66,19 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
         packVM.getApiCallStatus().observe(this, status -> {
             if(status == null)
                 return;
-            String message = "";
+            String message ="";
             switch (status) {
                 case Constants.NO_CONNECTION :
                     message = this.getResources().getString(R.string.no_connection);
                     break;
+                case 200:
+                    return;
                 default :
                     message = this.getResources().getString(R.string.internal_server_error);
                     break;
             }
+            if(message.length()==0)
+                return;
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             packVM.setApiCallStatus(null);
         });

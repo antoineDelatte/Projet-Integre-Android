@@ -28,12 +28,14 @@ import com.example.packvoyage.Singleton.SingletonDao;
 import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.activity.IMainActivity;
 import com.example.packvoyage.adapterRecyclerView.CommentsAdapter;
+import com.example.packvoyage.bindingModel.CommentCreationBindingModel;
 import com.example.packvoyage.model.Comment;
 import com.example.packvoyage.model.User;
 import com.example.packvoyage.repository.PackDao;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,6 +65,7 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
     public LinearLayout booked_pack_details;
     private int selectedCommentPosition;
     public IMainActivity parent;
+    private Integer packId;
 
     public fragmentBookedPackDetails() { }
 
@@ -80,6 +83,13 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
             }
         });
 
+        packVM.getSelectedBookedPackId().observe(getViewLifecycleOwner(), id -> packId = id);
+
+        packVM.getRegisterStatus().observe(getViewLifecycleOwner(), status ->{
+            if(status != 201 && status != 200)
+                Toast.makeText(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.comment_creation_failed), Toast.LENGTH_LONG).show();
+        });
+
         packVM.getSelectedBookedPackId().observe(getViewLifecycleOwner(), id -> {
             packDao.loadComments(packVM, id, getContext());
         });
@@ -94,15 +104,19 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent keyEvent) {
                 if(actionId == EditorInfo.IME_ACTION_SEND){
-                    String message = add_comment_section.getText().toString();
+                    String message = Objects.requireNonNull(add_comment_section.getText()).toString();
                     if(message.length() != 0){
                         if(message.equals("roll")){
                             parent.changeFragment(fragmentBookedPackDetails.SECRET_CODE);
                         }
                         else{
                             comments.add(0, new Comment(message, currentUser));
+                            if(rVAdapter == null){
+                                initRecyclerView(comments);
+                            }
                             rVAdapter.notifyItemInserted(0);
                             rVAdapter.notifyItemRangeChanged(0, comments.size());
+                            packDao.registerNewComment(new CommentCreationBindingModel(0, message, packId, currentUser.getUser_id()), getContext(), packVM);
                         }
                     }
                     else{

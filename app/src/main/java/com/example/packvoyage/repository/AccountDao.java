@@ -6,8 +6,6 @@ import android.util.Log;
 import com.example.packvoyage.Constant.Constants;
 import com.example.packvoyage.Utils.ConnectionState;
 import com.example.packvoyage.ViewModel.PackDetailVM;
-import com.example.packvoyage.bindingModel.CloudinaryResponseAfterUpload;
-import com.example.packvoyage.bindingModel.CloudinaryUnsignedUploadBody;
 import com.example.packvoyage.bindingModel.UserForEvaluationBindingModel;
 import com.example.packvoyage.model.User;
 import com.example.packvoyage.service.IAccountService;
@@ -21,37 +19,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AccountDao {
-    public void uploadNewProfilePicture(PackDetailVM packVM, Context context, CloudinaryUnsignedUploadBody uploadBody){
-        if(!ConnectionState.isNetworkAvailable(context)){
-            packVM.setApiCallStatus(Constants.NO_CONNECTION);
-            return;
-        }
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(IAccountService.CLOUNDINARY_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        IAccountService service = retrofit.create(IAccountService.class);
-        Call<CloudinaryResponseAfterUpload> call = service.uploadNewProfilePicture(uploadBody);
-        call.enqueue(new Callback<CloudinaryResponseAfterUpload>() {
-            @Override
-            public void onResponse(Call<CloudinaryResponseAfterUpload> call, Response<CloudinaryResponseAfterUpload> response) {
-                if (response.code() != 200) {
-                    packVM.setApiCallStatus(response.code());
-                    Log.i("Trip4", response.message());
-                    Log.i("Trip4", response.raw().toString());
-                    Log.i("Trip4", "code : " + response.code());
-                    return;
-                }
-                packVM.setNewUserProfilePicture(response.body().getSecure_url());
-            }
-
-            @Override
-            public void onFailure(Call<CloudinaryResponseAfterUpload> call, Throwable t) {
-                Log.e("Trip4Student", t.getMessage());
-            }
-        });
-    }
 
     public void loadAccountInformations(PackDetailVM packVM, Context context, String userId){
         if(!ConnectionState.isNetworkAvailable(context)){

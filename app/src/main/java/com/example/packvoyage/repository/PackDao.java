@@ -9,6 +9,7 @@ import com.example.packvoyage.ViewModel.PackDetailVM;
 import com.example.packvoyage.bindingModel.AccommodationOfPackBindingModel;
 import com.example.packvoyage.bindingModel.ActivityBindingModel;
 import com.example.packvoyage.bindingModel.AirportBindingModel;
+import com.example.packvoyage.bindingModel.CommentCreationBindingModel;
 import com.example.packvoyage.bindingModel.EvaluationBindingModel;
 import com.example.packvoyage.bindingModel.FlightOfPackBindingModel;
 import com.example.packvoyage.bindingModel.LocalityBindingModel;
@@ -528,5 +529,39 @@ public class PackDao {
                 Log.e("Trip4Student", t.getMessage());
             }
         });
+    }
+
+    public void registerNewComment(CommentCreationBindingModel newComment, Context context, PackDetailVM packVM){
+        if(!ConnectionState.isNetworkAvailable(context)){
+            packVM.setApiCallStatus(Constants.NO_CONNECTION);
+            return;
+        }
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(PackService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        PackService pack = retrofit.create(PackService.class);
+        Call<ResponseBody> call = pack.saveComment(newComment);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                packVM.setRegisterStatus(response.code());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Trip4Student", t.getMessage());
+            }
+        });
+    }
+
+    public void deleteComment(Integer commentId, Context context, PackDetailVM packVM){
+        if(!ConnectionState.isNetworkAvailable(context)){
+            packVM.setApiCallStatus(Constants.NO_CONNECTION);
+            return;
+        }
+
+
     }
 }
