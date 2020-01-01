@@ -57,7 +57,6 @@ public class PackDetailVM extends androidx.lifecycle.ViewModel {
 
     public void setCurrentPackFlightsWithSeats(ArrayList<Flight> currentPackFlightsWithSeats) {
         this.currentPackFlightsWithSeats.setValue(currentPackFlightsWithSeats);
-        Log.i("Trip4", "flights size dans vm : " + currentPackFlightsWithSeats.size());
     }
 
     public LiveData<ArrayList<Flight>> getCurrentPackFlights() {

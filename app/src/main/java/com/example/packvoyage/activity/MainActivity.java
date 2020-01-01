@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.packvoyage.Constant.Constants;
 import com.example.packvoyage.R;
 import com.example.packvoyage.ViewModel.PackDetailVM;
+import com.example.packvoyage.fragment.RollingFragment;
 import com.example.packvoyage.fragment.fragmentBookedPackDetails;
 import com.example.packvoyage.fragment.fragmentHomeBookingOptions;
 import com.example.packvoyage.fragment.fragmentHomePackDetails;
@@ -124,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
                 break;
             case fragmentBookedPackDetails.TAG :
                 newFragment = new fragmentBookedPackDetails();
+                break;
+            case fragmentBookedPackDetails.SECRET_CODE :
+                newFragment = new RollingFragment();
                 break;
             default :
                 newFragment = new fragmentHomePackList();

@@ -369,7 +369,6 @@ public class PackDao {
                     flight.setPlaneSeats(planeSeats);
                     flights.add(flight);
                 }
-                Log.i("Trip4", "avant le set des vols, taille des vols : " + flights.size());
                 packVM.setCurrentPackFlightsWithSeats(flights);
             }
 
