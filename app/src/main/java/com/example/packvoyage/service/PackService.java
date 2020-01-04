@@ -40,5 +40,5 @@ public interface PackService {
     Call<List<EvaluationBindingModel>> getPackEvaluations(@Query("packId") Integer packId);
 
     @POST("Evaluation")
-    Call<ResponseBody> saveComment(@Body CommentCreationBindingModel newComment);
+    Call<EvaluationBindingModel> saveComment(@Body CommentCreationBindingModel newComment);
 }

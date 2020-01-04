@@ -66,6 +66,7 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
     private int selectedCommentPosition;
     public IMainActivity parent;
     private Integer packId;
+    private Comment lastCreatedComment;
 
     public fragmentBookedPackDetails() { }
 
@@ -81,6 +82,13 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
             public void onClick(View v) {
                 removeSelectedComment();
             }
+        });
+
+        packVM.getPostedCommentId().observe(getViewLifecycleOwner(), id -> {
+            if(id == null)
+                return;
+            lastCreatedComment.setId(id);
+            packVM.setPostedCommentId(null);
         });
 
         packVM.getSelectedBookedPackId().observe(getViewLifecycleOwner(), id -> packId = id);
@@ -114,7 +122,8 @@ public class fragmentBookedPackDetails extends Fragment implements CommentsAdapt
                             parent.changeFragment(fragmentBookedPackDetails.SECRET_CODE);
                         }
                         else{
-                            comments.add(0, new Comment(message, currentUser));
+                            lastCreatedComment = new Comment(message, currentUser);
+                            comments.add(0, lastCreatedComment);
                             if(rVAdapter == null){
                                 initRecyclerView(comments);
                             }

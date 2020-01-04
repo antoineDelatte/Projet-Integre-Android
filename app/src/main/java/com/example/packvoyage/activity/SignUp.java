@@ -59,11 +59,18 @@ public class SignUp extends AppCompatActivity {
     Button signIn;
 
     @Override
+    public void onStart() {
+        super.onStart();
+        signIn.setEnabled(true);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
 
+        signIn.setEnabled(true);
         loginVM = ViewModelProviders.of(this).get(LoginVM.class);
         loginDao = new LoginDao();
         signUpDao = new SignUpDao();
@@ -71,16 +78,18 @@ public class SignUp extends AppCompatActivity {
         loginVM.getSignUpStatus().observe(this, signUpStatus -> {
             switch (signUpStatus){
                 case 409 :
-                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.email_or_username_already_exists), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.email_or_username_already_exists), Toast.LENGTH_LONG).show();
+                    signIn.setEnabled(true);
                     return;
                 case 400 :
                 case 408 :
                 case 500 :
                     // internal server error
-                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.internal_server_error), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.internal_server_error), Toast.LENGTH_LONG).show();
+                    signIn.setEnabled(true);
                     return;
                 case 200 :
-                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.registration_successful), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.registration_successful), Toast.LENGTH_LONG).show();
                     // generate token for the user
                     UserBindingModel userBindingModel = new UserBindingModel();
                     userBindingModel.setEmail(Objects.requireNonNull(emailAddress.getEditText()).getText().toString());
@@ -88,7 +97,8 @@ public class SignUp extends AppCompatActivity {
                     loginDao.login(loginVM, userBindingModel, getApplicationContext());
                     return;
                 default :
-                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.error_during_sign_up), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.error_during_sign_up), Toast.LENGTH_LONG).show();
+                    signIn.setEnabled(true);
             }
         });
 
@@ -122,7 +132,10 @@ public class SignUp extends AppCompatActivity {
                     userBindingModel.setLastName(Objects.requireNonNull(lastname.getEditText()).getText().toString());
                     userBindingModel.setEmail(Objects.requireNonNull(emailAddress.getEditText()).getText().toString().trim());
                     userBindingModel.setPassword(Objects.requireNonNull(password.getEditText()).getText().toString().trim());
-                    userBindingModel.setUsername(Objects.requireNonNull(username.getEditText()).getText().toString().trim());
+                    String usernameToString = Objects.requireNonNull(username.getEditText()).getText().toString().trim();
+                    usernameToString = usernameToString.replaceAll("\\s+","");
+                    userBindingModel.setUsername(usernameToString);
+                    signIn.setEnabled(false);
                     signUpDao.registerAccount(loginVM, userBindingModel, getApplicationContext());
                 }
             }

@@ -546,15 +546,19 @@ public class PackDao {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         PackService pack = retrofit.create(PackService.class);
-        Call<ResponseBody> call = pack.saveComment(newComment);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<EvaluationBindingModel> call = pack.saveComment(newComment);
+        call.enqueue(new Callback<EvaluationBindingModel>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<EvaluationBindingModel> call, Response<EvaluationBindingModel> response) {
                 packVM.setRegisterStatus(response.code());
+                if(response.isSuccessful()){
+                    EvaluationBindingModel evaluation = response.body();
+                    packVM.setPostedCommentId(evaluation.getId());
+                }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<EvaluationBindingModel> call, Throwable t) {
                 Log.e("Trip4Student", t.getMessage());
             }
         });

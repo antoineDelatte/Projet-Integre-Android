@@ -33,9 +33,14 @@ public class PackDetailVM extends androidx.lifecycle.ViewModel {
     private MutableLiveData<ArrayList<ActivityTag>> allActivityTags = new MutableLiveData<>();
     private MutableLiveData<Integer>registerStatus = new MutableLiveData<>();
     private MutableLiveData<Integer>deletionStatus = new MutableLiveData<>();
+    private MutableLiveData<Integer>postedCommentId = new MutableLiveData<>();
 
-    public LiveData<Integer> getDeletionStatus() {
-        return deletionStatus;
+    public LiveData<Integer> getPostedCommentId() {
+        return postedCommentId;
+    }
+
+    public void setPostedCommentId(Integer postedCommentId) {
+        this.postedCommentId.setValue(postedCommentId);
     }
 
     public void setDeletionStatus(Integer deletionStatus) {

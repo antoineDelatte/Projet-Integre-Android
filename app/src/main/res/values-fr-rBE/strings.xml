@@ -105,7 +105,7 @@
     <string name="button_sign_up">S\'inscrire</string>
     <string name="internal_server_error">Erreur du serveur</string>
     <string name="no_connection">Vous n\'êtes pas connecté à internet</string>
-    <string name="scroll_down_for_more">Scrollez vers le bas pour voir les packs suivants</string>
+    <string name="scroll_down_for_more">Descendez pour voir les packs suivants</string>
     <string name="reservation_successful">Réservation enregistrée !</string>
     <string name="reservation_unsuccessful">Problème lors de la réservation</string>
     <string name="my_account">Mon compte</string>
