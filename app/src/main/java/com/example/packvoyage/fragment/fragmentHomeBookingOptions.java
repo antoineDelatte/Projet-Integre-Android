@@ -74,6 +74,11 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
     private String currentUserId;
     private IMainActivity parent;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        add_to_my_bookings.setEnabled(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,12 +103,13 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
                 return;
             switch(status){
                 case 201:
-                    Toast.makeText(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.reservation_successful), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.reservation_successful), Toast.LENGTH_LONG).show();
                     parent.changeFragment(fragmentMyBookings.TAG);
                     packDetailVM.setRegisterStatus(null);
                     break;
                 default :
                     Toast.makeText(getContext(), Objects.requireNonNull(getContext()).getResources().getString(R.string.reservation_unsuccessful), Toast.LENGTH_LONG).show();
+                    add_to_my_bookings.setEnabled(false);
                     packDetailVM.setRegisterStatus(null);
                     break;
             }
@@ -116,7 +122,7 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
                     try{
                         numberOfTravelers =  Integer.parseInt(Objects.requireNonNull(nbTravelers.getText()).toString());
                         if(numberOfTravelers < 1){
-                            Toast.makeText(getContext(), getResources().getString(R.string.booking_negative_nb_of_travelers_input), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getResources().getString(R.string.booking_negative_nb_of_travelers_input), Toast.LENGTH_LONG).show();
                             nbTravelers.setText("1");
                             numberOfTravelers = 1;
                         }
@@ -138,9 +144,10 @@ public class fragmentHomeBookingOptions extends Fragment implements BookingPlane
             @Override
             public void onClick(View v) {
                 if(numberOfTravelers == null || numberOfTravelers == 0){
-                    Toast.makeText(getContext(), R.string.please_enter_a_number_of_traveler, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.please_enter_a_number_of_traveler, Toast.LENGTH_LONG).show();
                     return;
                 }
+                add_to_my_bookings.setEnabled(false);
                 double totalPricePlaneSeats = getTotalPriceForMap(selectedSeatsWithPrice);
                 double totalPriceActivities = getTotalPriceForMap(selectedActivitiesWithPrice) * numberOfTravelers;
                 double totalPriceRooms = getTotalPriceForMap(selectedRoomsWithPrice);

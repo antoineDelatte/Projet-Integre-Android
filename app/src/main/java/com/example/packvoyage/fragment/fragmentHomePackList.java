@@ -56,6 +56,12 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
     public fragmentHomePackList(){ }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        load_more_packs.setEnabled(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_home_pack_list, container, false);
@@ -70,6 +76,7 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
                 packs.addAll(list);
                 nbPacksRecentlyAdded = list.size();
                 updateRecyclerView();
+                load_more_packs.setEnabled(true);
             }
         });
 
@@ -77,6 +84,7 @@ public class fragmentHomePackList extends Fragment implements PackListAdapter.On
             @Override
             public void onClick(View v) {
                 packDao.loadPacks(packVM, pageIndex, getContext());
+                load_more_packs.setEnabled(false);
             }
         });
         return view;
